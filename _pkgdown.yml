@@ -1,0 +1,18 @@
+url: https://systempipe.org/systemPipeWorkshop2021
+
+template:
+  params:
+    bootswatch: flatly
+    #ganalytics: UA-99999999-9
+
+home:
+  title: "systemPipeWorkshop2021"
+  type: inverse
+
+
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/systemPipeR/systemPipeWorkshop2021
+     
+
