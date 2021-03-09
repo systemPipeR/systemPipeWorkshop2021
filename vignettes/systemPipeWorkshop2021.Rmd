@@ -19,12 +19,12 @@ knitr::opts_chunk$set(
 
 **Authors**:
     Daniela Cassol (danielac@ucr.edu),
-    Le Zhang ("le.zhang001@email.ucr.edu"),
+    Le Zhang (le.zhang001@email.ucr.edu),
     Thomas Girke (thomas.girke@ucr.edu).
     
 **Institution**: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.
 
-**Last modified**: 8 March, 2021.
+**Last modified**: 9 March, 2021.
 
 # Overview
 
@@ -41,7 +41,7 @@ This workshop introduces _systemPipe_ (SP), a generic toolkit for designing and 
 
 Non-essential background reading:
 
-  * [systemPipe Workflow Environment](https://systempipe.org/)
+  * [systemPipe Workflow Environment WebPage](https://systempipe.org/)
   * [systemPipeR vignette](https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html)
   * [systemPipeShiny vignette](https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeShiny/inst/doc/systemPipeShiny.html)
   * [systemPipeRdata vignette](https://bioconductor.org/packages/release/data/experiment/vignettes/systemPipeRdata/inst/doc/systemPipeRdata.html)
@@ -56,7 +56,6 @@ Participants will be able to perform all analysis components of this workshop ha
 * [`systemPipeR`](http://www.bioconductor.org/packages/release/bioc/html/systemPipeR.html)
 * [`systemPipeShiny`](https://bioconductor.org/packages/devel/bioc/html/systemPipeShiny.html)
 * [`systemPipeRdata`](http://www.bioconductor.org/packages/release/data/experiment/html/systemPipeRdata.html)
-* [R Markdown tutorial](https://rmarkdown.rstudio.com/lesson-2.html)
 
 ## Time outline
 
@@ -64,12 +63,12 @@ Participants will be able to perform all analysis components of this workshop ha
 
 | Activity                                                          | Time |
 |-------------------------------------------------------------------|------|
-| Introduction                                                      | 5m   |
-| Overview of *systemPipeR* package                                 | 10m  |
+| Overview of *systemPipe* toolkit                                  | 10m  |
 | Introduction to new S4 class: `SYSargs2` and `SYSargsList`        | 20m  |
 | Showcase small RNA-Seq workflow                                   | 20m  |
+| Configuration and customization of workflows                      | 20m  |
 | Parallelization on single machines and clusters                   | 10m  |
-| Building a custom workflow                                        | 20m  |
+| Generation of technical and scientific analysis reports           | 5m   |
 | Overview of *systemPipeShiny* package                             | 20m  |
 
 ## Workshop goals and objectives
