@@ -9,10 +9,8 @@ home:
   title: "systemPipeWorkshop2021"
   type: inverse
 
-
 navbar:
   right:
    - icon: fa-github
      href: https://github.com/systemPipeR/systemPipeWorkshop2021
      
-
