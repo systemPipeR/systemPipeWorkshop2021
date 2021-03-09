@@ -78,5 +78,5 @@ Participants will be able to perform all analysis components of this workshop ha
 
 # Key resources
 
-- [Docker image](https://hub.docker.com/repository/systempipe/systempipeworkshop2021)
+- [Docker image](https://hub.docker.com/r/systempipe/systempipeworkshop2021)
 - [Workshop website](https://systempipe.org/systemPipeWorkshop2021/)
