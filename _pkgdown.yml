@@ -8,6 +8,11 @@ template:
 home:
   title: "systemPipeWorkshop2021"
   type: inverse
+  links:
+  - text: Download from Github
+    href: https://github.com/systemPipeR/systemPipeWorkshop2021/
+  - text: Report a bug
+    href: https://github.com/systemPipeR/systemPipeWorkshop2021/issues
 
 navbar:
   right:
