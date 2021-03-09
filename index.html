@@ -71,9 +71,9 @@
   <div class="contents col-md-9">
 
 
-<div id="systempipe-workshop-" class="section level1">
+<div id="systempipe-workflow-and-visualization-toolkit-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#systempipe-workshop-" class="anchor"></a>systemPipe Workshop <img src="https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/static/images/systemPipe_logo.png" align="right" width="280" height="288">
+<a href="#systempipe-workflow-and-visualization-toolkit-" class="anchor"></a>systemPipe: Workflow and Visualization Toolkit <img src="https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/static/images/systemPipe_logo.png" align="right" width="280" height="288">
 </h1></div>
 </div>
 <div id="key-resources" class="section level1">
@@ -83,6 +83,121 @@
 <li><a href="https://hub.docker.com/repository/systempipe/systempiperworkshop2021">Docker image</a></li>
 <li><a href="https://systempipe.org/systemPipeWorkshop2021/docs/articles/systemPipeR.html">Workshop website</a></li>
 </ul>
+<p><strong>Authors</strong>: Daniela Cassol (<a href="mailto:danielac@ucr.edu" class="email">danielac@ucr.edu</a>), Le Zhang (<a href="mailto:le.zhang001@email.ucr.edu" class="email">le.zhang001@email.ucr.edu</a>), Thomas Girke (<a href="mailto:thomas.girke@ucr.edu" class="email">thomas.girke@ucr.edu</a>).</p>
+<p><strong>Institution</strong>: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.</p>
+<p><strong>Last modified</strong>: 9 March, 2021.</p>
+</div>
+<div id="overview" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h1>
+<div id="workshop-description" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-description" class="anchor"></a>Workshop Description</h2>
+<p>This workshop introduces <em>systemPipe</em> (SP), a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages. <em>systemPipeR</em> (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports. <em>systemPipeShiny</em> (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively. <em>systemPipeWorkflow</em> (SPW) offers a collection of pre-configured workflow templates. This hand-on event will include the following topics: (1) brief overview of the design principles and functionalities of the SP toolkit; (2) configuration and execution of workflows; (3) design and usage of SPR’s command-line interface based on an object-oriented R implementation of CWL; (4) construction of custom workflows; (5) parallel execution of workflows on HPC and cloud systems with and without schedulers; (6) generation of technical and scientific analysis reports including visualization; (7) configuration and execution of a pre-configured workflow example from start to finish, e.g. smallRNA-Seq template; and (8) demonstration of SPS’ core functionalities, the project’s Shiny App.</p>
+</div>
+<div id="pre-requisites" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pre-requisites" class="anchor"></a>Pre-requisites</h2>
+<ul>
+<li>Basic knowledge of R and usage of Bioconductor packages for NGS analysis</li>
+<li>Basic knowledge of running command-line software</li>
+<li>Basic knowledge of parallelization concepts</li>
+</ul>
+<p>Non-essential background reading:</p>
+<ul>
+<li><a href="https://systempipe.org/">systemPipe Workflow Environment WebPage</a></li>
+<li><a href="https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html">systemPipeR vignette</a></li>
+<li><a href="https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeShiny/inst/doc/systemPipeShiny.html">systemPipeShiny vignette</a></li>
+<li><a href="https://bioconductor.org/packages/release/data/experiment/vignettes/systemPipeRdata/inst/doc/systemPipeRdata.html">systemPipeRdata vignette</a></li>
+<li><a href="https://rmarkdown.rstudio.com/lesson-2.html">R Markdown tutorial</a></li>
+</ul>
+</div>
+<div id="workshop-participation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-participation" class="anchor"></a>Workshop Participation</h2>
+<p>Participants will be able to perform all analysis components of this workshop hands-on. Active user participation throughout the event is highly encouraged, including but not limited to lecture material, hands-on sections, and final discussion about package improvements. Participants are encouraged to ask questions at any time during the workshop.</p>
+</div>
+<div id="r--bioconductor-packages-used" class="section level2">
+<h2 class="hasAnchor">
+<a href="#r--bioconductor-packages-used" class="anchor"></a><em>R</em> / <em>Bioconductor</em> packages used</h2>
+<ul>
+<li><a href="http://www.bioconductor.org/packages/release/bioc/html/systemPipeR.html"><code>systemPipeR</code></a></li>
+<li><a href="https://bioconductor.org/packages/devel/bioc/html/systemPipeShiny.html"><code>systemPipeShiny</code></a></li>
+<li><a href="http://www.bioconductor.org/packages/release/data/experiment/html/systemPipeRdata.html"><code>systemPipeRdata</code></a></li>
+</ul>
+</div>
+<div id="time-outline" class="section level2">
+<h2 class="hasAnchor">
+<a href="#time-outline" class="anchor"></a>Time outline</h2>
+<p>1h 45m total</p>
+<table class="table">
+<thead><tr class="header">
+<th>Activity</th>
+<th>Time</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Overview of <em>systemPipe</em> toolkit</td>
+<td>10m</td>
+</tr>
+<tr class="even">
+<td>Introduction to new S4 class: <code>SYSargs2</code> and <code>SYSargsList</code>
+</td>
+<td>20m</td>
+</tr>
+<tr class="odd">
+<td>Showcase small RNA-Seq workflow</td>
+<td>20m</td>
+</tr>
+<tr class="even">
+<td>Configuration and customization of workflows</td>
+<td>20m</td>
+</tr>
+<tr class="odd">
+<td>Parallelization on single machines and clusters</td>
+<td>10m</td>
+</tr>
+<tr class="even">
+<td>Generation of technical and scientific analysis reports</td>
+<td>5m</td>
+</tr>
+<tr class="odd">
+<td>Overview of <em>systemPipeShiny</em> package</td>
+<td>20m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="workshop-goals-and-objectives" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-goals-and-objectives" class="anchor"></a>Workshop goals and objectives</h2>
+<div id="learning-goals" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-goals" class="anchor"></a>Learning goals</h3>
+<ul>
+<li>Recognize the benefits of a generic R-based workflow construction environment that is both scalable and reproducible</li>
+<li>Integration of command-line tools via the CWL community standard</li>
+<li>Rendering of R markdown reports and critical assessment of scientific analysis reports</li>
+<li>Parallelization of big data analysis tasks</li>
+</ul>
+</div>
+<div id="learning-objectives" class="section level3">
+<h3 class="hasAnchor">
+<a href="#learning-objectives" class="anchor"></a>Learning objectives</h3>
+<ul>
+<li>Identify and practice how to make analysis workflows more robust, reproducible, and portable across heterogeneous computing systems</li>
+<li>Usage of new workflow control class for designing, configuring, and running workflows</li>
+<li>Optimize and debug workflows</li>
+<li>Inspection of technical reports and log files</li>
+<li>Design of new and fully customized workflows</li>
+<li>Practice interactive workflow management and visualization</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="workshop" class="section level1">
+<h1 class="hasAnchor">
+<a href="#workshop" class="anchor"></a>Workshop</h1>
 </div>
 
   </div>
