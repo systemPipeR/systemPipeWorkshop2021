@@ -4,11 +4,6 @@
 
 # systemPipe: Workflow and Visualization Toolkit <img src="https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/static/images/systemPipe_logo.png" align="right" width="280" height="288">
 
-# Key resources
-
-- [Docker image](https://hub.docker.com/repository/systempipe/systempiperworkshop2021)
-- [Workshop website](https://systempipe.org/systemPipeWorkshop2021/docs/articles/systemPipeR.html)
-
 **Authors**:
     Daniela Cassol (danielac@ucr.edu),
     Le Zhang (le.zhang001@email.ucr.edu),
@@ -81,5 +76,7 @@ Participants will be able to perform all analysis components of this workshop ha
 * Design of new and fully customized workflows
 * Practice interactive workflow management and visualization 
 
+# Key resources
 
-# Workshop
+- [Docker image](https://hub.docker.com/repository/systempipe/systempiperworkshop2021)
+- [Workshop website](https://systempipe.org/systemPipeWorkshop2021/)
