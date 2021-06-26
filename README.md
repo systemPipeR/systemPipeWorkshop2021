@@ -49,7 +49,7 @@ Participants will be able to perform all analysis components of this workshop ha
 | Activity                                                         | Time |
 |------------------------------------------------------------------|------|
 | Overview of *systemPipe* toolkit                                 | 10m  | 
-| Introduction to SPR’s command-line interface                     | 20m  |
+| Introduction to SPR's command-line interface                     | 20m  |
 | Configuration and execution of workflows                         | 10m  |
 | Construction of custom workflows                                 | 10m  |
 | Showcase small RNA-Seq workflow                                  | 20m  |
