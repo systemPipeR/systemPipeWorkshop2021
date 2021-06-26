@@ -139,13 +139,270 @@ browseVignettes(package = "systemPipeWorkshop2021")
 
 ## Overview of *systemPipe* toolkit
 
-This workshop introduces systemPipe (SP), a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages. systemPipeR (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports. systemPipeShiny (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively. systemPipeWorkflow (SPW) offers a collection of pre-configured workflow templates. This hand-on event will include the following topics: (1) brief overview of the design principles and functionalities of the SP toolkit; (2) design and usage of SPR's command-line interface based on an object-oriented R implementation of CWL; (3) configuration and execution of workflows; (4) construction of custom workflows; (5) configuration and execution of a pre-configured workflow example from start to finish, e.g. smallRNA-Seq template; (6) parallel execution of workflows on HPC and cloud systems with and without schedulers; (7) generation of technical and scientific analysis reports including visualization; and 
-(8) demonstration of SPS' core functionalities, the project's Shiny App.
+`systemPipe` (SP) is a generic toolkit for designing and running reproducible data
+analysis workflows. The environment consists of three major modules implemented 
+as R/Bioconductor packages.
 
-
+  - `systemPipeR` (SPR) provides core functionalities for defining workflows, 
+    interacting with command-line software, and executing both R and/or command-line
+    software, as well as generating publication-quality analysis reports.
+ 
+  - `systemPipeShiny` (SPS) integrates a graphical user interface for managing 
+    workflows and visualizing results interactively. 
+    
+  - `systemPipeWorkflow` (SPW) offers a collection of pre-configured workflow templates. 
+    
 ## Introduction to SPR's command-line interface
 
+A central concept for designing workflows within the `systemPipeR` environment is 
+the use of workflow management containers. `systemPipeR` adopted the widely used community standard [Common Workflow Language](https://www.commonwl.org/) (CWL) 
+[@Amstutz2016-ka] for describing analysis workflows in a generic and reproducible 
+manner.
+Using this community standard in `systemPipeR` has many advantages. For instance, 
+the integration of CWL allows running `systemPipeR` workflows from a single 
+specification instance either entirely from within R, from various command line 
+wrappers (e.g., cwl-runner) or from other languages (, e.g., Bash or Python). 
+`systemPipeR` includes support for both command line and R/Bioconductor software 
+as well as resources for containerization, parallel evaluations on computer 
+clusters along with the automated generation of interactive analysis reports.
+
+An important feature of `systemPipeR's` CWL interface is that it provides two 
+options to run command line tools and workflows based on CWL. 
+First, one can run CWL in its native way via an R-based wrapper utility for 
+`cwl-runner` or `cwl-tools` (CWL-based approach). Second, one can run workflows 
+using CWL's command line and workflow instructions from within R (R-based approach). 
+In the latter case the same CWL workflow definition files (e.g. *.cwl* and *.yml*) 
+are used but rendered and executed entirely with R functions defined by `systemPipeR`, 
+and thus use CWL mainly as a command line and workflow definition format rather 
+than software to run workflows. In this regard `systemPipeR` also provides several 
+convenience functions that are useful for designing and debugging workflows, 
+such as a command line rendering function to retrieve the exact command line 
+strings for each data set and processing step prior to running a command line.
+
 ## Configuration and execution of workflows
+
+### Load library
+
+```{r lib, eval=TRUE}
+library(systemPipeR)
+systemPipeRdata::genWorkenvir("rnaseq")
+setwd("rnaseq")
+```
+
+To create a Workflow within `systemPipeR`, we can start by defining an empty
+container and checking the directory structure:
+
+```{r SPRproject, eval=TRUE}
+sal <- SPRproject() 
+```
+
+Internally, `SPRproject` function will check and/or create the basic folder
+structure, which means `data`, `param`, and `results` folder. 
+If the user wants to use a different names for these directories, can be specified 
+as follows:
+
+```{r SPRproject_dir, eval=FALSE}
+sal <- SPRproject(projPath = getwd(), data = "data", param = "param", results = "results") 
+```
+
+Also, this function allows creating a hidden folder called `.SPRproject`, by default,
+to store all the log files.
+A yaml file, here called `SYSargsList.yml`, has been created, which initially
+contains the basic location of the project structure; however, every time the object in R 
+is updated, the new information will also be store in this file, for easy recover.
+If you desire a different names for the logs folder and the yaml files, those can be 
+modify as follows:
+
+```{r SPRproject_logs, eval=FALSE}
+sal <- SPRproject(logs.dir= "SPRproject", sys.file="SPRproject/SYSargsList.yml") 
+```
+
+In this stage, the object `sal` is a empty container, except the project
+information, as the project, data, results and param folder paths, as can be
+access but the `projectInfo` accessory method:
+
+```{r}
+sal
+projectInfo(sal)
+```
+
+Also, the length function will return how many steps this workflow contains and
+in this case it is empty, as follow:
+
+```{r}
+length(sal)
+```
+
+### Adding a new step from template
+
+Next, we need to populate the object created with the first step in the
+workflow. Here, an example of how to perform this task using param template
+files for trimming FASTQ files with `Hisat2` software.
+
+The constructor functions create an `SYSargsList` S4 class object from three
+input files:
+
+    - CWL command-line specification file (`wf_file` argument);
+    - Input variables (`input_file` argument);
+    - Targets file (`targets` argument).
+
+The latter is optional for workflow steps lacking input files. The connection
+between input variables and the targets file are defined under the `inputvars`
+argument. It is required a named vector, where each element name needs to match
+with column names in the targets file and the value must match the names of the
+*.yml* variables.
+
+In CWL, files with the extension `.cwl` define the parameters of a chosen
+command-line step or workflow, while files with the extension `.yml` define the
+input variables of command-line steps. Note, input variables provided by a
+targets file can be passed on to a instance via the `inputvars` argument of the
+`SYSargsList` function.
+
+For more information of each one of those files, please check here. (Link to tutorial).
+
+```{r}
+appendStep(sal) <- SYSargsList(step_name = "Index", dir = FALSE,
+                               targets=NULL, 
+                               wf_file = "hisat2/hisat2-index.cwl", input_file="hisat2/hisat2-index.yml",
+                               dir_path=system.file("extdata/cwl", package = "systemPipeR"),
+                               dependency=NULL)
+cmdlist(sal[1])
+```
+
+```{r}
+targetspath <- system.file("extdata", "targetsPE.txt", package = "systemPipeR")
+appendStep(sal) <- SYSargsList(targets=targetspath,
+                               step_name="Mapping", dir=TRUE, 
+                               wf_file = "workflow-hisat2/workflow_hisat2-pe.cwl",
+                               input_file="workflow-hisat2/workflow_hisat2-pe.yml",
+                               dir_path=system.file("extdata/cwl", package = "systemPipeR"),
+                               inputvars=c(FileName1="_FASTQ_PATH1_",
+                                           FileName2="_FASTQ_PATH2_", SampleName="_SampleName_"),
+                               dependency = c("Index"))
+```
+
+### Accessing the details
+
+Let's explore our object:
+
+- Accessor Methods:
+
+Several accessor methods are available that are named after the slot names of
+the `SYSargsList` object.
+
+```{r}
+names(sal)
+```
+
+- Check the length of the `sal` object:
+
+```{r}
+length(sal)
+```
+
+- The `SYSargsList` class and its subsetting operator `[`:
+
+```{r}
+sal[1]
+stepsWF(sal[2])
+
+```
+
+- The `SYSargsList` class and its subsetting input samples: 
+
+```{r}
+sal_sub <- subsetTargets(sal[2], 1:3)
+stepsWF(sal_sub)
+targetsWF(sal_sub)
+outfiles(sal_sub)
+```
+
+- The `SYSargsList` class and its operator `+`:
+
+```{r, eval=FALSE}
+sal[1] + sal[2]
+```
+
+- Checking the expected output files:
+
+The `outfiles` components of `SYSargsList` define the expected output files for
+each step in the workflow; some of which are the input for the next workflow
+step.
+
+```{r}
+outfiles(sal)[1:3]
+```
+
+- Checking the input files by the `targetsWF()`:
+
+```{r}
+targetsWF(sal)
+```
+
+- Checking the command-line for each sample:
+
+`cmdlist()` method constructs the system commands for running command-line
+software as specified by a given `.cwl` file combined with the paths to the
+input samples (e.g. FASTQ files) provided by a `targets` file. The example below
+shows the `cmdlist()` output for running Trimmomatic on the first PE read
+sample. Evaluating the output of `cmdlist()` can be very helpful for designing
+and debugging `.cwl` files of new command-line software or changing the
+parameter settings of existing ones.
+
+```{r}
+sal[1]
+cmdlist(sal[2], 1:2)
+```
+
+- Rename a Step
+
+```{r}
+renameStep(sal, 1) <- "newStep"
+renameStep(sal, c(1, 2)) <- c("Index", "Mapping")
+sal
+names(outfiles(sal[1:2]))
+names(targetsWF(sal[1:2]))
+```
+
+- Replace a Step
+
+```{r, eval=FALSE}
+replaceStep(sal, 1) <- sal[2]
+replaceStep(sal, 1, step_name="Quality") <- sal[2]
+sal
+```
+
+- Removing a Step
+
+```{r}
+sal_sub <- sal[-2]
+sal_sub
+```
+
+## Adding a R code as new Step
+
+```{r}
+appendStep(sal) <- LineWise("log <- log(1)", "R_code")
+sal
+stepsWF(sal)
+```
+
+- Replacement and Append methods for R Code Steps
+
+```{r, sal_lw_rep, eval=TRUE}
+appendCodeLine(sal, step=3, after=1) <- "log <- log(10)"
+codeLine(sal[3])
+
+replaceCodeLine(sal, step=3, line=1) <- "log <- log(6)"
+codeLine(sal[3])
+```
+
+### Running the workflow
+
+```{r, eval=FALSE}
+sal <- runWF(sal)
+statusWF(sal)
+```
 
 ## Construction of custom workflows
 
@@ -157,3 +414,51 @@ This workshop introduces systemPipe (SP), a generic toolkit for designing and ru
 
 ## Overview of *systemPipeShiny* core functionalities
 
+**<span style="color:#5DA7D6;">s</span>ystem<span
+style="color:#5DA7D6;">P</span>ipe<span style="color:#5DA7D6;">S</span>hiny**
+(SPS) extends the widely used [systemPipeR](/spr/) 
+(SPR) workflow
+environment with a versatile graphical user interface provided by a [Shiny
+App](https://shiny.rstudio.com). This allows non-R users, such as
+experimentalists, to run many systemPipeR's workflow designs, control, and
+visualization functionalities interactively without requiring knowledge of R.
+Most importantly, `SPS` has been designed as a general purpose framework for
+interacting with other R packages in an intuitive manner. Like most Shiny Apps,
+SPS can be used on both local computers as well as centralized server-based
+deployments that can be accessed remotely as a public web service for using
+SPR's functionalities with community and/or private data. The framework can
+integrate many core packages from the R/Bioconductor ecosystem. Examples of
+SPS' current functionalities include: 
+
+- A default interactive workflow module to 
+create experimental designs, visualize and customize workflow topologies with previews, and 
+programming free workflow execution within the application. 
+- An interactive module with extensive plot options to visualize downstream analysis of a RNA-Seq workflow.
+- A quick ggplot module to make all variety of scientific plots from any user defined 
+tabular data. 
+- An extendable set of visualization functionalities makes it easy to design 
+custom Shiny Apps under SPS framework without any knowledge of Shiny. 
+- A 'Canvas Workbench' to manage complex visual results. It allows users to 
+organize and to compare plots in an efficient manner combined
+with a session screenshot feature to edit scientific and publishable figures. 
+- Three other supporting packages to help all users from beginners and advanced developers 
+to extend under current SPS framework or on their own visualization apps. 
+
+## Demo
+View our online demo app:
+
+| Type and link| option changed | notes |
+| --- | --- | --- |
+| [Default full installation{blk}](https://tgirke.shinyapps.io/systemPipeShiny/) | [See installation](#installation) | full app |
+| [Minimum installation{blk}](https://tgirke.shinyapps.io/systemPipeShiny/) | [See installation](#installation) | no modules installed |
+| [Login enabled{blk}](https://tgirke.shinyapps.io/systemPipeShiny_loading/) | `login_screen = TRUE; login_theme = "empty"` | no modules installed |
+| [Login and login themes{blk}](https://tgirke.shinyapps.io/systemPipeShiny_loading_theme/) | `login_screen = TRUE; login_theme = "random"` | no modules installed |
+| [App admin page{blk}](https://tgirke.shinyapps.io/systemPipeShiny_loading/?admin) | `admin_page = TRUE` | or simply add "?admin" to the end of URL of demos |
+
+For the login required demos, the app account name is **"user"** password **"user"**.
+
+For the admin panel login, account name **"admin"**, password **"admin"**.
+
+**Please DO NOT delete or change password when you are using the admin features.**
+_shinyapp.io_ will reset the app once a while, but this will affect other people 
+who are trying the demo simultaneously. 
