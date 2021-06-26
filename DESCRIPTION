@@ -18,6 +18,7 @@ Suggests:
     knitr,
     rmarkdown,
     pkgdown, 
+    systemPipeR,
     systemPipeRdata
 URL: https://systempipe.org/systemPipeWorkshop2021/
 BugReports: https://systempipe.org/systemPipeWorkshop2021/issues/new/choose
