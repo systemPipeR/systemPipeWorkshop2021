@@ -1,9 +1,9 @@
-pandoc: 2.11.2
+pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   systemPipeWorkshop2021: systemPipeWorkshop2021.html
-last_built: 2021-03-10T01:47Z
+last_built: 2021-06-26T17:23Z
 urls:
   reference: https://systempipe.org/systemPipeWorkshop2021/reference
   article: https://systempipe.org/systemPipeWorkshop2021/articles
