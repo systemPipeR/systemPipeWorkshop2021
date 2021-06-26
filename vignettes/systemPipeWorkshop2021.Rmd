@@ -72,7 +72,6 @@ Participants will be able to perform all analysis components of this workshop ha
 | Generation of technical and scientific analysis reports          | 5m   |
 | Overview of *systemPipeShiny* core functionalities               | 20m  |
 
-
 ## Workshop goals and objectives
 
 ### Learning goals
@@ -93,7 +92,64 @@ Participants will be able to perform all analysis components of this workshop ha
 
 # Workshop
 
-## Workshop setup with Docker
+## Running the Workshop 
 
-## Workshop setup with GitHub
+This workshop uses R `4.1.0` and Bioconductor version` 3.14.` Bioconductor can be
+installed following [these instructions](https://www.bioconductor.org/developers/how-to/useDevel/).
+
+During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the workshop can be run in the [cloud](http://app.orchestra.cancerdatasci.org/).
+
+### Workshop setup with Docker
+
+The workshop Docker container runs with Bioconductor `devel` version `3.14` and has 
+all the necessary packages and software for running the workshop vignettes. 
+To use Docker container, you need to first install [Docker](https://docs.docker.com/engine/install/) on your system.
+
+- The container can be downloaded and run with:
+
+```{bash docker, eval=FALSE}
+docker run -e PASSWORD=systempipe -p 8787:8787 systempipe/systempipeworkshop2021:latest
+```
+
+- Log in to RStudio at [http://localhost:8787](http://localhost:8787) using username `rstudio`
+and password `systempipe`.
+
+- If you prefer to run the workshop from the command line:
+
+```{bash docker_bash, eval=FALSE}
+docker run -it --user rstudio systempipe/systempipeworkshop2021:latest bash 
+```
+
+### Workshop setup with GitHub
+
+You can install locally the necessary packages for this workshop as follows: 
+
+```{r, install_pkg, eval=FALSE}
+## Install workshop package
+BiocManager::install("systemPipeR/systemPipeWorkshop2021")
+## Install required packages
+BiocManager::install(c("systemPipeR", "systemPipeRdata", "systemPipeShiny"))
+```
+
+To access the vignette:
+
+```{r, vignette, eval=FALSE}
+browseVignettes(package = "systemPipeWorkshop2021")
+```
+
+## Overview of *systemPipe* toolkit
+
+## Introduction to SPR’s command-line interface
+
+## Configuration and execution of workflows
+
+## Construction of custom workflows
+
+## Showcase small RNA-Seq workflow
+
+## Parallelization on single machines and clusters
+
+## Generation of technical and scientific analysis reports
+
+## Overview of *systemPipeShiny* core functionalities
 
