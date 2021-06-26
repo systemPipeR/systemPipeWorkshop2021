@@ -11,8 +11,6 @@
     
 **Institution**: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.
 
-**Last modified**: 9 March, 2021.
-
 # Overview
 
 ## Workshop Description
@@ -59,7 +57,6 @@ Participants will be able to perform all analysis components of this workshop ha
 | Generation of technical and scientific analysis reports          | 5m   |
 | Overview of *systemPipeShiny* core functionalities               | 20m  |
 
-
 ## Workshop goals and objectives
 
 ### Learning goals
@@ -77,7 +74,6 @@ Participants will be able to perform all analysis components of this workshop ha
 * Inspection of technical reports and log files
 * Design of new and fully customized workflows
 * Practice interactive workflow management and visualization 
-
 
 # Key resources
 
