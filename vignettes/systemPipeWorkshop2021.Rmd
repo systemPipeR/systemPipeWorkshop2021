@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
     
 **Institution**: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.
 
-**Last modified**: 9 March, 2021.
+**Last modified**: 26 June, 2021.
 
 # Overview
 
@@ -94,4 +94,6 @@ Participants will be able to perform all analysis components of this workshop ha
 # Workshop
 
 ## Workshop setup with Docker
+
+## Workshop setup with GitHub
 
