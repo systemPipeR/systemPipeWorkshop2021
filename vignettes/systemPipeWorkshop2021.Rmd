@@ -128,7 +128,7 @@ You can install locally the necessary packages for this workshop as follows:
 ## Install workshop package
 BiocManager::install("systemPipeR/systemPipeWorkshop2021")
 ## Install required packages
-BiocManager::install(c("systemPipeR", "systemPipeRdata", "systemPipeShiny"))
+BiocManager::install(c("systemPipeR", "systemPipeRdata", "systemPipeShiny"), version="3.14")
 ```
 
 To access the vignette:
@@ -193,7 +193,7 @@ To create a Workflow within `systemPipeR`, we can start by defining an empty
 container and checking the directory structure:
 
 ```{r SPRproject, eval=TRUE}
-sal <- SPRproject() 
+sal <- SPRproject(overwrite=TRUE) 
 ```
 
 Internally, `SPRproject` function will check and/or create the basic folder
