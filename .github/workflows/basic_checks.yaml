@@ -41,8 +41,8 @@ jobs:
           BiocManager::repositories()
           remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
           remotes::install_cran("rcmdcheck")
-          remotes::install_github("tgirke/systemPipeR")
-          remotes::install_github("tgirke/systemPipeRdata")
+          remotes::install_github("tgirke/systemPipeR", force=TRUE)
+          remotes::install_github("tgirke/systemPipeRdata", force=TRUE)
           remotes::install_cran("rsconnect")
           remotes::install_cran("learnr")
         shell: Rscript {0}
