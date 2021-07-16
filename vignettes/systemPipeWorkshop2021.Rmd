@@ -183,7 +183,7 @@ strings for each data set and processing step prior to running a command line.
 
 ### Load library
 
-```{r lib, eval=TRUE}
+```{r lib, eval=FALSE}
 library(systemPipeR)
 systemPipeRdata::genWorkenvir("rnaseq")
 setwd("rnaseq")
