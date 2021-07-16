@@ -192,7 +192,7 @@ setwd("rnaseq")
 To create a Workflow within `systemPipeR`, we can start by defining an empty
 container and checking the directory structure:
 
-```{r SPRproject, eval=TRUE}
+```{r SPRproject, eval=FALSE}
 sal <- SPRproject(overwrite=TRUE) 
 ```
 
@@ -221,7 +221,7 @@ In this stage, the object `sal` is a empty container, except the project
 information, as the project, data, results and param folder paths, as can be
 access but the `projectInfo` accessory method:
 
-```{r}
+```{r, eval=FALSE}
 sal
 projectInfo(sal)
 ```
@@ -229,7 +229,7 @@ projectInfo(sal)
 Also, the length function will return how many steps this workflow contains and
 in this case it is empty, as follow:
 
-```{r}
+```{r, eval=FALSE}
 length(sal)
 ```
 
@@ -260,7 +260,7 @@ targets file can be passed on to a instance via the `inputvars` argument of the
 
 For more information of each one of those files, please check here. (Link to tutorial).
 
-```{r}
+```{r, eval=FALSE}
 appendStep(sal) <- SYSargsList(step_name = "Index", dir = FALSE,
                                targets=NULL, 
                                wf_file = "hisat2/hisat2-index.cwl", input_file="hisat2/hisat2-index.yml",
@@ -269,7 +269,7 @@ appendStep(sal) <- SYSargsList(step_name = "Index", dir = FALSE,
 cmdlist(sal[1])
 ```
 
-```{r}
+```{r, eval=FALSE}
 targetspath <- system.file("extdata", "targetsPE.txt", package = "systemPipeR")
 appendStep(sal) <- SYSargsList(targets=targetspath,
                                step_name="Mapping", dir=TRUE, 
@@ -290,19 +290,19 @@ Let's explore our object:
 Several accessor methods are available that are named after the slot names of
 the `SYSargsList` object.
 
-```{r}
+```{r, eval=FALSE}
 names(sal)
 ```
 
 - Check the length of the `sal` object:
 
-```{r}
+```{r, eval=FALSE}
 length(sal)
 ```
 
 - The `SYSargsList` class and its subsetting operator `[`:
 
-```{r}
+```{r, eval=FALSE}
 sal[1]
 stepsWF(sal[2])
 
@@ -310,7 +310,7 @@ stepsWF(sal[2])
 
 - The `SYSargsList` class and its subsetting input samples: 
 
-```{r}
+```{r, eval=FALSE}
 sal_sub <- subsetTargets(sal[2], 1:3)
 stepsWF(sal_sub)
 targetsWF(sal_sub)
@@ -329,13 +329,13 @@ The `outfiles` components of `SYSargsList` define the expected output files for
 each step in the workflow; some of which are the input for the next workflow
 step.
 
-```{r}
+```{r, eval=FALSE}
 outfiles(sal)[1:3]
 ```
 
 - Checking the input files by the `targetsWF()`:
 
-```{r}
+```{r, eval=FALSE}
 targetsWF(sal)
 ```
 
@@ -349,14 +349,14 @@ sample. Evaluating the output of `cmdlist()` can be very helpful for designing
 and debugging `.cwl` files of new command-line software or changing the
 parameter settings of existing ones.
 
-```{r}
+```{r, eval=FALSE}
 sal[1]
 cmdlist(sal[2], 1:2)
 ```
 
 - Rename a Step
 
-```{r}
+```{r, eval=FALSE}
 renameStep(sal, 1) <- "newStep"
 renameStep(sal, c(1, 2)) <- c("Index", "Mapping")
 sal
@@ -374,14 +374,14 @@ sal
 
 - Removing a Step
 
-```{r}
+```{r, eval=FALSE}
 sal_sub <- sal[-2]
 sal_sub
 ```
 
 ## Adding a R code as new Step
 
-```{r}
+```{r, eval=FALSE}
 appendStep(sal) <- LineWise("log <- log(1)", "R_code")
 sal
 stepsWF(sal)
@@ -389,7 +389,7 @@ stepsWF(sal)
 
 - Replacement and Append methods for R Code Steps
 
-```{r, sal_lw_rep, eval=TRUE}
+```{r, sal_lw_rep, eval=FALSE}
 appendCodeLine(sal, step=3, after=1) <- "log <- log(10)"
 codeLine(sal[3])
 
