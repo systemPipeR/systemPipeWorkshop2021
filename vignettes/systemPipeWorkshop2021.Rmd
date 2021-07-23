@@ -122,6 +122,13 @@ docker run -it --user rstudio systempipe/systempipeworkshop2021:latest bash
 
 ### Workshop setup with GitHub
 
+[_`systemPipeR`_](http://www.bioconductor.org/packages/devel/bioc/html/systemPipeR.html) 
+environment can be installed from the R console using the [_`BiocManager::install`_](https://cran.r-project.org/web/packages/BiocManager/index.html) 
+command. The associated data package [_`systemPipeRdata`_](http://www.bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html) 
+can be installed the same way. The latter is a helper package for generating _`systemPipeR`_ 
+workflow environments with a single command containing all parameter files and 
+sample data required to quickly test and run workflows. 
+
 You can install locally the necessary packages for this workshop as follows: 
 
 ```{r, install_pkg, eval=FALSE}
@@ -462,3 +469,5 @@ For the admin panel login, account name **"admin"**, password **"admin"**.
 **Please DO NOT delete or change password when you are using the admin features.**
 _shinyapp.io_ will reset the app once a while, but this will affect other people 
 who are trying the demo simultaneously. 
+
+
