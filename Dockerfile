@@ -10,14 +10,14 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip &&\
-  unzip Trimmomatic-0.39.zip &&\
+  unzip Trimmomatic-0.39.zip -d /opt/ &&\
   rm -rf Trimmomatic-0.39.zip &&\
-  chmod +x Trimmomatic-0.39/trimmomatic-0.39.jar &&\
-  echo "#!/bin/bash" >> /Trimmomatic-0.39/trimmomatic &&\
-  echo "exec java -jar /Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /Trimmomatic-0.39/trimmomatic &&\
-  chmod +x /Trimmomatic-0.39/trimmomatic
+  chmod +x /opt/Trimmomatic-0.39/trimmomatic-0.39.jar &&\
+  echo "#!/bin/bash" >> /opt/Trimmomatic-0.39/trimmomatic &&\
+  echo "exec java -jar /opt/Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /opt/Trimmomatic-0.39/trimmomatic &&\
+  chmod +x /opt/Trimmomatic-0.39/trimmomatic
 
-ENV PATH="${PATH}:/Trimmomatic-0.39/"
+ENV PATH="${PATH}:/opt/Trimmomatic-0.39/"
 
 RUN Rscript -e "options(repos = c(CRAN = 'https://cran.r-project.org')); BiocManager::install(ask=FALSE)"
 
