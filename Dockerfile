@@ -10,12 +10,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip &&\
-  unzip Trimmomatic-0.39.zip -d /opt/ &&\
-  rm -rf Trimmomatic-0.39.zip &&\
-  chmod +x /opt/Trimmomatic-0.39/trimmomatic-0.39.jar &&\
-  echo "#!/bin/bash" >> /opt/Trimmomatic-0.39/trimmomatic &&\
-  echo "exec java -jar /opt/Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /opt/Trimmomatic-0.39/trimmomatic &&\
-  chmod +x /opt/Trimmomatic-0.39/trimmomatic
+    unzip Trimmomatic-0.39.zip -d /opt/ &&\
+    rm -rf Trimmomatic-0.39.zip &&\
+    chmod +x /opt/Trimmomatic-0.39/trimmomatic-0.39.jar &&\
+    echo "#!/bin/bash" >> /opt/Trimmomatic-0.39/trimmomatic &&\
+    echo "exec java -jar /opt/Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /opt/Trimmomatic-0.39/trimmomatic &&\
+    chmod +x /opt/Trimmomatic-0.39/trimmomatic
 
 ENV PATH="${PATH}:/opt/Trimmomatic-0.39/"
 
