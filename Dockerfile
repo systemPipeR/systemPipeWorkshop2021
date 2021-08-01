@@ -9,15 +9,15 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-#RUN wget https://github.com/systemPipeR/systempipe_docker/blob/master/tools/Trimmomatic-0.39.zip &&\
-#    unzip Trimmomatic-0.39.zip -d /opt/ &&\
+RUN cd inst/tools &&\
+    unzip Trimmomatic-0.39.zip -d /opt/ &&\
 #    rm -rf Trimmomatic-0.39.zip &&\
-#    chmod +x /opt/Trimmomatic-0.39/trimmomatic-0.39.jar &&\
-#    echo "#!/bin/bash" >> /opt/Trimmomatic-0.39/trimmomatic &&\
-#    echo "exec java -jar /opt/Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /opt/Trimmomatic-0.39/trimmomatic &&\
-#    chmod +x /opt/Trimmomatic-0.39/trimmomatic
+    chmod +x /opt/Trimmomatic-0.39/trimmomatic-0.39.jar &&\
+    echo "#!/bin/bash" >> /opt/Trimmomatic-0.39/trimmomatic &&\
+    echo "exec java -jar /opt/Trimmomatic-0.39/trimmomatic-0.39.jar """"$""@"""" " >> /opt/Trimmomatic-0.39/trimmomatic &&\
+    chmod +x /opt/Trimmomatic-0.39/trimmomatic
 
-#ENV PATH="${PATH}:/opt/Trimmomatic-0.39/"
+ENV PATH="${PATH}:/opt/Trimmomatic-0.39/"
 
 RUN Rscript -e "options(repos = c(CRAN = 'https://cran.r-project.org')); BiocManager::install(ask=FALSE)"
 

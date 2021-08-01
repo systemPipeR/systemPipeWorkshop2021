@@ -759,7 +759,7 @@ evaluated, and until the workflow is executed it will be store as an expression.
 For running the workflow, `runWF` function will execute all the command lines 
 store in the workflow container.
 
-```{r runWF, eval=is_win}
+```{r runWF, eval=TRUE}
 sal <- runWF(sal)
 ```
 
@@ -971,8 +971,6 @@ sal <- SPRproject(overwrite = TRUE)
 
 
 ## Showcase RNA-Seq workflow
-
-
 
 
 ## Overview of *systemPipeShiny* core functionalities
