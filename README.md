@@ -79,3 +79,5 @@ Participants will be able to perform all analysis components of this workshop ha
 
 - [Docker image](https://hub.docker.com/r/systempipe/systempipeworkshop2021)
 - [Workshop website](https://systempipe.org/systemPipeWorkshop2021/)
+- [Bioc2021 Workshop](http://app.orchestra.cancerdatasci.org/1)
+- [Bioc2021 website](https://bioc2021.bioconductor.org/)

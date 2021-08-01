@@ -1,14 +1,15 @@
 ---
 title: "systemPipe: Workflow and Visualization Toolkit"
 author: 
+date: "Last update: `r format(Sys.time(), '%d %B, %Y')`" 
 output: 
   rmarkdown::html_vignette: default
 vignette: >
   %\VignetteIndexEntry{systemPipe: Workflow and Visualization Toolkit}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
+chunk_output_type: console
 ---
-
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -24,13 +25,11 @@ knitr::opts_chunk$set(
     
 **Institution**: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.
 
-**Last modified**: 26 June, 2021.
-
 # Overview
 
 ## Workshop Description
 
-This workshop introduces _systemPipe_ (SP), a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages. _systemPipeR_ (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports. _systemPipeShiny_ (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively. _systemPipeWorkflow_ (SPW) offers a collection of pre-configured workflow templates. This hand-on event will include the following topics: (1) brief overview of the design principles and functionalities of the SP toolkit; (2) design and usage of SPR's command-line interface based on an object-oriented R implementation of CWL; (3) configuration and execution of workflows; (4) construction of custom workflows; (5) configuration and execution of a pre-configured workflow example from start to finish, e.g. smallRNA-Seq template; (6) parallel execution of workflows on HPC and cloud systems with and without schedulers; (7) generation of technical and scientific analysis reports including visualization; and 
+This workshop introduces _systemPipe_ (SP), a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages. _systemPipeR_ (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports. _systemPipeShiny_ (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively. _systemPipeWorkflow_ (SPW) offers a collection of pre-configured workflow templates. This hand-on event will include the following topics: (1) brief overview of the design principles and functionalities of the SP toolkit; (2) design and usage of SPR's command-line interface based on an object-oriented R implementation of CWL; (3) configuration and execution of workflows; (4) construction of custom workflows; (5) configuration and execution of a pre-configured workflow example from start to finish, e.g. RNA-Seq template; (6) parallel execution of workflows on HPC and cloud systems with and without schedulers; (7) generation of technical and scientific analysis reports including visualization; and 
 (8) demonstration of SPS' core functionalities, the project's Shiny App.
 
 ## Pre-requisites
@@ -67,7 +66,7 @@ Participants will be able to perform all analysis components of this workshop ha
 | Introduction to SPR's command-line interface                     | 20m  |
 | Configuration and execution of workflows                         | 10m  |
 | Construction of custom workflows                                 | 10m  |
-| Showcase small RNA-Seq workflow                                  | 20m  |
+| Showcase RNA-Seq workflow                                        | 20m  |
 | Parallelization on single machines and clusters                  | 10m  |
 | Generation of technical and scientific analysis reports          | 5m   |
 | Overview of *systemPipeShiny* core functionalities               | 20m  |
@@ -94,7 +93,7 @@ Participants will be able to perform all analysis components of this workshop ha
 
 ## Running the Workshop 
 
-This workshop uses R `4.1.0` and Bioconductor version` 3.14.` Bioconductor can be
+This workshop uses R `4.1.0` and Bioconductor version`3.14`. Bioconductor can be
 installed following [these instructions](https://www.bioconductor.org/developers/how-to/useDevel/).
 
 During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the workshop can be run in the [cloud](http://app.orchestra.cancerdatasci.org/).
@@ -112,7 +111,7 @@ docker run -e PASSWORD=systempipe -p 8787:8787 systempipe/systempipeworkshop2021
 ```
 
 - Log in to RStudio at [http://localhost:8787](http://localhost:8787) using username `rstudio`
-and password `systempipe`.
+and password `systempipe`.http://vbdukvrh.orchestra.cancerdatasci.org/
 
 - If you prefer to run the workshop from the command line:
 
@@ -122,7 +121,8 @@ docker run -it --user rstudio systempipe/systempipeworkshop2021:latest bash
 
 ### Workshop setup with GitHub
 
-[_`systemPipeR`_](http://www.bioconductor.org/packages/devel/bioc/html/systemPipeR.html) 
+[_`systemPipeR`_](http://www.bioconductor.org/packages/devel/bioc/html/systemPipeR.html) and
+[_`systemPipeShiny`_](http://bioconductor.org/packages/devel/bioc/html/systemPipeShiny.html)
 environment can be installed from the R console using the [_`BiocManager::install`_](https://cran.r-project.org/web/packages/BiocManager/index.html) 
 command. The associated data package [_`systemPipeRdata`_](http://www.bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html) 
 can be installed the same way. The latter is a helper package for generating _`systemPipeR`_ 
