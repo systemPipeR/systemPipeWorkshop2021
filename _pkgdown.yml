@@ -30,6 +30,6 @@ navbar:
      href: https://hub.docker.com/r/systempipe/systempipeworkshop2021
 
 # tutorials:
-# - name: SPR worrkflow
-#   title: uild Your First Workflow
+# - name: SPR workflow
+#   title: Build Your First Workflow
 #   url: https://dcassol.shinyapps.io/Exercise_SPR/
