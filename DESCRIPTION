@@ -17,6 +17,7 @@ Depends:
 Suggests: 
     knitr,
     rmarkdown,
+    BiocStyle,
     pkgdown, 
     systemPipeR,
     systemPipeRdata, 
@@ -32,7 +33,12 @@ Suggests:
     pushbar,
     readr,
     rhandsontable,
-    shinyTree   
+    shinyTree, 
+    esquisse, 
+    networkD3, 
+    pushbar, 
+    rhandsontable, 
+    shinyTree
 URL: https://systempipe.org/systemPipeWorkshop2021/
 BugReports: https://systempipe.org/systemPipeWorkshop2021/issues/new/choose
 VignetteBuilder: knitr

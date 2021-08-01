@@ -158,10 +158,15 @@ browseVignettes(package = "systemPipeWorkshop2021")
 
 ### Loading package and documentation
 
-```{r documentation, eval=FALSE}
+```{r documentation, eval=TRUE}
 library("systemPipeR") 
 library("systemPipeShiny") 
 library("systemPipeRdata") 
+```
+
+- Documentation
+
+```{r library, eval=FALSE}
 library(help="systemPipeR") # Lists package info
 vignette("systemPipeR") # Opens vignette
 ```
