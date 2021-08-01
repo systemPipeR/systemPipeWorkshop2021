@@ -21,7 +21,18 @@ Suggests:
     systemPipeR,
     systemPipeRdata, 
     systemPipeShiny,
-    learnr 
+    learnr,
+    ape, 
+    ggtree,
+    glmpca,
+    Rtsne, 
+    UpSetR, 
+    esquisse, 
+    networkD3,
+    pushbar,
+    readr,
+    rhandsontable,
+    shinyTree   
 URL: https://systempipe.org/systemPipeWorkshop2021/
 BugReports: https://systempipe.org/systemPipeWorkshop2021/issues/new/choose
 VignetteBuilder: knitr
