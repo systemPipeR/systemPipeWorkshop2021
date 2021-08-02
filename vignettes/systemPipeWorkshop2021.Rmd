@@ -15,6 +15,7 @@ editor_options:
   markdown: 
     wrap: 80
   chunk_output_type: console
+bibliography: bibtex.bib
 ---
 
 ```{r setting, echo=FALSE}
@@ -74,8 +75,7 @@ Participants will be able to perform all analysis components of this workshop ha
 |------------------------------------------------------------------|------|
 | Overview of *systemPipe* toolkit                                 | 10m  | 
 | Introduction to SPR's command-line interface                     | 20m  |
-| Configuration and execution of workflows                         | 10m  |
-| Construction of custom workflows                                 | 10m  |
+| Configuration and execution of workflows                         | 20m  |
 | Showcase RNA-Seq workflow                                        | 20m  |
 | Parallelization on single machines and clusters                  | 10m  |
 | Generation of technical and scientific analysis reports          | 5m   |
@@ -319,7 +319,6 @@ To work with custom data, users need to generate a _`targets`_ file containing
 the paths to their own FASTQ files and then provide under _`targetspath`_ the
 path to the corresponding _`targets`_ file. 
 
-
 - Structure of _`targets`_ file for "Hello World" example
 
 In this example, _`targets`_ file presents only two columns, which the first one 
@@ -331,7 +330,7 @@ targetspath <- system.file("extdata/cwl/example/targets_example.txt", package = 
 showDF(read.delim(targetspath, comment.char = "#"))
 ```
 
-## Structure of the new parameters files
+### Structure of the new parameters files
 
 The parameters and configuration required for running command-line software are 
 provided by the widely used community standard [Common Workflow Language](https://www.commonwl.org/) (CWL) 
@@ -341,7 +340,7 @@ For a complete overview of the CWL syntax, please see the [section](#cwl) below.
 Also, we have a dedicated section explain how to _`systemPipeR`_ establish the 
 connection between the CWL parameters files and the targets files. Please see [here](#cwl_targets). 
 
-### Creating the CWL param files from the command-line
+#### Automate creation of CWL parameters
 
 Users need to define the command-line in a pseudo-bash script format:
 
@@ -357,7 +356,7 @@ command <- "
 "
 ```
 
-#### Define prefix and defaults
+##### Define prefix and defaults
 
 - First line is the base command. Each line is an argument with its default value.
 
@@ -377,7 +376,7 @@ command <- "
   
 - If any argument has no default value, just a flag, like `--verbose`, there is no need to add any `<...>`
 
-#### `createParam` Function
+##### `createParam` Function
 
 `createParam` function requires the `string` as defined above as an input. 
 
@@ -399,7 +398,7 @@ consider "yes" and returning the container.
 cmd <- createParam(command, writeParamFiles = TRUE)
 ```
 
-### How to connect CWL description files within _`systemPipeR`_ {#cwl_targets}
+#### How to connect CWL description files within _`systemPipeR`_ {#cwl_targets}
 
 This section will demonstrate how to connect CWL parameters files to create 
 workflows. In addition, we will show how the workflow can be easily scalable 
@@ -409,8 +408,7 @@ with _`systemPipeR`_.
 knitr::include_graphics(system.file("extdata/images", "SPR_CWL_hello.png", package = "systemPipeR"))
 ```
 
-
-# Project initialization
+## Project initialization
 
 To create a Workflow within _`systemPipeR`_, we can start by defining an empty
 container and checking the directory structure:
@@ -464,7 +462,7 @@ in this case it is empty, as follow:
 length(sal)
 ```
 
-# Workflow Design 
+## Workflow Design 
 
 _`systemPipeR`_ workflows can be designed and built from start to finish with a 
 single command, importing from an R Markdown file or stepwise in interactive 
@@ -482,7 +480,7 @@ particular tool/step.
 To build R code based step, the constructor function `Linewise` is used. 
 For more details about this S4 class container, see [here](#linewise). 
 
-## Build workflow interactive {#appendstep}
+### Build workflow interactive {#appendstep}
 
 This tutorial shows a very simple example for describing and explaining all main 
 features available within systemPipeR to design, build, manage, run, and 
@@ -500,7 +498,7 @@ sal
 Next, we need to populate the object created with the first step in the
 workflow.
 
-### Adding the first step 
+#### Adding the first step 
 
 The first step is R code based, and we are splitting the `iris` dataset by `Species`
 and for each `Species` will be saved on file. Please note that this code will
@@ -533,7 +531,7 @@ Also, for printing and double-check the R code in the step, we can use the
 codeLine(sal)
 ```
 
-### Adding more steps
+#### Adding more steps
 
 Next, an example of how to compress the exported files using 
 [`gzip`](https://www.gnu.org/software/gzip/) command-line. 
@@ -695,7 +693,7 @@ appendStep(sal) <- LineWise(code = {
                     dependency = "gzip")
 ```
 
-## Build workflow from a {R Markdown} {#importWF}
+### Build workflow from a {R Markdown} {#importWF}
 
 The precisely same workflow can be created by importing the steps from an 
 R Markdown file.
@@ -721,7 +719,7 @@ codeLine(sal_rmd)
 targetsWF(sal_rmd)
 ```
 
-### Rules to create the R Markdown to import as workflow
+#### Rules to create the R Markdown to import as workflow
 
 To include a particular code chunk from the R Markdown file in the workflow
 analysis, please use the following code chunk options:
@@ -754,7 +752,7 @@ The motivation for this is that when R Markdown files are imported, the
 class as the `SYSargsList` object, while the R code based (`spr = 'r'`) is not 
 evaluated, and until the workflow is executed it will be store as an expression.
 
-# Running the workflow
+## Running the workflow
 
 For running the workflow, `runWF` function will execute all the command lines 
 store in the workflow container.
@@ -796,7 +794,7 @@ The workflow execution allows to save this environment for future recovery:
 sal <- runWF(sal, saveEnv = TRUE)
 ```
 
-## Workflow status
+### Workflow status
 
 To check the summary of the workflow, we can use:
 
@@ -808,6 +806,39 @@ To access more details about the workflow instances, we can use the `statusWF` m
 
 ```{r statusWF, eval=TRUE}
 statusWF(sal)
+```
+
+## Visualize workflow
+
+_`systemPipeR`_ workflows instances can be visualized with the `plotWF` function.
+
+This function will make a plot of selected workflow instance and the following 
+information is displayed on the plot:
+
+    - Workflow structure (dependency graphs between different steps); 
+    - Workflow step status, *e.g.* `Success`, `Error`, `Pending`, `Warnings`; 
+    - Sample status and statistics; 
+    - Workflow timing: running duration time. 
+
+If no argument is provided, the basic plot will automatically detect width, 
+height, layout, plot method, branches, _etc_. 
+
+```{r, eval=TRUE}
+plotWF(sal, show_legend = TRUE, width = "80%", rstudio = TRUE)
+```
+
+For more details about the `plotWF` function, please see [here](#plotWF).
+
+## Generation of technical report
+
+_`systemPipeR`_ compiles all the workflow execution logs in one central location, 
+making it easier to check any standard output (`stdout`) or standard error 
+(`stderr`) for any command-line tools used on the workflow or the R code `stdout`.
+Also, the workflow plot is appended at the beginning of the report, making it 
+easier to click on the respective step.
+
+```{r, eval=FALSE}
+sal <- renderLogs(sal)
 ```
 
 ## Parallelization on clusters
@@ -851,47 +882,14 @@ sal <- clusterRun(sal, FUN = runWF,
 Note: The example is submitting the jog to `short` partition. If you desire to 
 use a different partition, please adjust accordingly (`batchtools.slurm.tmpl`).
 
-# Visualize workflow
-
-_`systemPipeR`_ workflows instances can be visualized with the `plotWF` function.
-
-This function will make a plot of selected workflow instance and the following 
-information is displayed on the plot:
-
-    - Workflow structure (dependency graphs between different steps); 
-    - Workflow step status, *e.g.* `Success`, `Error`, `Pending`, `Warnings`; 
-    - Sample status and statistics; 
-    - Workflow timing: running duration time. 
-
-If no argument is provided, the basic plot will automatically detect width, 
-height, layout, plot method, branches, _etc_. 
-
-```{r, eval=TRUE}
-plotWF(sal, show_legend = TRUE, width = "80%", rstudio = TRUE)
-```
-
-For more details about the `plotWF` function, please see [here](#plotWF).
-
-## Generation of technical 
-
-_`systemPipeR`_ compiles all the workflow execution logs in one central location, 
-making it easier to check any standard output (`stdout`) or standard error 
-(`stderr`) for any command-line tools used on the workflow or the R code `stdout`.
-Also, the workflow plot is appended at the beginning of the report, making it 
-easier to click on the respective step.
-
-```{r, eval=FALSE}
-sal <- renderLogs(sal)
-```
-
-# Exported the workflow 
+## Exported the workflow 
 
 _`systemPipeR`_ workflow management system allows to translate and export the 
 workflow build interactively to R Markdown format or an executable bash script.
 This feature advances the reusability of the workflow, as well as the flexibility
 for workflow execution.
 
-## R Markdown file
+### R Markdown file
 
 `sal2rmd` function takes an `SYSargsList` workflow container and translates it to 
 SPR workflow template R markdown format. This file can be imported with the 
@@ -901,7 +899,7 @@ SPR workflow template R markdown format. This file can be imported with the
 sal2rmd(sal)
 ```
 
-## Bash script
+### Bash script
 
 `sal2bash` function takes an `SYSargsList` workflow container and translates 
 it to an executable bash script, so one can run the workflow without loading 
@@ -917,7 +915,7 @@ default the `spr_wf.sh`. Also, a directory `./spr_wf` will be created and store
 all the R scripts based on the workflow steps. Please note that this function will 
 "collapse" adjacent R steps into one file as much as possible.
 
-# Project Resume and Restart
+## Project Resume and Restart
 
 If you desire to resume or restart a project that has been initialized in the past, 
 `SPRproject` function allows this operation.
@@ -967,11 +965,19 @@ file nor any results it was created in previous runs. Please use with caution.
 sal <- SPRproject(overwrite = TRUE) 
 ```
 
-## Construction of custom workflows
-
-
 ## Showcase RNA-Seq workflow
 
+If you desire to import and run a RNA-seq pipeline, please follow:
+
+```{r project_import, eval=FALSE}
+systemPipeRdata::genWorkenvir(workflow = "rnaseq")
+setwd("rnaseq")
+sal <- SPRproject() 
+sal <- importWF(sal, file_path = "systemPipeRNAseq_importWF.Rmd", verbose = FALSE)
+sal <- runWF(sal)
+plotWF(sal, rstudio = TRUE)
+sal <- renderLogs(sal)
+```
 
 ## Overview of *systemPipeShiny* core functionalities
 
