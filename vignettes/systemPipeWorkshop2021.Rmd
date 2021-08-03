@@ -178,17 +178,16 @@ vignette("systemPipeR") # Opens vignette
 setwd("vignettes")
 ```
 
-### How to get help for systemPipeR/systemPipeShiny
+### How to find help 
 
 All questions about the package or any particular function should be posted to 
 the Bioconductor support site [https://support.bioconductor.org](https://support.bioconductor.org). 
 
-Please add the "_`systemPipeR`_" tag to your question, and the package authors will 
-automatically receive an alert. 
+Please add the "_`systemPipeR`_" tag to your question. This triggers an email 
+alert that will be send to the authors.
 
-We appreciate receiving reports of bugs in the functions or documentation and
-suggestions for improvement. For that, please consider opening an issue at
-[GitHub](https://github.com/systemPipeR). 
+We also appreciate receiving suggestions for improvements and/or bug reports by opening issues 
+at [GitHub](https://github.com/systemPipeR). 
 
 ## Overview of *systemPipe* toolkit
 
