@@ -255,9 +255,9 @@ to a different location and still be able to run the entire workflow. Also, it
 increases efficiency and data management once the raw data is kept in a separate 
 folder and avoids duplication. 
 
-<p style="color:red">The above is a bit fuzzy. I would merge anything relevent with the 
+<p style="color:red">[ThG Comment: The above is a bit fuzzy. I would merge anything relevent with the 
 following subsection. Keep it short and informative and eliminate the verbose parts
-that are not necessary.</p>
+that are not necessary.]</p>
 
 #### Directory Structure {#dir}
 
@@ -299,10 +299,10 @@ comparisons of an analysis workflow. The following shows the format of a sample
 _`targets`_ file included in the package. It also can be viewed and downloaded 
 from _`systemPipeR`_'s GitHub repository [here](https://github.com/tgirke/systemPipeR/blob/master/inst/extdata/targets.txt). 
 In a target file with a single type of input files, here FASTQ files of 
-single-end (SE) reads, the first column describe the path and the second column
+single-end (SE) reads, the first column defines the paths and the second column
 represents a unique id name for each sample. The third column called `Factor` 
-represents the biological replicates. All subsequent columns are additional 
-information, and any number of extra columns can be added as needed.
+represents the biological replicates. All subsequent columns are optional to provide
+additional information. Any number of additional columns can be added as needed.
 
 Users should note here, the usage of targets files is optional when using
 _`systemPipeR's`_ new workflow management interface. They can be replaced by a standard YAML
