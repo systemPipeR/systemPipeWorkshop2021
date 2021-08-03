@@ -323,9 +323,12 @@ path to the corresponding _`targets`_ file.
 
 - Structure of _`targets`_ file for "Hello World" example
 
-In this example, _`targets`_ file presents only two columns, which the first one 
-are the different phrases used by the `echo` command-line and the second column
-it is the sample `id`. The `id` column is required, and each sample id should be unique. 
+In this example, the _`targets`_ file contains only two columns. The first column
+contains short text strings that will be used by the `echo` command-line. The second column
+contains sample `ids`. The `id` column is required, and each sample `id` should be unique. 
+
+<p style="color:red">[ThG Comment: it is confusing that the text states as column title id 
+while the example below clearly has a different title, here SampleName. Try to be consistent...]</p>
 
 ```{r targets_echo, eval=TRUE}
 targetspath <- system.file("extdata/cwl/example/targets_example.txt", package = "systemPipeR")
