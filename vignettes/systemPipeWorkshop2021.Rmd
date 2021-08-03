@@ -335,15 +335,14 @@ targetspath <- system.file("extdata/cwl/example/targets_example.txt", package = 
 showDF(read.delim(targetspath, comment.char = "#"))
 ```
 
-### Structure of the new parameters files
+### Structure of parameters files
 
-The parameters and configuration required for running command-line software are 
-provided by the widely used community standard [Common Workflow Language](https://www.commonwl.org/) (CWL) 
-[@Amstutz2016-ka], which describes parameters analysis workflows in a generic 
-and reproducible manner. For R-based workflow steps, param files are not required. 
-For a complete overview of the CWL syntax, please see the [section](#cwl) below. 
-Also, we have a dedicated section explain how to _`systemPipeR`_ establish the 
-connection between the CWL parameters files and the targets files. Please see [here](#cwl_targets). 
+The parameters required for running command-line software are provided by adopting the 
+widely used CWL ([Common Workflow Language](https://www.commonwl.org/)) community standard 
+[@Amstutz2016-ka]. Parameter files are only required for command-line steps, and for R-based workflow 
+they are optional. An overview of the CWL syntax is provided in the [section](#cwl) below, while
+the [here](#cwl_targets) section explains how target files can be used for CWL-based workflow
+steps.
 
 #### Automate creation of CWL parameters
 
