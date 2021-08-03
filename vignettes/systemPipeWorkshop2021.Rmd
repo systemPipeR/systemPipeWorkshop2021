@@ -59,7 +59,7 @@ Non-essential background reading:
 
 ## Workshop Participation
 
-Participants will be able to perform all analysis components of this workshop hands-on. Active user participation throughout the event is highly encouraged, including but not limited to lecture material, hands-on sections, and final discussion about package improvements. Participants are encouraged to ask questions at any time during the workshop.
+Participants will be able to perform all analysis components of this workshop hands-on. Active user participation throughout the event is highly encouraged, including but not limited to lecture material, hands-on sections, and final discussion about package improvements. Participants are encouraged to ask questions preferentially at the end of the workshop.
 
 ## _R_ / _Bioconductor_ packages used
 
@@ -110,9 +110,9 @@ During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the worksh
 
 ### Workshop setup with Docker
 
-The workshop Docker container runs with Bioconductor `devel` version `3.14` and has 
-all the necessary packages and software for running the workshop vignettes. 
-To use Docker container, you need to first install [Docker](https://docs.docker.com/engine/install/) on your system.
+The Docker container used by this workshop runs with Bioconductor's `development` version `3.14`. I includes 
+all the necessary packages and software for running the code of in the workshop vignettes. 
+To use the Docker container, one needs to first install [Docker](https://docs.docker.com/engine/install/) on a user's system.
 
 - The container can be downloaded and run with:
 
@@ -121,9 +121,9 @@ docker run -e PASSWORD=systempipe -p 8787:8787 systempipe/systempipeworkshop2021
 ```
 
 - Log in to RStudio at [http://localhost:8787](http://localhost:8787) using username `rstudio`
-and password `systempipe`.http://vbdukvrh.orchestra.cancerdatasci.org/
+and password `systempipe`.
 
-- If you prefer to run the workshop from the command line:
+- If you prefer to run the workshop from the command-line:
 
 ```{bash docker_bash, eval=FALSE}
 docker run -it --user rstudio systempipe/systempipeworkshop2021:latest bash 
