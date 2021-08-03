@@ -159,7 +159,7 @@ browseVignettes(package = "systemPipeWorkshop2021")
 
 ### Loading package and documentation
 
-```{r documentation, eval=TRUE}
+```{r documentation, eval=TRUE, message=FALSE}
 library("systemPipeR") 
 library("systemPipeShiny") 
 library("systemPipeRdata") 
@@ -289,7 +289,7 @@ workflows accordingly.
         + Note, the user has the option to organize results files for a given sample and analysis step in a separate subdirectory.
 
 ```{r dir, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "*systemPipeR's* preconfigured directory structure."}
-knitr::include_graphics(system.file("extdata/images", "spr_project.png", package = "systemPipeR"))  
+knitr::include_graphics(system.file("images", "spr_project.png", package = "systemPipeWorkshop2021"))  
 ```
 
 #### Structure of initial _`targets`_ file
@@ -409,7 +409,7 @@ workflows. In addition, we will show how the workflow can be easily scalable
 with _`systemPipeR`_.
 
 ```{r sprCWL, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "WConnectivity between CWL param files and targets files."}
-knitr::include_graphics(system.file("extdata/images", "SPR_CWL_hello.png", package = "systemPipeR"))
+knitr::include_graphics(system.file("images", "SPR_CWL_hello.png", package = "systemPipeWorkshop2021"))
 ```
 
 ## Project initialization
@@ -1034,4 +1034,22 @@ For the admin panel login, account name **"admin"**, password **"admin"**.
 _shinyapp.io_ will reset the app once a while, but this will affect other people 
 who are trying the demo simultaneously. 
 
+# Version information
 
+```{r sessionInfo}
+sessionInfo()
+```
+
+```{r cleaning, eval=TRUE, include=FALSE}
+print(getwd())
+if (file.exists(".SPRproject")) unlink(".SPRproject", recursive = TRUE)
+setwd("../")
+if (file.exists("bioc2021")) unlink("bioc2021", recursive = TRUE)
+## NOTE: Removing previous project create in the quick starts section
+```
+
+# Funding
+
+This project is funded by NSF award [ABI-1661152](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1661152). 
+
+# References
