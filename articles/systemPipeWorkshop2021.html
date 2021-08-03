@@ -88,113 +88,6 @@
     
 <p><strong>Authors</strong>: Daniela Cassol (<a href="mailto:danielac@ucr.edu" class="email">danielac@ucr.edu</a>), Le Zhang (<a href="mailto:le.zhang001@email.ucr.edu" class="email">le.zhang001@email.ucr.edu</a>), Thomas Girke (<a href="mailto:thomas.girke@ucr.edu" class="email">thomas.girke@ucr.edu</a>).</p>
 <p><strong>Institution</strong>: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.</p>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h1>
-<div id="workshop-description" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workshop-description" class="anchor"></a>Workshop Description</h2>
-<p>This workshop introduces <em>systemPipe</em> (SP), a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages. <em>systemPipeR</em> (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports. <em>systemPipeShiny</em> (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively. <em>systemPipeWorkflow</em> (SPW) offers a collection of pre-configured workflow templates. This hands-on event will include the following topics: (1) brief overview of the design principles and functionalities of the SP toolkit; (2) design and usage of SPR’s command-line interface based on an object-oriented R implementation of CWL; (3) configuration and execution of workflows; (4) construction of custom workflows; (5) configuration and execution of a pre-configured workflow example from start to finish, e.g. RNA-Seq template; (6) parallel execution of workflows on HPC and cloud systems with and without schedulers; (7) generation of technical and scientific analysis reports including visualization; and (8) demonstration of SPS’ core functionalities, the project’s Shiny App.</p>
-</div>
-<div id="pre-requisites" class="section level2">
-<h2 class="hasAnchor">
-<a href="#pre-requisites" class="anchor"></a>Pre-requisites</h2>
-<ul>
-<li>Basic knowledge of R and usage of Bioconductor packages for NGS analysis</li>
-<li>Basic knowledge of running command-line software</li>
-<li>Basic knowledge of parallelization concepts</li>
-</ul>
-<p>Non-essential background reading:</p>
-<ul>
-<li><a href="https://systempipe.org/">systemPipe Workflow Environment WebPage</a></li>
-<li><a href="https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html">systemPipeR vignette</a></li>
-<li><a href="https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeShiny/inst/doc/systemPipeShiny.html">systemPipeShiny vignette</a></li>
-<li><a href="https://bioconductor.org/packages/release/data/experiment/vignettes/systemPipeRdata/inst/doc/systemPipeRdata.html">systemPipeRdata vignette</a></li>
-<li><a href="https://rmarkdown.rstudio.com/lesson-2.html">R Markdown tutorial</a></li>
-</ul>
-</div>
-<div id="workshop-participation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workshop-participation" class="anchor"></a>Workshop Participation</h2>
-<p>Participants will be able to perform all analysis components of this workshop hands-on. Active user participation throughout the event is highly encouraged, including but not limited to lecture material, hands-on sections, and final discussion about package improvements. Participants are encouraged to ask questions preferentially at the end of the workshop.</p>
-</div>
-<div id="r-bioconductor-packages-used" class="section level2">
-<h2 class="hasAnchor">
-<a href="#r-bioconductor-packages-used" class="anchor"></a><em>R</em> / <em>Bioconductor</em> packages used</h2>
-<ul>
-<li><a href="http://www.bioconductor.org/packages/release/bioc/html/systemPipeR.html"><code>systemPipeR</code></a></li>
-<li><a href="https://bioconductor.org/packages/devel/bioc/html/systemPipeShiny.html"><code>systemPipeShiny</code></a></li>
-<li><a href="http://www.bioconductor.org/packages/release/data/experiment/html/systemPipeRdata.html"><code>systemPipeRdata</code></a></li>
-</ul>
-</div>
-<div id="time-outline" class="section level2">
-<h2 class="hasAnchor">
-<a href="#time-outline" class="anchor"></a>Time outline</h2>
-<p>1h 45m total</p>
-<table class="table">
-<thead><tr class="header">
-<th>Activity</th>
-<th>Time</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Overview of <em>systemPipe</em> toolkit</td>
-<td>10m</td>
-</tr>
-<tr class="even">
-<td>Introduction to SPR’s command-line interface</td>
-<td>20m</td>
-</tr>
-<tr class="odd">
-<td>Configuration and execution of workflows</td>
-<td>20m</td>
-</tr>
-<tr class="even">
-<td>Showcase RNA-Seq workflow</td>
-<td>20m</td>
-</tr>
-<tr class="odd">
-<td>Parallelization on single machines and clusters</td>
-<td>10m</td>
-</tr>
-<tr class="even">
-<td>Generation of technical and scientific analysis reports</td>
-<td>5m</td>
-</tr>
-<tr class="odd">
-<td>Overview of <em>systemPipeShiny</em> core functionalities</td>
-<td>20m</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="workshop-goals-and-objectives" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workshop-goals-and-objectives" class="anchor"></a>Workshop goals and objectives</h2>
-<div id="learning-goals" class="section level3">
-<h3 class="hasAnchor">
-<a href="#learning-goals" class="anchor"></a>Learning goals</h3>
-<ul>
-<li>Recognize the benefits of a generic R-based workflow construction environment that is both scalable and reproducible</li>
-<li>Integration of command-line tools via the CWL community standard</li>
-<li>Rendering of R markdown reports and critical assessment of scientific analysis reports</li>
-<li>Parallelization of big data analysis tasks</li>
-</ul>
-</div>
-<div id="learning-objectives" class="section level3">
-<h3 class="hasAnchor">
-<a href="#learning-objectives" class="anchor"></a>Learning objectives</h3>
-<ul>
-<li>Identify and practice how to make analysis workflows more robust, reproducible, and portable across heterogeneous computing systems</li>
-<li>Usage of new workflow control class for designing, configuring, and running workflows</li>
-<li>Optimize and debug workflows</li>
-<li>Inspection of technical reports and log files</li>
-<li>Design of new and fully customized workflows</li>
-<li>Practice interactive workflow management and visualization</li>
-</ul>
-</div>
-</div>
-</div>
 <div id="workshop" class="section level1">
 <h1 class="hasAnchor">
 <a href="#workshop" class="anchor"></a>Workshop</h1>
@@ -232,101 +125,16 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"systemPipeWorkshop2021"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="getting-started" class="section level2">
+</div>
+<div id="getting-started" class="section level1">
+<h1 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting Started</h1>
+<div id="loading-package-and-documentation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting Started</h2>
-<div id="loading-package-and-documentation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#loading-package-and-documentation" class="anchor"></a>Loading package and documentation</h3>
+<a href="#loading-package-and-documentation" class="anchor"></a>Loading package and documentation</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://systempipe.org/">"systemPipeR"</a></span><span class="op">)</span> 
-<span class="co">#&gt; Loading required package: Rsamtools</span>
-<span class="co">#&gt; Loading required package: GenomeInfoDb</span>
-<span class="co">#&gt; Loading required package: BiocGenerics</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'BiocGenerics'</span>
-<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     IQR, mad, sd, var, xtabs</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     anyDuplicated, append, as.data.frame, basename, cbind, colnames,</span>
-<span class="co">#&gt;     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,</span>
-<span class="co">#&gt;     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,</span>
-<span class="co">#&gt;     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,</span>
-<span class="co">#&gt;     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,</span>
-<span class="co">#&gt;     union, unique, unsplit, which.max, which.min</span>
-<span class="co">#&gt; Loading required package: S4Vectors</span>
-<span class="co">#&gt; Loading required package: stats4</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'S4Vectors'</span>
-<span class="co">#&gt; The following objects are masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     expand.grid, I, unname</span>
-<span class="co">#&gt; Loading required package: IRanges</span>
-<span class="co">#&gt; Loading required package: GenomicRanges</span>
-<span class="co">#&gt; Loading required package: Biostrings</span>
-<span class="co">#&gt; Loading required package: XVector</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'Biostrings'</span>
-<span class="co">#&gt; The following object is masked from 'package:base':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     strsplit</span>
-<span class="co">#&gt; Loading required package: ShortRead</span>
-<span class="co">#&gt; Loading required package: BiocParallel</span>
-<span class="co">#&gt; Loading required package: GenomicAlignments</span>
-<span class="co">#&gt; Loading required package: SummarizedExperiment</span>
-<span class="co">#&gt; Loading required package: MatrixGenerics</span>
-<span class="co">#&gt; Loading required package: matrixStats</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'MatrixGenerics'</span>
-<span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,</span>
-<span class="co">#&gt;     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,</span>
-<span class="co">#&gt;     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,</span>
-<span class="co">#&gt;     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,</span>
-<span class="co">#&gt;     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,</span>
-<span class="co">#&gt;     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,</span>
-<span class="co">#&gt;     colWeightedMeans, colWeightedMedians, colWeightedSds,</span>
-<span class="co">#&gt;     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,</span>
-<span class="co">#&gt;     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,</span>
-<span class="co">#&gt;     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,</span>
-<span class="co">#&gt;     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,</span>
-<span class="co">#&gt;     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,</span>
-<span class="co">#&gt;     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,</span>
-<span class="co">#&gt;     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span>
-<span class="co">#&gt;     rowWeightedSds, rowWeightedVars</span>
-<span class="co">#&gt; Loading required package: Biobase</span>
-<span class="co">#&gt; Welcome to Bioconductor</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     Vignettes contain introductory material; view with</span>
-<span class="co">#&gt;     'browseVignettes()'. To cite Bioconductor, see</span>
-<span class="co">#&gt;     'citation("Biobase")', and for packages 'citation("pkgname")'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'Biobase'</span>
-<span class="co">#&gt; The following object is masked from 'package:MatrixGenerics':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     rowMedians</span>
-<span class="co">#&gt; The following objects are masked from 'package:matrixStats':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     anyMissing, rowMedians</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'systemPipeR'</span>
-<span class="co">#&gt; The following object is masked from 'package:BiocStyle':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     output</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://systempipe.org/sps">"systemPipeShiny"</a></span><span class="op">)</span> 
-<span class="co">#&gt; Loading required package: shiny</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'shiny'</span>
-<span class="co">#&gt; The following object is masked from 'package:BiocStyle':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     markdown</span>
-<span class="co">#&gt; Loading required package: spsUtil</span>
-<span class="co">#&gt; Loading required package: spsComps</span>
-<span class="co">#&gt; Loading required package: drawer</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/tgirke/systemPipeRdata">"systemPipeRdata"</a></span><span class="op">)</span> </code></pre></div>
 <ul>
 <li>Documentation</li>
@@ -334,7 +142,6 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span>help<span class="op">=</span><span class="st">"systemPipeR"</span><span class="op">)</span> <span class="co"># Lists package info</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"systemPipeR"</span><span class="op">)</span> <span class="co"># Opens vignette</span></code></pre></div>
-</div>
 <div id="set-working-directory" class="section level3">
 <h3 class="hasAnchor">
 <a href="#set-working-directory" class="anchor"></a>Set working directory</h3>
@@ -426,7 +233,7 @@
 </li>
 </ul>
 <div class="figure" style="text-align: center">
-<img src="../../../../usr/local/lib/R/site-library/systemPipeR/extdata/images/spr_project.png" alt="*systemPipeR's* preconfigured directory structure." width="100%"><p class="caption">
+<img src="../../../../tmp/RtmphnhBVR/temp_libpath62158f7ba47/systemPipeWorkshop2021/images/spr_project.png" alt="*systemPipeR's* preconfigured directory structure." width="100%"><p class="caption">
 <em>systemPipeR’s</em> preconfigured directory structure.
 </p>
 </div>
@@ -442,23 +249,26 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="st">"targets.txt"</span>
 <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/showDF.html">showDF</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">targetspath</span>, comment.char <span class="op">=</span> <span class="st">"#"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-4ffedd0218e42fd32ffa" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4ffedd0218e42fd32ffa">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"],["./data/SRR446027_1.fastq.gz","./data/SRR446028_1.fastq.gz","./data/SRR446029_1.fastq.gz","./data/SRR446030_1.fastq.gz","./data/SRR446031_1.fastq.gz","./data/SRR446032_1.fastq.gz","./data/SRR446033_1.fastq.gz","./data/SRR446034_1.fastq.gz","./data/SRR446035_1.fastq.gz","./data/SRR446036_1.fastq.gz","./data/SRR446037_1.fastq.gz","./data/SRR446038_1.fastq.gz","./data/SRR446039_1.fastq.gz","./data/SRR446040_1.fastq.gz","./data/SRR446041_1.fastq.gz","./data/SRR446042_1.fastq.gz","./data/SRR446043_1.fastq.gz","./data/SRR446044_1.fastq.gz"],["M1A","M1B","A1A","A1B","V1A","V1B","M6A","M6B","A6A","A6B","V6A","V6B","M12A","M12B","A12A","A12B","V12A","V12B"],["M1","M1","A1","A1","V1","V1","M6","M6","A6","A6","V6","V6","M12","M12","A12","A12","V12","V12"],["Mock.1h.A","Mock.1h.B","Avr.1h.A","Avr.1h.B","Vir.1h.A","Vir.1h.B","Mock.6h.A","Mock.6h.B","Avr.6h.A","Avr.6h.B","Vir.6h.A","Vir.6h.B","Mock.12h.A","Mock.12h.B","Avr.12h.A","Avr.12h.B","Vir.12h.A","Vir.12h.B"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],["23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>FileName<\/th>\n      <th>SampleName<\/th>\n      <th>Factor<\/th>\n      <th>SampleLong<\/th>\n      <th>Experiment<\/th>\n      <th>Date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>To work with custom data, users need to generate a <em><code>targets</code></em> file containing the paths to their own FASTQ files and then provide under <em><code>targetspath</code></em> the path to the corresponding <em><code>targets</code></em> file.</p>
+<div id="htmlwidget-5305caaca833286d00bc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5305caaca833286d00bc">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"],["./data/SRR446027_1.fastq.gz","./data/SRR446028_1.fastq.gz","./data/SRR446029_1.fastq.gz","./data/SRR446030_1.fastq.gz","./data/SRR446031_1.fastq.gz","./data/SRR446032_1.fastq.gz","./data/SRR446033_1.fastq.gz","./data/SRR446034_1.fastq.gz","./data/SRR446035_1.fastq.gz","./data/SRR446036_1.fastq.gz","./data/SRR446037_1.fastq.gz","./data/SRR446038_1.fastq.gz","./data/SRR446039_1.fastq.gz","./data/SRR446040_1.fastq.gz","./data/SRR446041_1.fastq.gz","./data/SRR446042_1.fastq.gz","./data/SRR446043_1.fastq.gz","./data/SRR446044_1.fastq.gz"],["M1A","M1B","A1A","A1B","V1A","V1B","M6A","M6B","A6A","A6B","V6A","V6B","M12A","M12B","A12A","A12B","V12A","V12B"],["M1","M1","A1","A1","V1","V1","M6","M6","A6","A6","V6","V6","M12","M12","A12","A12","V12","V12"],["Mock.1h.A","Mock.1h.B","Avr.1h.A","Avr.1h.B","Vir.1h.A","Vir.1h.B","Mock.6h.A","Mock.6h.B","Avr.6h.A","Avr.6h.B","Vir.6h.A","Vir.6h.B","Mock.12h.A","Mock.12h.B","Avr.12h.A","Avr.12h.B","Vir.12h.A","Vir.12h.B"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],["23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>FileName<\/th>\n      <th>SampleName<\/th>\n      <th>Factor<\/th>\n      <th>SampleLong<\/th>\n      <th>Experiment<\/th>\n      <th>Date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>To work with custom data, users need to generate a <em><code>targets</code></em> file containing the paths to their own FASTQ files and then provide under <em><code>targetspath</code></em> the path to the corresponding <em><code>targets</code></em> file.</p>
 <ul>
 <li>Structure of <em><code>targets</code></em> file for “Hello World” example</li>
 </ul>
-<p>In this example, <em><code>targets</code></em> file presents only two columns, which the first one are the different phrases used by the <code>echo</code> command-line and the second column it is the sample <code>id</code>. The <code>id</code> column is required, and each sample id should be unique.</p>
+<p>In this example, the <em><code>targets</code></em> file contains only two columns. The first column contains short text strings that will be used by the <code>echo</code> command-line. The second column contains sample <code>ids</code>. The <code>id</code> column is required, and each sample <code>id</code> should be unique.</p>
+<p style="color:red">
+[ThG Comment: it is confusing that the text states as column title id while the example below clearly has a different title, here SampleName. Try to be consistent…]
+</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl/example/targets_example.txt"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/showDF.html">showDF</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">targetspath</span>, comment.char <span class="op">=</span> <span class="st">"#"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-ab7d5df3e7075a0cefbb" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ab7d5df3e7075a0cefbb">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3"],["Hello World!","Hello USA!","Hello Bioconductor!"],["M1","M2","M3"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Message<\/th>\n      <th>SampleName<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6f7cbfc3493dd9c7cdfd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6f7cbfc3493dd9c7cdfd">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3"],["Hello World!","Hello USA!","Hello Bioconductor!"],["M1","M2","M3"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Message<\/th>\n      <th>SampleName<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div id="structure-of-the-new-parameters-files" class="section level3">
+<div id="structure-of-parameters-files" class="section level3">
 <h3 class="hasAnchor">
-<a href="#structure-of-the-new-parameters-files" class="anchor"></a>Structure of the new parameters files</h3>
-<p>The parameters and configuration required for running command-line software are provided by the widely used community standard <a href="https://www.commonwl.org/">Common Workflow Language</a> (CWL) <span class="citation">(Amstutz et al. 2016)</span>, which describes parameters analysis workflows in a generic and reproducible manner. For R-based workflow steps, param files are not required. For a complete overview of the CWL syntax, please see the <a href="#cwl">section</a> below. Also, we have a dedicated section explain how to <em><code>systemPipeR</code></em> establish the connection between the CWL parameters files and the targets files. Please see <a href="#cwl_targets">here</a>.</p>
+<a href="#structure-of-parameters-files" class="anchor"></a>Structure of parameters files</h3>
+<p>The parameters required for running command-line software are provided by adopting the widely used CWL (<a href="https://www.commonwl.org/">Common Workflow Language</a>) community standard <span class="citation">(Amstutz et al. 2016)</span>. Parameter files are only required for command-line steps, and for R-based workflow they are optional. An overview of the CWL syntax is provided in the <a href="#cwl">section</a> below, while the <a href="#cwl_targets">here</a> section explains how target files can be used for CWL-based workflow steps.</p>
 <div id="automate-creation-of-cwl-parameters" class="section level4">
 <h4 class="hasAnchor">
 <a href="#automate-creation-of-cwl-parameters" class="anchor"></a>Automate creation of CWL parameters</h4>
@@ -537,16 +347,17 @@
 </h4>
 <p>This section will demonstrate how to connect CWL parameters files to create workflows. In addition, we will show how the workflow can be easily scalable with <em><code>systemPipeR</code></em>.</p>
 <div class="figure" style="text-align: center">
-<img src="../../../../usr/local/lib/R/site-library/systemPipeR/extdata/images/SPR_CWL_hello.png" alt="WConnectivity between CWL param files and targets files." width="100%"><p class="caption">
+<img src="../../../../tmp/RtmphnhBVR/temp_libpath62158f7ba47/systemPipeWorkshop2021/images/SPR_CWL_hello.png" alt="WConnectivity between CWL param files and targets files." width="100%"><p class="caption">
 WConnectivity between CWL param files and targets files.
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="project-initialization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#project-initialization" class="anchor"></a>Project initialization</h2>
+</div>
+<div id="project-initialization" class="section level1">
+<h1 class="hasAnchor">
+<a href="#project-initialization" class="anchor"></a>Project initialization</h1>
 <p>To create a Workflow within <em><code>systemPipeR</code></em>, we can start by defining an empty container and checking the directory structure:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>projPath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> 
@@ -588,7 +399,6 @@ WConnectivity between CWL param files and targets files.
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0</span></code></pre></div>
-</div>
 <div id="workflow-design" class="section level2">
 <h2 class="hasAnchor">
 <a href="#workflow-design" class="anchor"></a>Workflow Design</h2>
@@ -919,9 +729,10 @@ WConnectivity between CWL param files and targets files.
 </div>
 </div>
 </div>
-<div id="running-the-workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#running-the-workflow" class="anchor"></a>Running the workflow</h2>
+</div>
+<div id="running-the-workflow" class="section level1">
+<h1 class="hasAnchor">
+<a href="#running-the-workflow" class="anchor"></a>Running the workflow</h1>
 <p>For running the workflow, <code>runWF</code> function will execute all the command-lines store in the workflow container.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sal <span class="ot">&lt;-</span> <span class="fu">runWF</span>(sal)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running Step: export_iris </span></span>
@@ -1035,7 +846,6 @@ WConnectivity between CWL param files and targets files.
 <span class="co">#&gt;   &lt;character&gt; &lt;character&gt;</span>
 <span class="co">#&gt; 1  iris_stats     Success</span></code></pre></div>
 </div>
-</div>
 <div id="visualize-workflow" class="section level2">
 <h2 class="hasAnchor">
 <a href="#visualize-workflow" class="anchor"></a>Visualize workflow</h2>
@@ -1048,8 +858,8 @@ WConnectivity between CWL param files and targets files.
 <p>If no argument is provided, the basic plot will automatically detect width, height, layout, plot method, branches, <em>etc</em>.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, show_legend <span class="op">=</span> <span class="cn">TRUE</span>, width <span class="op">=</span> <span class="st">"80%"</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-6cef0b4ecbbfb02d87ad" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6cef0b4ecbbfb02d87ad">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        export_iris -> gzip -> iris_stats[color=\"dodgerblue\"]\n   }\n    gzip -> gunzip\n    \n    export_iris[label=<<b><font color=\"#5cb85c\">export_iris<\/font><br><\/br><font color=\"#5cb85c\">1<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step export_iris: 1 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-03 01:17:17; End time: 2021-08-03 01:17:17; Duration: 00:00:00\"]\n    gzip[label=<<b><font color=\"#5cb85c\">gzip<\/font><br><\/br><font color=\"#5cb85c\">3<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">3<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step gzip: 3 samples passed; 0 samples have warnings; 0 samples have errors; 3 samples in total; Start time: 2021-08-03 01:17:17; End time: 2021-08-03 01:17:17; Duration: 00:00:00\"]\n    gunzip[label=<<b><font color=\"#5cb85c\">gunzip<\/font><br><\/br><font color=\"#5cb85c\">3<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">3<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step gunzip: 3 samples passed; 0 samples have warnings; 0 samples have errors; 3 samples in total; Start time: 2021-08-03 01:17:17; End time: 2021-08-03 01:17:17; Duration: 00:00:00\"]\n    iris_stats[label=<<b><font color=\"#5cb85c\">iris_stats<\/font><br><\/br><font color=\"#5cb85c\">1<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0.3s<\/font>>  tooltip=\"step iris_stats: 1 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-03 01:17:17; End time: 2021-08-03 01:17:17; Duration: 00:00:0.3\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-54873126","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="#plotWF">here</a>.</p>
+<div id="htmlwidget-b1c27d14d94b6b5e5d36" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b1c27d14d94b6b5e5d36">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        export_iris -> gzip -> iris_stats[color=\"dodgerblue\"]\n   }\n    gzip -> gunzip\n    \n    export_iris[label=<<b><font color=\"#5cb85c\">export_iris<\/font><br><\/br><font color=\"#5cb85c\">1<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step export_iris: 1 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-03 18:20:46; End time: 2021-08-03 18:20:46; Duration: 00:00:00\"]\n    gzip[label=<<b><font color=\"#5cb85c\">gzip<\/font><br><\/br><font color=\"#5cb85c\">3<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">3<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step gzip: 3 samples passed; 0 samples have warnings; 0 samples have errors; 3 samples in total; Start time: 2021-08-03 18:20:46; End time: 2021-08-03 18:20:46; Duration: 00:00:00\"]\n    gunzip[label=<<b><font color=\"#5cb85c\">gunzip<\/font><br><\/br><font color=\"#5cb85c\">3<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">3<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step gunzip: 3 samples passed; 0 samples have warnings; 0 samples have errors; 3 samples in total; Start time: 2021-08-03 18:20:46; End time: 2021-08-03 18:20:46; Duration: 00:00:00\"]\n    iris_stats[label=<<b><font color=\"#5cb85c\">iris_stats<\/font><br><\/br><font color=\"#5cb85c\">1<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0.3s<\/font>>  tooltip=\"step iris_stats: 1 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-03 18:20:46; End time: 2021-08-03 18:20:46; Duration: 00:00:0.3\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-15742638","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="#plotWF">here</a>.</p>
 </div>
 <div id="generation-of-technical-report" class="section level2">
 <h2 class="hasAnchor">
@@ -1189,10 +999,108 @@ WConnectivity between CWL param files and targets files.
 <p>For the login required demos, the app account name is <strong>“user”</strong> password <strong>“user”</strong>.</p>
 <p>For the admin panel login, account name <strong>“admin”</strong>, password <strong>“admin”</strong>.</p>
 <p><strong>Please DO NOT delete or change password when you are using the admin features.</strong> <em>shinyapp.io</em> will reset the app once a while, but this will affect other people who are trying the demo simultaneously.</p>
+</div>
+</div>
+<div id="version-information" class="section level1">
+<h1 class="hasAnchor">
+<a href="#version-information" class="anchor"></a>Version information</h1>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
+<span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
+<span class="co">#&gt; Running under: Ubuntu 20.04.2 LTS</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Matrix products: default</span>
+<span class="co">#&gt; BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; locale:</span>
+<span class="co">#&gt;  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              </span>
+<span class="co">#&gt;  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    </span>
+<span class="co">#&gt;  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=C             </span>
+<span class="co">#&gt;  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 </span>
+<span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span>
+<span class="co">#&gt; [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attached base packages:</span>
+<span class="co">#&gt; [1] stats4    stats     graphics  grDevices utils     datasets  methods  </span>
+<span class="co">#&gt; [8] base     </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; other attached packages:</span>
+<span class="co">#&gt;  [1] systemPipeRdata_1.21.3      systemPipeShiny_1.3.2      </span>
+<span class="co">#&gt;  [3] drawer_0.1.0                spsComps_0.3.0             </span>
+<span class="co">#&gt;  [5] spsUtil_0.1.2               shiny_1.6.0                </span>
+<span class="co">#&gt;  [7] systemPipeR_1.27.19         ShortRead_1.51.0           </span>
+<span class="co">#&gt;  [9] GenomicAlignments_1.29.0    SummarizedExperiment_1.23.1</span>
+<span class="co">#&gt; [11] Biobase_2.53.0              MatrixGenerics_1.5.2       </span>
+<span class="co">#&gt; [13] matrixStats_0.60.0          BiocParallel_1.27.2        </span>
+<span class="co">#&gt; [15] Rsamtools_2.9.1             Biostrings_2.61.1          </span>
+<span class="co">#&gt; [17] XVector_0.33.0              GenomicRanges_1.45.0       </span>
+<span class="co">#&gt; [19] GenomeInfoDb_1.29.3         IRanges_2.27.0             </span>
+<span class="co">#&gt; [21] S4Vectors_0.31.0            BiocGenerics_0.39.1        </span>
+<span class="co">#&gt; [23] BiocStyle_2.21.3           </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; loaded via a namespace (and not attached):</span>
+<span class="co">#&gt;   [1] GOstats_2.59.0           backports_1.2.1          BiocFileCache_2.1.1     </span>
+<span class="co">#&gt;   [4] systemfonts_1.0.2        lazyeval_0.2.2           shinydashboard_0.7.1    </span>
+<span class="co">#&gt;   [7] GSEABase_1.55.1          splines_4.1.0            crosstalk_1.1.1         </span>
+<span class="co">#&gt;  [10] ggplot2_3.3.5            digest_0.6.27            htmltools_0.5.1.1       </span>
+<span class="co">#&gt;  [13] GO.db_3.13.0             fansi_0.5.0              magrittr_2.0.1          </span>
+<span class="co">#&gt;  [16] checkmate_2.0.0          memoise_2.0.0            BSgenome_1.61.0         </span>
+<span class="co">#&gt;  [19] base64url_1.4            remotes_2.4.0            tzdb_0.1.2              </span>
+<span class="co">#&gt;  [22] limma_3.49.1             shinyFiles_0.9.0         annotate_1.71.0         </span>
+<span class="co">#&gt;  [25] vroom_1.5.3              askpass_1.1              pkgdown_1.6.1           </span>
+<span class="co">#&gt;  [28] prettyunits_1.1.1        jpeg_0.1-9               colorspace_2.0-2        </span>
+<span class="co">#&gt;  [31] blob_1.2.2               rappdirs_0.3.3           textshaping_0.3.5       </span>
+<span class="co">#&gt;  [34] xfun_0.24                dplyr_1.0.7              crayon_1.4.1            </span>
+<span class="co">#&gt;  [37] RCurl_1.98-1.3           jsonlite_1.7.2           graph_1.71.2            </span>
+<span class="co">#&gt;  [40] genefilter_1.75.0        brew_1.0-6               survival_3.2-11         </span>
+<span class="co">#&gt;  [43] VariantAnnotation_1.39.0 glue_1.4.2               gtable_0.3.0            </span>
+<span class="co">#&gt;  [46] zlibbioc_1.39.0          DelayedArray_0.19.1      Rgraphviz_2.37.0        </span>
+<span class="co">#&gt;  [49] scales_1.1.1             pheatmap_1.0.12          DBI_1.1.1               </span>
+<span class="co">#&gt;  [52] edgeR_3.35.0             Rcpp_1.0.7               viridisLite_0.4.0       </span>
+<span class="co">#&gt;  [55] xtable_1.8-4             progress_1.2.2           bit_4.0.4               </span>
+<span class="co">#&gt;  [58] DT_0.18                  AnnotationForge_1.35.0   shinyjqui_0.4.0         </span>
+<span class="co">#&gt;  [61] htmlwidgets_1.5.3        httr_1.4.2               shinyAce_0.4.1          </span>
+<span class="co">#&gt;  [64] RColorBrewer_1.1-2       ellipsis_0.3.2           farver_2.1.0            </span>
+<span class="co">#&gt;  [67] shinydashboardPlus_2.0.2 pkgconfig_2.0.3          XML_3.99-0.6            </span>
+<span class="co">#&gt;  [70] sass_0.4.0               dbplyr_2.1.1             locfit_1.5-9.4          </span>
+<span class="co">#&gt;  [73] utf8_1.2.2               labeling_0.4.2           tidyselect_1.1.1        </span>
+<span class="co">#&gt;  [76] rlang_0.4.11             later_1.2.0              AnnotationDbi_1.55.1    </span>
+<span class="co">#&gt;  [79] munsell_0.5.0            tools_4.1.0              cachem_1.0.5            </span>
+<span class="co">#&gt;  [82] generics_0.1.0           RSQLite_2.2.7            evaluate_0.14           </span>
+<span class="co">#&gt;  [85] stringr_1.4.0            fastmap_1.1.0            yaml_2.2.1              </span>
+<span class="co">#&gt;  [88] ragg_1.1.3               knitr_1.33               bit64_4.0.5             </span>
+<span class="co">#&gt;  [91] fs_1.5.0                 purrr_0.3.4              KEGGREST_1.33.0         </span>
+<span class="co">#&gt;  [94] RBGL_1.69.0              mime_0.11                xml2_1.3.2              </span>
+<span class="co">#&gt;  [97] biomaRt_2.49.2           rstudioapi_0.13          debugme_1.1.0           </span>
+<span class="co">#&gt; [100] compiler_4.1.0           plotly_4.9.4.1           filelock_1.0.2          </span>
+<span class="co">#&gt; [103] curl_4.3.2               png_0.1-7                tibble_3.1.3            </span>
+<span class="co">#&gt; [106] bslib_0.2.5.1            stringi_1.7.3            highr_0.9               </span>
+<span class="co">#&gt; [109] GenomicFeatures_1.45.0   desc_1.3.0               lattice_0.20-44         </span>
+<span class="co">#&gt; [112] Matrix_1.3-4             styler_1.5.1             shinyjs_2.0.0           </span>
+<span class="co">#&gt; [115] vctrs_0.3.8              pillar_1.6.2             lifecycle_1.0.0         </span>
+<span class="co">#&gt; [118] BiocManager_1.30.16      jquerylib_0.1.4          data.table_1.14.0       </span>
+<span class="co">#&gt; [121] bitops_1.0-7             httpuv_1.6.1             rtracklayer_1.53.0      </span>
+<span class="co">#&gt; [124] R6_2.5.0                 BiocIO_1.3.0             latticeExtra_0.6-29     </span>
+<span class="co">#&gt; [127] hwriter_1.3.2            bookdown_0.22            promises_1.2.0.1        </span>
+<span class="co">#&gt; [130] assertthat_0.2.1         openssl_1.4.4            Category_2.59.0         </span>
+<span class="co">#&gt; [133] rprojroot_2.0.2          rjson_0.2.20             shinyWidgets_0.6.0      </span>
+<span class="co">#&gt; [136] withr_2.4.2              batchtools_0.9.15        GenomeInfoDbData_1.2.6  </span>
+<span class="co">#&gt; [139] parallel_4.1.0           hms_1.1.0                grid_4.1.0              </span>
+<span class="co">#&gt; [142] tidyr_1.1.3              rmarkdown_2.9            shinytoastr_2.1.1       </span>
+<span class="co">#&gt; [145] restfulr_0.0.13</span></code></pre></div>
+</div>
+<div id="funding" class="section level1">
+<h1 class="hasAnchor">
+<a href="#funding" class="anchor"></a>Funding</h1>
+<p>This project is funded by NSF award <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1661152">ABI-1661152</a>.</p>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Amstutz2016-ka" class="csl-entry">
 Amstutz, Peter, Michael R Crusoe, Nebojša Tijanić, Brad Chapman, John Chilton, Michael Heuer, Andrey Kartashov, et al. 2016. <span>“Common Workflow Language, V1.0,”</span> July. <a href="https://doi.org/10.6084/m9.figshare.3115156.v2">https://doi.org/10.6084/m9.figshare.3115156.v2</a>.
-</div>
 </div>
 </div>
 </div>
