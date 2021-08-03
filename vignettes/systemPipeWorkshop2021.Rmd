@@ -182,12 +182,10 @@ setwd("vignettes")
 
 All questions about the package or any particular function should be posted to 
 the Bioconductor support site [https://support.bioconductor.org](https://support.bioconductor.org). 
-
 Please add the "_`systemPipeR`_" tag to your question. This triggers an email 
 alert that will be send to the authors.
-
 We also appreciate receiving suggestions for improvements and/or bug reports by opening issues 
-at [GitHub](https://github.com/systemPipeR). 
+on [GitHub](https://github.com/systemPipeR). 
 
 ## Overview of *systemPipe* toolkit
 
@@ -213,24 +211,24 @@ community standard [Common Workflow Language](https://www.commonwl.org/) (CWL)
 manner.
 Using this community standard in `systemPipeR` has many advantages. For instance, 
 the integration of CWL allows running `systemPipeR` workflows from a single 
-specification instance either entirely from within R, from various command line 
-wrappers (e.g., cwl-runner) or from other languages (, e.g., Bash or Python). 
-`systemPipeR` includes support for both command line and R/Bioconductor software 
+specification instance either entirely from within R, from various command-line 
+wrappers (e.g. cwl-runner) or from other languages (e.g. Bash or Python). 
+`systemPipeR` includes support for both command-line and R/Bioconductor software 
 as well as resources for containerization, parallel evaluations on computer 
-clusters along with the automated generation of interactive analysis reports.
+clusters along with automated generation of interactive analysis reports.
 
 An important feature of `systemPipeR's` CWL interface is that it provides two 
-options to run command line tools and workflows based on CWL. 
+options to run command-line tools and workflows based on CWL. 
 First, one can run CWL in its native way via an R-based wrapper utility for 
 `cwl-runner` or `cwl-tools` (CWL-based approach). Second, one can run workflows 
-using CWL's command line and workflow instructions from within R (R-based approach). 
+using CWL's command-line and workflow instructions from within R (R-based approach). 
 In the latter case the same CWL workflow definition files (e.g. *.cwl* and *.yml*) 
 are used but rendered and executed entirely with R functions defined by `systemPipeR`, 
-and thus use CWL mainly as a command line and workflow definition format rather 
-than software to run workflows. In this regard `systemPipeR` also provides several 
+and thus use CWL mainly as a command-line and workflow definition format rather 
+than software to run workflows. Moreover, `systemPipeR` provides several 
 convenience functions that are useful for designing and debugging workflows, 
-such as a command line rendering function to retrieve the exact command line 
-strings for each data set and processing step prior to running a command line.
+such as a command-line rendering function to retrieve the exact command-line 
+strings for each step prior to running a command-line.
 
 ## Configuration and execution of workflows
 
@@ -256,6 +254,10 @@ team since internally relative paths are used. Users could transfer this project
 to a different location and still be able to run the entire workflow. Also, it 
 increases efficiency and data management once the raw data is kept in a separate 
 folder and avoids duplication. 
+
+<p style="color:red">The above is a bit fuzzy. I would merge anything relevent with the 
+following subsection. Keep it short and informative and eliminate the verbose parts
+that are not necessary.</p>
 
 #### Directory Structure {#dir}
 
@@ -593,7 +595,7 @@ sal
 Note that we have two steps, and it is expected three files from the second step.
 Also, the workflow status is *Pending*, which means the workflow object is 
 rendered in R; however, we did not execute the workflow yet. 
-In addition to this summary, it can be observed this step has three command lines. 
+In addition to this summary, it can be observed this step has three command-lines. 
 
 For more details about the command-line rendered for each target file, it can be 
 checked as follows: 
@@ -659,7 +661,7 @@ Now, we can observe that the third step has been added and contains one substep.
 sal
 ```
 
-In addition, we can access all the command lines for each one of the substeps. 
+In addition, we can access all the command-lines for each one of the substeps. 
 
 ```{r, eval=TRUE}
 cmdlist(sal["gzip"], targets = 1)
@@ -754,7 +756,7 @@ evaluated, and until the workflow is executed it will be store as an expression.
 
 ## Running the workflow
 
-For running the workflow, `runWF` function will execute all the command lines 
+For running the workflow, `runWF` function will execute all the command-lines 
 store in the workflow container.
 
 ```{r runWF, eval=TRUE}
