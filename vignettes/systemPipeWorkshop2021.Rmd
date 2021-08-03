@@ -139,7 +139,8 @@ can be installed the same way. The latter is a helper package for generating _`s
 workflow environments with a single command containing all parameter files and 
 sample data required to quickly test and run workflows. 
 
-You can install locally the necessary packages for this workshop as follows: 
+To install all packages requried for this workshop on a local system, one can use the following 
+install commands. 
 
 ```{r, install_pkg, eval=FALSE}
 ## Install workshop package
