@@ -100,6 +100,30 @@
     
 <p><strong>Authors</strong>: Daniela Cassol (<a href="mailto:danielac@ucr.edu" class="email">danielac@ucr.edu</a>), Le Zhang (<a href="mailto:le.zhang001@email.ucr.edu" class="email">le.zhang001@email.ucr.edu</a>), Thomas Girke (<a href="mailto:thomas.girke@ucr.edu" class="email">thomas.girke@ucr.edu</a>).</p>
 <p><strong>Institution</strong>: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.</p>
+<div id="overview-of-systempipe-toolkit" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview-of-systempipe-toolkit" class="anchor"></a>Overview of <em>systemPipe</em> toolkit</h1>
+<p><code>systemPipe</code> (SP) is a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages:</p>
+<ul>
+<li><p><code>systemPipeR</code> (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports.</p></li>
+<li><p><code>systemPipeShiny</code> (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively.</p></li>
+<li><p><code>systemPipeWorkflow</code> (SPW) offers a collection of pre-configured workflow templates.</p></li>
+</ul>
+<p>For more details, please see the <a href="http://www.dcassol.com/bioc2021_slides/#1">presentation slides</a>.</p>
+</div>
+<div id="introduction-to-sprs-command-line-interface" class="section level1">
+<h1 class="hasAnchor">
+<a href="#introduction-to-sprs-command-line-interface" class="anchor"></a>Introduction to SPR’s command-line interface</h1>
+<p>A central concept for designing workflows within the <code>systemPipeR</code> environment is the use of workflow management containers (see Figure 1).</p>
+<p><code>systemPipeR</code> adopted the widely used community standard <a href="https://www.commonwl.org/">Common Workflow Language</a> (CWL) <span class="citation">(Amstutz et al. 2016)</span> for describing analysis workflows in a generic and reproducible manner.</p>
+<p>Using this community standard in <code>systemPipeR</code> has many advantages. For instance, the integration of CWL allows running <code>systemPipeR</code> workflows from a single specification instance either entirely from within R, from various command-line wrappers (e.g. cwl-runner) or from other languages (e.g. Bash or Python). <code>systemPipeR</code> includes support for both command-line and R/Bioconductor software as well as resources for containerization, parallel evaluations on computer clusters along with automated generation of interactive analysis reports.</p>
+<p>An important feature of <code>systemPipeR's</code> CWL interface is that it provides two options to run command-line tools and workflows based on CWL. First, one can run CWL in its native way via an R-based wrapper utility for <code>cwl-runner</code> or <code>cwl-tools</code> (CWL-based approach). Second, one can run workflows using CWL’s command-line and workflow instructions from within R (R-based approach). In the latter case the same CWL workflow definition files (e.g. <em>.cwl</em> and <em>.yml</em>) are used but rendered and executed entirely with R functions defined by <code>systemPipeR</code>, and thus use CWL mainly as a command-line and workflow definition format rather than software to run workflows. Moreover, <code>systemPipeR</code> provides several convenience functions that are useful for designing and debugging workflows, such as a command-line rendering function to retrieve the exact command-line strings for each step prior to running a command-line.</p>
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/sysargslist.png" alt="Figure 1. Workflow steps with input/output file operations are controlled by `SYSargsList` instances. The only input provided by the user is the initial targets file, which can be optional. Subsequent targets instances are created automatically, from the previous output files. Any number of predefined or custom workflow steps are supported." width="100%"><p class="caption">
+Figure 1. Workflow steps with input/output file operations are controlled by <code>SYSargsList</code> instances. The only input provided by the user is the initial targets file, which can be optional. Subsequent targets instances are created automatically, from the previous output files. Any number of predefined or custom workflow steps are supported.
+</p>
+</div>
+</div>
 <div id="workshop" class="section level1">
 <h1 class="hasAnchor">
 <a href="#workshop" class="anchor"></a>Workshop</h1>
@@ -108,10 +132,11 @@
 <a href="#running-the-workshop" class="anchor"></a>Running the Workshop</h2>
 <p>This workshop uses R <code>4.1.0</code> and Bioconductor version<code>3.14</code>. Bioconductor can be installed following <a href="https://www.bioconductor.org/developers/how-to/useDevel/">these instructions</a>.</p>
 <p>During the <a href="https://bioc2021.bioconductor.org/">Bioc2021 conference</a>, the workshop can be run in the <a href="http://app.orchestra.cancerdatasci.org/">cloud</a>.</p>
-<div id="workshop-setup-with-docker" class="section level3">
-<h3 class="hasAnchor">
-<a href="#workshop-setup-with-docker" class="anchor"></a>Workshop setup with Docker</h3>
-<p>The Docker container used by this workshop runs with Bioconductor’s <code>development</code> version <code>3.14</code>. I includes all the necessary packages and software for running the code of in the workshop vignettes. To use the Docker container, one needs to first install <a href="https://docs.docker.com/engine/install/">Docker</a> on a user’s system.</p>
+</div>
+<div id="workshop-setup-with-docker" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-setup-with-docker" class="anchor"></a>Workshop setup with Docker</h2>
+<p>The Docker container used by this workshop runs with Bioconductor’s <code>development</code> version <code>3.14</code>. It includes all the necessary packages and software for running the code of in the workshop vignettes. To use the Docker container, one needs to first install <a href="https://docs.docker.com/engine/install/">Docker</a> on a user’s system.</p>
 <ul>
 <li>The container can be downloaded and run with:</li>
 </ul>
@@ -122,11 +147,11 @@
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> <span class="at">--user</span> rstudio systempipe/systempipeworkshop2021:latest bash </span></code></pre></div>
 </div>
-<div id="workshop-setup-with-github" class="section level3">
-<h3 class="hasAnchor">
-<a href="#workshop-setup-with-github" class="anchor"></a>Workshop setup with GitHub</h3>
+<div id="workshop-setup-with-github" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workshop-setup-with-github" class="anchor"></a>Workshop setup with GitHub</h2>
 <p><a href="http://www.bioconductor.org/packages/devel/bioc/html/systemPipeR.html"><em><code>systemPipeR</code></em></a> and <a href="http://bioconductor.org/packages/devel/bioc/html/systemPipeShiny.html"><em><code>systemPipeShiny</code></em></a> environment can be installed from the R console using the <a href="https://cran.r-project.org/web/packages/BiocManager/index.html"><em><code>BiocManager::install</code></em></a> command. The associated data package <a href="http://www.bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html"><em><code>systemPipeRdata</code></em></a> can be installed the same way. The latter is a helper package for generating <em><code>systemPipeR</code></em> workflow environments with a single command containing all parameter files and sample data required to quickly test and run workflows.</p>
-<p>To install all packages requried for this workshop on a local system, one can use the following install commands.</p>
+<p>To install all packages required for this workshop on a local system, one can use the following install commands.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Install workshop package</span>
 <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"systemPipeR/systemPipeWorkshop2021"</span><span class="op">)</span>
@@ -135,7 +160,6 @@
 <p>To access the vignette:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"systemPipeWorkshop2021"</span><span class="op">)</span></code></pre></div>
-</div>
 </div>
 </div>
 <div id="getting-started" class="section level1">
@@ -154,56 +178,97 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span>help<span class="op">=</span><span class="st">"systemPipeR"</span><span class="op">)</span> <span class="co"># Lists package info</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"systemPipeR"</span><span class="op">)</span> <span class="co"># Opens vignette</span></code></pre></div>
-<div id="set-working-directory" class="section level3">
-<h3 class="hasAnchor">
-<a href="#set-working-directory" class="anchor"></a>Set working directory</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"vignettes"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="how-to-find-help" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-to-find-help" class="anchor"></a>How to find help</h3>
+<div id="load-sample-data-and-directory-structure" class="section level2">
+<h2 class="hasAnchor">
+<a href="#load-sample-data-and-directory-structure" class="anchor"></a>Load sample data and directory structure</h2>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">systemPipeRdata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/systemPipeRdata/man/genWorkenvir.html">genWorkenvir</a></span><span class="op">(</span><span class="st">"rnaseq"</span>, mydirname <span class="op">=</span> <span class="st">"bioc2021"</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Generated bioc2021 directory. Next run in rnaseq directory, the R code from *.Rmd template interactively. Alternatively, workflows can be exectued with a single command as instructed in the vignette."</span></code></pre></div>
+</div>
+<div id="how-to-find-help" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-find-help" class="anchor"></a>How to find help</h2>
 <p>All questions about the package or any particular function should be posted to the Bioconductor support site <a href="https://support.bioconductor.org">https://support.bioconductor.org</a>. Please add the “<em><code>systemPipeR</code></em>” tag to your question. This triggers an email alert that will be send to the authors. We also appreciate receiving suggestions for improvements and/or bug reports by opening issues on <a href="https://github.com/systemPipeR">GitHub</a>.</p>
 </div>
 </div>
-<div id="overview-of-systempipe-toolkit" class="section level2">
+<div id="design-and-run-workflow---quick-start" class="section level1">
+<h1 class="hasAnchor">
+<a href="#design-and-run-workflow---quick-start" class="anchor"></a>Design and Run Workflow - Quick Start</h1>
+<div id="showcase-rna-seq-workflow" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overview-of-systempipe-toolkit" class="anchor"></a>Overview of <em>systemPipe</em> toolkit</h2>
-<p><code>systemPipe</code> (SP) is a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages:</p>
-<ul>
-<li><p><code>systemPipeR</code> (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports.</p></li>
-<li><p><code>systemPipeShiny</code> (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively.</p></li>
-<li><p><code>systemPipeWorkflow</code> (SPW) offers a collection of pre-configured workflow templates.</p></li>
-</ul>
-</div>
-<div id="introduction-to-sprs-command-line-interface" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction-to-sprs-command-line-interface" class="anchor"></a>Introduction to SPR’s command-line interface</h2>
-<p>A central concept for designing workflows within the <code>systemPipeR</code> environment is the use of workflow management containers. <code>systemPipeR</code> adopted the widely used community standard <a href="https://www.commonwl.org/">Common Workflow Language</a> (CWL) <span class="citation">(Amstutz et al. 2016)</span> for describing analysis workflows in a generic and reproducible manner. Using this community standard in <code>systemPipeR</code> has many advantages. For instance, the integration of CWL allows running <code>systemPipeR</code> workflows from a single specification instance either entirely from within R, from various command-line wrappers (e.g. cwl-runner) or from other languages (e.g. Bash or Python). <code>systemPipeR</code> includes support for both command-line and R/Bioconductor software as well as resources for containerization, parallel evaluations on computer clusters along with automated generation of interactive analysis reports.</p>
-<p>An important feature of <code>systemPipeR's</code> CWL interface is that it provides two options to run command-line tools and workflows based on CWL. First, one can run CWL in its native way via an R-based wrapper utility for <code>cwl-runner</code> or <code>cwl-tools</code> (CWL-based approach). Second, one can run workflows using CWL’s command-line and workflow instructions from within R (R-based approach). In the latter case the same CWL workflow definition files (e.g. <em>.cwl</em> and <em>.yml</em>) are used but rendered and executed entirely with R functions defined by <code>systemPipeR</code>, and thus use CWL mainly as a command-line and workflow definition format rather than software to run workflows. Moreover, <code>systemPipeR</code> provides several convenience functions that are useful for designing and debugging workflows, such as a command-line rendering function to retrieve the exact command-line strings for each step prior to running a command-line.</p>
-</div>
-<div id="configuration-and-execution-of-workflows" class="section level2">
-<h2 class="hasAnchor">
-<a href="#configuration-and-execution-of-workflows" class="anchor"></a>Configuration and execution of workflows</h2>
-<div id="load-sample-data-and-directory-structure" class="section level3">
-<h3 class="hasAnchor">
-<a href="#load-sample-data-and-directory-structure" class="anchor"></a>Load sample data and directory structure</h3>
+<a href="#showcase-rna-seq-workflow" class="anchor"></a>Showcase RNA-Seq workflow</h2>
+<p>If you desire to import and run a RNA-seq pipeline in a few steps, please follow:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">systemPipeRdata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/systemPipeRdata/man/genWorkenvir.html">genWorkenvir</a></span><span class="op">(</span><span class="st">"new"</span>, mydirname <span class="op">=</span> <span class="st">"bioc2021"</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Generated bioc2021 directory. Next run in new directory, the R code from *.Rmd template interactively. Alternatively, workflows can be exectued with a single command as instructed in the vignette."</span></code></pre></div>
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span><span class="op">)</span> 
+<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/importWF.html">importWF</a></span><span class="op">(</span><span class="va">sal</span>, file_path <span class="op">=</span> <span class="st">"systemPipeRNAseq_importWF.Rmd"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/renderLogs.html">renderLogs</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/plot.png" alt="Figure 2. *systemPipeR's* workflow structure, showing the dependency between steps and the status of each step." width="100%"><p class="caption">
+Figure 2. <em>systemPipeR’s</em> workflow structure, showing the dependency between steps and the status of each step.
+</p>
 </div>
-<div id="project-structure" class="section level3">
-<h3 class="hasAnchor">
-<a href="#project-structure" class="anchor"></a>Project structure</h3>
+</div>
+</div>
+<div id="explore-all-details-of-design-and-run-workflow" class="section level1">
+<h1 class="hasAnchor">
+<a href="#explore-all-details-of-design-and-run-workflow" class="anchor"></a>Explore all details of Design and Run Workflow</h1>
+<div id="project-initialization" class="section level2">
+<h2 class="hasAnchor">
+<a href="#project-initialization" class="anchor"></a>Project initialization</h2>
+<p>To create a workflow within <em><code>systemPipeR</code></em>, we can start by defining an empty container and checking the directory structure:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>projPath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> 
+<span class="co">#&gt; Creating directory '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject'</span>
+<span class="co">#&gt; Creating file '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject/SYSargsList.yml'</span></code></pre></div>
+<p>Internally, <code>SPRproject</code> function will create a hidden folder called <code>.SPRproject</code>, by default, to store all the log files. A <code>YAML</code> file, here called <code>SYSargsList.yml</code>, has been created, which initially contains the basic location of the project structure; however, every time the workflow object <code>sal</code> is updated in R, the new information will also be store in this flat-file database for easy recovery. If you desire different names for the logs folder and the <code>YAML</code> file, these can be modified as follows:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>logs.dir<span class="op">=</span> <span class="st">".SPRproject"</span>, sys.file<span class="op">=</span><span class="st">".SPRproject/SYSargsList.yml"</span><span class="op">)</span> </code></pre></div>
+<p>Also, this function will check and/or create the basic folder structure if missing, which means <code>data</code>, <code>param</code>, and <code>results</code> folder, as described <a href="#dir">here</a>. If the user wants to use a different names for these directories, can be specified as follows:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>data <span class="op">=</span> <span class="st">"data"</span>, param <span class="op">=</span> <span class="st">"param"</span>, results <span class="op">=</span> <span class="st">"results"</span><span class="op">)</span> </code></pre></div>
+<p>It is possible to separate all the R objects created within the workflow analysis from the current environment. <code>SPRproject</code> function provides the option to create a new environment, and in this way, it is not overwriting any object you may want to have at your current section.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
+<p>In this stage, the object <code>sal</code> is a empty container, except for the project information. The project information can be accessed by the <code>projectInfo</code> method:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span>
+<span class="co">#&gt; Instance of 'SYSargsList': </span>
+<span class="co">#&gt;  No workflow steps added</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">projectInfo</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; $project</span>
+<span class="co">#&gt; [1] "/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $data</span>
+<span class="co">#&gt; [1] "data"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $param</span>
+<span class="co">#&gt; [1] "param"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $results</span>
+<span class="co">#&gt; [1] "results"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $logsDir</span>
+<span class="co">#&gt; [1] ".SPRproject"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $sysargslist</span>
+<span class="co">#&gt; [1] ".SPRproject/SYSargsList.yml"</span></code></pre></div>
+<p>Also, the <code>length</code> function will return how many steps this workflow contains and in this case it is empty, as follow:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0</span></code></pre></div>
+</div>
+<div id="project-structure" class="section level2">
+<h2 class="hasAnchor">
+<a href="#project-structure" class="anchor"></a>Project structure</h2>
 <p><em><code>systemPipeR</code></em> expects a project directory structure that consists of a directory where users may store all the raw data, the results directory that will be reserved for all the outfiles files or new output folders, and the parameters directory.</p>
 <p>This structure allows reproducibility and collaboration across the data science team since internally relative paths are used. Users could transfer this project to a different location and still be able to run the entire workflow. Also, it increases efficiency and data management once the raw data is kept in a separate folder and avoids duplication.</p>
-<p style="color:red">
-[ThG Comment: The above is a bit fuzzy. I would merge anything relevent with the following subsection. Keep it short and informative and eliminate the verbose parts that are not necessary.]
-</p>
-<div id="dir" class="section level4">
-<h4 class="hasAnchor">
-<a href="#dir" class="anchor"></a>Directory Structure</h4>
-<p><a href="http://bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html"><em><code>systemPipeRdata</code></em></a>, helper package, provides pre-configured workflows, reporting templates, and sample data loaded as demonstrated below. With a single command, the package allows creating the workflow environment containing the structure described here (see Figure @ref(fig:dir)).</p>
+<div id="dir" class="section level3">
+<h3 class="hasAnchor">
+<a href="#dir" class="anchor"></a>Directory Structure</h3>
+<p><a href="http://bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html"><em><code>systemPipeRdata</code></em></a>, helper package, provides pre-configured workflows, reporting templates, and sample data loaded as demonstrated below. With a single command, the package allows creating the workflow environment containing the structure described here (see Figure 3).</p>
 <p>Directory names are indicated in <span style="color:grey"><strong><em>green</em></strong></span>. Users can change this structure as needed, but need to adjust the code in their workflows accordingly.</p>
 <ul>
 <li>
@@ -245,47 +310,35 @@
 </li>
 </ul>
 <div class="figure" style="text-align: center">
-<img src="../../../../tmp/Rtmp09KeFK/temp_libpath62046ddc236/systemPipeWorkshop2021/images/spr_project.png" alt="*systemPipeR's* preconfigured directory structure." width="100%"><p class="caption">
-<em>systemPipeR’s</em> preconfigured directory structure.
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/spr_project.png" alt="Figure 3. *systemPipeR's* preconfigured directory structure." width="100%"><p class="caption">
+Figure 3. <em>systemPipeR’s</em> preconfigured directory structure.
 </p>
 </div>
 </div>
-<div id="structure-of-initial-targets-file" class="section level4">
-<h4 class="hasAnchor">
-<a href="#structure-of-initial-targets-file" class="anchor"></a>Structure of initial <em><code>targets</code></em> file</h4>
+<div id="structure-of-initial-targets-file" class="section level3">
+<h3 class="hasAnchor">
+<a href="#structure-of-initial-targets-file" class="anchor"></a>Structure of initial <em><code>targets</code></em> file</h3>
 <p>The <em><code>targets</code></em> file defines all input files (<em>e.g.</em> FASTQ, BAM, BCF) and sample comparisons of an analysis workflow. The following shows the format of a sample <em><code>targets</code></em> file included in the package. It also can be viewed and downloaded from <em><code>systemPipeR</code></em>’s GitHub repository <a href="https://github.com/tgirke/systemPipeR/blob/master/inst/extdata/targets.txt">here</a>. In a target file with a single type of input files, here FASTQ files of single-end (SE) reads, the first column defines the paths and the second column represents a unique id name for each sample. The third column called <code>Factor</code> represents the biological replicates. All subsequent columns are optional to provide additional information. Any number of additional columns can be added as needed.</p>
 <p>Users should note here, the usage of targets files is optional when using <em><code>systemPipeR's</code></em> new workflow management interface. They can be replaced by a standard YAML input file used by CWL. Since for organizing experimental variables targets files are extremely useful and user-friendly. Thus, we encourage users to keep using them.</p>
 <ul>
-<li>Structure of <em><code>targets</code></em> file for single-end (SE) samples</li>
+<li>Structure of <em><code>targets</code></em> file for paired-end (PE) samples</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="st">"targets.txt"</span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="st">"targetsPE.txt"</span>
 <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/showDF.html">showDF</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">targetspath</span>, comment.char <span class="op">=</span> <span class="st">"#"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-11f3fb801b6206f6cf13" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-11f3fb801b6206f6cf13">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"],["./data/SRR446027_1.fastq.gz","./data/SRR446028_1.fastq.gz","./data/SRR446029_1.fastq.gz","./data/SRR446030_1.fastq.gz","./data/SRR446031_1.fastq.gz","./data/SRR446032_1.fastq.gz","./data/SRR446033_1.fastq.gz","./data/SRR446034_1.fastq.gz","./data/SRR446035_1.fastq.gz","./data/SRR446036_1.fastq.gz","./data/SRR446037_1.fastq.gz","./data/SRR446038_1.fastq.gz","./data/SRR446039_1.fastq.gz","./data/SRR446040_1.fastq.gz","./data/SRR446041_1.fastq.gz","./data/SRR446042_1.fastq.gz","./data/SRR446043_1.fastq.gz","./data/SRR446044_1.fastq.gz"],["M1A","M1B","A1A","A1B","V1A","V1B","M6A","M6B","A6A","A6B","V6A","V6B","M12A","M12B","A12A","A12B","V12A","V12B"],["M1","M1","A1","A1","V1","V1","M6","M6","A6","A6","V6","V6","M12","M12","A12","A12","V12","V12"],["Mock.1h.A","Mock.1h.B","Avr.1h.A","Avr.1h.B","Vir.1h.A","Vir.1h.B","Mock.6h.A","Mock.6h.B","Avr.6h.A","Avr.6h.B","Vir.6h.A","Vir.6h.B","Mock.12h.A","Mock.12h.B","Avr.12h.A","Avr.12h.B","Vir.12h.A","Vir.12h.B"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],["23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>FileName<\/th>\n      <th>SampleName<\/th>\n      <th>Factor<\/th>\n      <th>SampleLong<\/th>\n      <th>Experiment<\/th>\n      <th>Date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":5},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>To work with custom data, users need to generate a <em><code>targets</code></em> file containing the paths to their own FASTQ files and then provide under <em><code>targetspath</code></em> the path to the corresponding <em><code>targets</code></em> file.</p>
-<ul>
-<li>Structure of <em><code>targets</code></em> file for “Hello World” example</li>
-</ul>
-<p>In this example, the <em><code>targets</code></em> file contains only two columns. The first column contains short text strings that will be used by the <code>echo</code> command-line. The second column contains sample <code>ids</code>. The <code>id</code> column is required, and each sample <code>id</code> should be unique.</p>
-<p style="color:red">
-[ThG Comment: it is confusing that the text states as column title id while the example below clearly has a different title, here SampleName. Try to be consistent…]
-</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl/example/targets_example.txt"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/showDF.html">showDF</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">targetspath</span>, comment.char <span class="op">=</span> <span class="st">"#"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-352c700f7f603bcef742" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-352c700f7f603bcef742">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3"],["Hello World!","Hello USA!","Hello Bioconductor!"],["M1","M2","M3"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Message<\/th>\n      <th>SampleName<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-aae0f389d120496df041" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aae0f389d120496df041">{"x":{"filter":"none","extensions":["FixedColumns","Scroller"],"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18"],["./data/SRR446027_1.fastq.gz","./data/SRR446028_1.fastq.gz","./data/SRR446029_1.fastq.gz","./data/SRR446030_1.fastq.gz","./data/SRR446031_1.fastq.gz","./data/SRR446032_1.fastq.gz","./data/SRR446033_1.fastq.gz","./data/SRR446034_1.fastq.gz","./data/SRR446035_1.fastq.gz","./data/SRR446036_1.fastq.gz","./data/SRR446037_1.fastq.gz","./data/SRR446038_1.fastq.gz","./data/SRR446039_1.fastq.gz","./data/SRR446040_1.fastq.gz","./data/SRR446041_1.fastq.gz","./data/SRR446042_1.fastq.gz","./data/SRR446043_1.fastq.gz","./data/SRR446044_1.fastq.gz"],["./data/SRR446027_2.fastq.gz","./data/SRR446028_2.fastq.gz","./data/SRR446029_2.fastq.gz","./data/SRR446030_2.fastq.gz","./data/SRR446031_2.fastq.gz","./data/SRR446032_2.fastq.gz","./data/SRR446033_2.fastq.gz","./data/SRR446034_2.fastq.gz","./data/SRR446035_2.fastq.gz","./data/SRR446036_2.fastq.gz","./data/SRR446037_2.fastq.gz","./data/SRR446038_2.fastq.gz","./data/SRR446039_2.fastq.gz","./data/SRR446040_2.fastq.gz","./data/SRR446041_2.fastq.gz","./data/SRR446042_2.fastq.gz","./data/SRR446043_2.fastq.gz","./data/SRR446044_2.fastq.gz"],["M1A","M1B","A1A","A1B","V1A","V1B","M6A","M6B","A6A","A6B","V6A","V6B","M12A","M12B","A12A","A12B","V12A","V12B"],["M1","M1","A1","A1","V1","V1","M6","M6","A6","A6","V6","V6","M12","M12","A12","A12","V12","V12"],["Mock.1h.A","Mock.1h.B","Avr.1h.A","Avr.1h.B","Vir.1h.A","Vir.1h.B","Mock.6h.A","Mock.6h.B","Avr.6h.A","Avr.6h.B","Vir.6h.A","Vir.6h.B","Mock.12h.A","Mock.12h.B","Avr.12h.A","Avr.12h.B","Vir.12h.A","Vir.12h.B"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],["23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012","23-Mar-2012"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>FileName1<\/th>\n      <th>FileName2<\/th>\n      <th>SampleName<\/th>\n      <th>Factor<\/th>\n      <th>SampleLong<\/th>\n      <th>Experiment<\/th>\n      <th>Date<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"fixedColumns":true,"deferRender":true,"scrollY":200,"scroller":true,"columnDefs":[{"className":"dt-right","targets":6},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>To work with custom data, users need to generate a <em><code>targets</code></em> file containing the paths to their own FASTQ files and then provide under <em><code>targetspath</code></em> the path to the corresponding <em><code>targets</code></em> file.</p>
 </div>
 </div>
-<div id="structure-of-parameters-files" class="section level3">
-<h3 class="hasAnchor">
-<a href="#structure-of-parameters-files" class="anchor"></a>Structure of parameters files</h3>
+<div id="structure-of-parameters-files" class="section level2">
+<h2 class="hasAnchor">
+<a href="#structure-of-parameters-files" class="anchor"></a>Structure of parameters files</h2>
 <p>The parameters required for running command-line software are provided by adopting the widely used CWL (<a href="https://www.commonwl.org/">Common Workflow Language</a>) community standard <span class="citation">(Amstutz et al. 2016)</span>. Parameter files are only required for command-line steps, and for R-based workflow they are optional. An overview of the CWL syntax is provided in the <a href="#cwl">section</a> below, while the <a href="#cwl_targets">here</a> section explains how target files can be used for CWL-based workflow steps.</p>
-<div id="automate-creation-of-cwl-parameters" class="section level4">
-<h4 class="hasAnchor">
-<a href="#automate-creation-of-cwl-parameters" class="anchor"></a>Automate creation of CWL parameters</h4>
+<div id="automate-creation-of-cwl-parameters" class="section level3">
+<h3 class="hasAnchor">
+<a href="#automate-creation-of-cwl-parameters" class="anchor"></a>Automate creation of CWL parameters</h3>
 <p>Users need to define the command-line in a pseudo-bash script format:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># "hisat2 -S ./results/M1A.sam -x ./data/tair10.fasta -k 1 -threads 4 -U ./data/SRR446027_1.fastq.gz "</span>
 <span class="va">command</span> <span class="op">&lt;-</span> <span class="st">"
     hisat2 \
@@ -295,9 +348,9 @@
     -threads &lt;int: 4&gt; \
     -U &lt;F: ./data/SRR446027_1.fastq.gz&gt;
 "</span></code></pre></div>
-<div id="define-prefix-and-defaults" class="section level5">
-<h5 class="hasAnchor">
-<a href="#define-prefix-and-defaults" class="anchor"></a>Define prefix and defaults</h5>
+<div id="define-prefix-and-defaults" class="section level4">
+<h4 class="hasAnchor">
+<a href="#define-prefix-and-defaults" class="anchor"></a>Define prefix and defaults</h4>
 <ul>
 <li><p>First line is the base command. Each line is an argument with its default value.</p></li>
 <li><p>For argument lines (starting from the second line), any word before the first space with leading <code><a href="https://rdrr.io/r/base/Arithmetic.html">-</a></code> or <code>--</code> in each will be treated as a prefix, like <code>-S</code> or <code>--min</code>. Any line without this first word will be treated as no prefix.</p></li>
@@ -308,15 +361,15 @@
 <li><p>If any argument has no default value, just a flag, like <code>--verbose</code>, there is no need to add any <code>&lt;...&gt;</code></p></li>
 </ul>
 </div>
-<div id="createparam-function" class="section level5">
-<h5 class="hasAnchor">
-<a href="#createparam-function" class="anchor"></a><code>createParam</code> Function</h5>
+<div id="createparam-function" class="section level4">
+<h4 class="hasAnchor">
+<a href="#createparam-function" class="anchor"></a><code>createParam</code> Function</h4>
 <p><code>createParam</code> function requires the <code>string</code> as defined above as an input.</p>
 <p>First of all, the function will print the three components of the <code>cwl</code> file: - <code>BaseCommand</code>: Specifies the program to execute. - <code>Inputs</code>: Defines the input parameters of the process. - <code>Outputs</code>: Defines the parameters representing the output of the process.</p>
 <p>The four component is the original command-line.</p>
 <p>If in interactive mode, the function will verify that everything is correct and will ask you to proceed. Here, the user can answer “no” and provide more information at the string level. Another question is to save the param created here.</p>
 <p>If running the workflow in non-interactive mode, the <code>createParam</code> function will consider “yes” and returning the container.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/createParamFiles.html">createParam</a></span><span class="op">(</span><span class="va">command</span>, writeParamFiles <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; *****BaseCommand*****</span>
 <span class="co">#&gt; hisat2 </span>
@@ -353,42 +406,517 @@
 <span class="co">#&gt;  param/cwl/hisat2/hisat2.yml</span></code></pre></div>
 </div>
 </div>
-<div id="cwl_targets" class="section level4">
-<h4 class="hasAnchor">
+<div id="cwl_targets" class="section level3">
+<h3 class="hasAnchor">
 <a href="#cwl_targets" class="anchor"></a>How to connect CWL description files within <em><code>systemPipeR</code></em>
-</h4>
+</h3>
 <p>This section will demonstrate how to connect CWL parameters files to create workflows. In addition, we will show how the workflow can be easily scalable with <em><code>systemPipeR</code></em>.</p>
 <div class="figure" style="text-align: center">
-<img src="../../../../tmp/Rtmp09KeFK/temp_libpath62046ddc236/systemPipeWorkshop2021/images/SPR_CWL_hello.png" alt="WConnectivity between CWL param files and targets files." width="100%"><p class="caption">
-WConnectivity between CWL param files and targets files.
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/SPR_CWL_hello.png" alt="Figure 4. Connectivity between CWL param files and targets files." width="100%"><p class="caption">
+Figure 4. Connectivity between CWL param files and targets files.
 </p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="project-initialization" class="section level1">
-<h1 class="hasAnchor">
-<a href="#project-initialization" class="anchor"></a>Project initialization</h1>
-<p>To create a Workflow within <em><code>systemPipeR</code></em>, we can start by defining an empty container and checking the directory structure:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>projPath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> 
-<span class="co">#&gt; Creating directory '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject'</span>
-<span class="co">#&gt; Creating file '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject/SYSargsList.yml'</span></code></pre></div>
-<p>Internally, <code>SPRproject</code> function will create a hidden folder called <code>.SPRproject</code>, by default, to store all the log files. A <code>YAML</code> file, here called <code>SYSargsList.yml</code>, has been created, which initially contains the basic location of the project structure; however, every time the workflow object <code>sal</code> is updated in R, the new information will also be store in this flat-file database for easy recovery. If you desire different names for the logs folder and the <code>YAML</code> file, these can be modified as follows:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>logs.dir<span class="op">=</span> <span class="st">".SPRproject"</span>, sys.file<span class="op">=</span><span class="st">".SPRproject/SYSargsList.yml"</span><span class="op">)</span> </code></pre></div>
-<p>Also, this function will check and/or create the basic folder structure if missing, which means <code>data</code>, <code>param</code>, and <code>results</code> folder, as described <a href="#dir">here</a>. If the user wants to use a different names for these directories, can be specified as follows:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>data <span class="op">=</span> <span class="st">"data"</span>, param <span class="op">=</span> <span class="st">"param"</span>, results <span class="op">=</span> <span class="st">"results"</span><span class="op">)</span> </code></pre></div>
-<p>It is possible to separate all the R objects created within the workflow analysis from the current environment. <code>SPRproject</code> function provides the option to create a new environment, and in this way, it is not overwriting any object you may want to have at your current section.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
-<p>In this stage, the object <code>sal</code> is a empty container, except for the project information. The project information can be accessed by the <code>projectInfo</code> method:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div id="workflow-design" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workflow-design" class="anchor"></a>Workflow Design</h2>
+<p><em><code>systemPipeR</code></em> workflows can be designed and built from start to finish with a single command, importing from an R Markdown file or stepwise in interactive mode from the R console. In the <a href="#appendstep">next section</a>, we will demonstrate how to build the workflow in an interactive mode, and in the <a href="#importWF">following section</a>, we will show how to build from a file.</p>
+<p>New workflows are constructed, or existing ones modified, by connecting each step via <code>appendStep</code> method. Each <code>SYSargsList</code> instance contains instructions needed for processing a set of input files with a specific command-line or R software, as well as the paths to the corresponding outfiles generated by a particular tool/step.</p>
+<p>To build R code based step, the constructor function <code>Linewise</code> is used. For more details about this S4 class container, see <a href="#linewise">here</a>.</p>
+<div id="appendstep" class="section level3">
+<h3 class="hasAnchor">
+<a href="#appendstep" class="anchor"></a>Build workflow interactive</h3>
+<p>This tutorial shows a very simple example for describing and explaining all main features available within systemPipeR to design, build, manage, run, and visualize the workflow. In summary, we are exporting a dataset to multiple files, compressing and decompressing each one of the files, and importing to R, and finally performing a statistical analysis.</p>
+<p>In the previous section, we initialize the project by building the <code>sal</code> object. Until this moment, the container has no steps:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span>
 <span class="co">#&gt; Instance of 'SYSargsList': </span>
-<span class="co">#&gt;  No workflow steps added</span>
+<span class="co">#&gt;  No workflow steps added</span></code></pre></div>
+<p>Next, we need to populate the object created with the first step in the workflow.</p>
+<div id="adding-the-first-step" class="section level4">
+<h4 class="hasAnchor">
+<a href="#adding-the-first-step" class="anchor"></a>Adding the first step</h4>
+<p>First, we need to populate the object created with the first step in the workflow. Here, an example of how to perform this task using parameters template files for trimming FASTQ files with <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a> software <span class="citation">(Bolger, Lohse, and Usadel 2014)</span>.</p>
+<p>The constructor function creates an <code>SYSargsList</code> S4 class object using data from three input files:</p>
+<pre><code>- CWL command-line specification file (`wf_file` argument);
+- Input variables (`input_file` argument);
+- Targets file (`targets` argument).</code></pre>
+<p>In CWL, files with the extension <code>.cwl</code> define the parameters of a chosen command-line step or workflow, while files with the extension <code>.yml</code> define the input variables of command-line steps.</p>
+<p>The <code>targets</code> file is optional for workflow steps lacking <code>input</code> files. The connection between <code>input</code> variables and the <code>targets</code> file is defined under the <code>inputvars</code> argument. It is required a <code>named vector</code>, where each element name needs to match with column names in the <code>targets</code> file, and the value must match the names of the <code>input</code> variables defined in the <code>*.yml</code> files (see Figure 2).</p>
+<p>A detailed description of the dynamic between <code>input</code> variables and <code>targets</code> files can be found <a href="#cwl_targets">here</a>. In addition, the CWL syntax overview can be found <a href="#cwl">here</a>.</p>
+<p>Besides all the data form <code>targets</code>, <code>wf_file</code>, <code>input_file</code> and <code>dir_path</code> arguments, <code>SYSargsList</code> constructor function options include:</p>
+<ul>
+<li>
+<code>step_name</code>: a unique <em>name</em> for the step. This is not mandatory; however, it is highly recommended. If no name is provided, a default <code>step_x</code>, where <code>x</code> reflects the step index, will be added.</li>
+<li>
+<code>dir</code>: this option allows creating an exclusive subdirectory for the step in the workflow. All the outfiles and log files for this particular step will be generated in the respective folders.</li>
+<li>
+<code>dependency</code>: after the first step, all the additional steps appended to the workflow require the information of the dependency tree.</li>
+</ul>
+<p>The <code>appendStep&lt;-</code> method is used to append a new step in the workflow.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Recreating directory '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject'</span>
+<span class="co">#&gt; Creating file '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject/SYSargsList.yml'</span>
+<span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="st">"targetsPE.txt"</span>
+<span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>
+    step_name <span class="op">=</span> <span class="st">"trimming"</span>,
+    targets <span class="op">=</span> <span class="va">targetspath</span>, 
+    wf_file <span class="op">=</span> <span class="st">"trimmomatic/trimmomatic-pe.cwl"</span>, input_file <span class="op">=</span> <span class="st">"trimmomatic/trimmomatic-pe.yml"</span>,
+    dir_path <span class="op">=</span> <span class="st">"param/cwl"</span>,
+    inputvars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>FileName1<span class="op">=</span><span class="st">"_FASTQ_PATH1_"</span>, FileName2<span class="op">=</span><span class="st">"_FASTQ_PATH2_"</span>, SampleName <span class="op">=</span> <span class="st">"_SampleName_"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>For a brief overview of the workflow, we can check the object as follows:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span>
+<span class="co">#&gt; Instance of 'SYSargsList': </span>
+<span class="co">#&gt;     WF Steps:</span>
+<span class="co">#&gt;        1. trimming --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 72 | Existing: 0 | Missing: 72 </span>
+<span class="co">#&gt;          1.1. trimmomatic-pe</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt; </span></code></pre></div>
+<p>Also, for printing and double-check the command-lines in the step, we can use the <code>cmdlist</code> method:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">cmdlist</a></span><span class="op">(</span><span class="va">sal</span>, targets <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; $trimming$M1A</span>
+<span class="co">#&gt; $trimming$M1A$`trimmomatic-pe`</span>
+<span class="co">#&gt; [1] "trimmomatic PE -phred33  ./data/SRR446027_1.fastq.gz  ./data/SRR446027_2.fastq.gz  results/M1A_1P.trimmed.fastq.gz  results/M1A_1U.trimmed.fastq.gz  results/M1A_2P.trimmed.fastq.gz  results/M1A_2U.trimmed.fastq.gz  -threads 4 MINLEN:35 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:5"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $trimming$M1B</span>
+<span class="co">#&gt; $trimming$M1B$`trimmomatic-pe`</span>
+<span class="co">#&gt; [1] "trimmomatic PE -phred33  ./data/SRR446028_1.fastq.gz  ./data/SRR446028_2.fastq.gz  results/M1B_1P.trimmed.fastq.gz  results/M1B_1U.trimmed.fastq.gz  results/M1B_2P.trimmed.fastq.gz  results/M1B_2U.trimmed.fastq.gz  -threads 4 MINLEN:35 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:5"</span></code></pre></div>
+</div>
+<div id="adding-more-steps" class="section level4">
+<h4 class="hasAnchor">
+<a href="#adding-more-steps" class="anchor"></a>Adding more steps</h4>
+<p>The following steps will demonstrate how to use the short read aligner <code>Hisat2</code> <span class="citation">(Kim, Langmead, and Salzberg 2015)</span> in both interactive job submissions and batch submissions to queuing systems of clusters using the <em><code>systemPipeR's</code></em> new CWL command-line interface.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>
+  step_name <span class="op">=</span> <span class="st">"hisat2_index"</span>, dir <span class="op">=</span> <span class="cn">FALSE</span>, targets<span class="op">=</span><span class="cn">NULL</span>, 
+  wf_file <span class="op">=</span> <span class="st">"hisat2/hisat2-index.cwl"</span>, 
+  input_file<span class="op">=</span><span class="st">"hisat2/hisat2-index.yml"</span>,
+  dir_path<span class="op">=</span><span class="st">"param/cwl"</span>, 
+  dependency <span class="op">=</span> <span class="st">"trimming"</span>
+<span class="op">)</span></code></pre></div>
+<p>For a overview of the workflow, we can check the object as follows:</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span>
+<span class="co">#&gt; Instance of 'SYSargsList': </span>
+<span class="co">#&gt;     WF Steps:</span>
+<span class="co">#&gt;        1. trimming --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 72 | Existing: 0 | Missing: 72 </span>
+<span class="co">#&gt;          1.1. trimmomatic-pe</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;        2. hisat2_index --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 8 | Existing: 0 | Missing: 8 </span>
+<span class="co">#&gt;          2.1. hisat2-index</span>
+<span class="co">#&gt;              cmdlist: 1 | Pending: 1</span>
+<span class="co">#&gt; </span></code></pre></div>
+<p>Note that we have two steps, and it is expected 16 files from the first step and 8 outfiles for the second step. Also, the workflow status is <em>Pending</em>, which means the workflow object is rendered in R; however, we did not execute the workflow yet. In addition to this summary, it can be observed this step has four command-lines.</p>
+<p>For more details about the command-line rendered for each target file, it can be checked as follows:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">cmdlist</a></span><span class="op">(</span><span class="va">sal</span>, step <span class="op">=</span> <span class="st">"hisat2_index"</span><span class="op">)</span>
+<span class="co">#&gt; $hisat2_index</span>
+<span class="co">#&gt; $hisat2_index$defaultid</span>
+<span class="co">#&gt; $hisat2_index$defaultid$`hisat2-index`</span>
+<span class="co">#&gt; [1] "hisat2-build ./data/tair10.fasta  ./data/tair10.fasta "</span></code></pre></div>
+</div>
+<div id="using-the-outfiles-for-the-next-step" class="section level4">
+<h4 class="hasAnchor">
+<a href="#using-the-outfiles-for-the-next-step" class="anchor"></a>Using the <code>outfiles</code> for the next step</h4>
+<p>For building this step, all the previous procedures are being used to append the next step. However, here, we can observe power features that build the connectivity between steps in the workflow.</p>
+<p>In this example, we would like to use the outfiles from <em>trimming</em> Step, as input from the next step, which is the <em>Mapping</em>. In this case, let’s look at the outfiles from the first step:</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">outfiles</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; DataFrame with 18 rows and 4 columns</span>
+<span class="co">#&gt;       trimmomatic_1_paired trimmomatic_1_unpaired   trimmomatic_2_paired</span>
+<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1   results/M1A_1P.trimm.. results/M1A_1U.trimm.. results/M1A_2P.trimm..</span>
+<span class="co">#&gt; 2   results/M1B_1P.trimm.. results/M1B_1U.trimm.. results/M1B_2P.trimm..</span>
+<span class="co">#&gt; 3   results/A1A_1P.trimm.. results/A1A_1U.trimm.. results/A1A_2P.trimm..</span>
+<span class="co">#&gt; 4   results/A1B_1P.trimm.. results/A1B_1U.trimm.. results/A1B_2P.trimm..</span>
+<span class="co">#&gt; 5   results/V1A_1P.trimm.. results/V1A_1U.trimm.. results/V1A_2P.trimm..</span>
+<span class="co">#&gt; ...                    ...                    ...                    ...</span>
+<span class="co">#&gt; 14  results/M12B_1P.trim.. results/M12B_1U.trim.. results/M12B_2P.trim..</span>
+<span class="co">#&gt; 15  results/A12A_1P.trim.. results/A12A_1U.trim.. results/A12A_2P.trim..</span>
+<span class="co">#&gt; 16  results/A12B_1P.trim.. results/A12B_1U.trim.. results/A12B_2P.trim..</span>
+<span class="co">#&gt; 17  results/V12A_1P.trim.. results/V12A_1U.trim.. results/V12A_2P.trim..</span>
+<span class="co">#&gt; 18  results/V12B_1P.trim.. results/V12B_1U.trim.. results/V12B_2P.trim..</span>
+<span class="co">#&gt;     trimmomatic_2_unpaired</span>
+<span class="co">#&gt;                &lt;character&gt;</span>
+<span class="co">#&gt; 1   results/M1A_2U.trimm..</span>
+<span class="co">#&gt; 2   results/M1B_2U.trimm..</span>
+<span class="co">#&gt; 3   results/A1A_2U.trimm..</span>
+<span class="co">#&gt; 4   results/A1B_2U.trimm..</span>
+<span class="co">#&gt; 5   results/V1A_2U.trimm..</span>
+<span class="co">#&gt; ...                    ...</span>
+<span class="co">#&gt; 14  results/M12B_2U.trim..</span>
+<span class="co">#&gt; 15  results/A12A_2U.trim..</span>
+<span class="co">#&gt; 16  results/A12B_2U.trim..</span>
+<span class="co">#&gt; 17  results/V12A_2U.trim..</span>
+<span class="co">#&gt; 18  results/V12B_2U.trim..</span></code></pre></div>
+<p>The two-column the user may want to use are “trimmomatic_1_paired” and “trimmomatic_2_paired.” F or the argument <code>targets</code> in the <code>SYSargsList</code> function, it should provide the name of the correspondent step in the Workflow and which <code>outfiles</code> you would like to be incorporated in the next step.</p>
+<p>The argument <code>inputvars</code> allows the connectivity between <code>outfiles</code> and the new <code>targets</code> file. Here, the name of the previous <code>outfiles</code> should be provided it. Please note that all <code>outfiles</code> column names must be unique.</p>
+<p>It is possible to keep all the original columns from the <code>targets</code> files or remove some columns for a clean <code>targets</code> file. The argument <code>rm_targets_col</code> provides this flexibility, where it is possible to specify the names of the columns that should be removed. If no names are passing here, the new columns will be appended.</p>
+<p>In addition, a useful utility establishes a dependency among the steps in the workflow, and this is possible with the <code>dependency</code> argument, where the names of steps are specified.</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>
+  step_name <span class="op">=</span> <span class="st">"hisat2_mapping"</span>,
+  targets <span class="op">=</span> <span class="st">"trimming"</span>, dir <span class="op">=</span> <span class="cn">TRUE</span>, 
+  wf_file <span class="op">=</span> <span class="st">"workflow-hisat2/workflow_hisat2-pe.cwl"</span>,
+  input_file <span class="op">=</span> <span class="st">"workflow-hisat2/workflow_hisat2-pe.yml"</span>,
+  dir_path <span class="op">=</span> <span class="st">"param/cwl"</span>,
+  inputvars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>trimmomatic_1_paired <span class="op">=</span> <span class="st">"_FASTQ_PATH1_"</span>, trimmomatic_2_paired <span class="op">=</span> <span class="st">"_FASTQ_PATH2_"</span>, 
+                SampleName <span class="op">=</span> <span class="st">"_SampleName_"</span><span class="op">)</span>,
+  rm_targets_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FileName1"</span>, <span class="st">"FileName2"</span><span class="op">)</span>, 
+  dependency <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trimming"</span>, <span class="st">"hisat2_index"</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<p>We can check the targets automatically create for this step, based on the previous <code>outfiles</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">targetsWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; DataFrame with 18 rows and 7 columns</span>
+<span class="co">#&gt;       trimmomatic_1_paired   trimmomatic_2_paired  SampleName      Factor</span>
+<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
+<span class="co">#&gt; 1   results/M1A_1P.trimm.. results/M1A_2P.trimm..         M1A          M1</span>
+<span class="co">#&gt; 2   results/M1B_1P.trimm.. results/M1B_2P.trimm..         M1B          M1</span>
+<span class="co">#&gt; 3   results/A1A_1P.trimm.. results/A1A_2P.trimm..         A1A          A1</span>
+<span class="co">#&gt; 4   results/A1B_1P.trimm.. results/A1B_2P.trimm..         A1B          A1</span>
+<span class="co">#&gt; 5   results/V1A_1P.trimm.. results/V1A_2P.trimm..         V1A          V1</span>
+<span class="co">#&gt; ...                    ...                    ...         ...         ...</span>
+<span class="co">#&gt; 14  results/M12B_1P.trim.. results/M12B_2P.trim..        M12B         M12</span>
+<span class="co">#&gt; 15  results/A12A_1P.trim.. results/A12A_2P.trim..        A12A         A12</span>
+<span class="co">#&gt; 16  results/A12B_1P.trim.. results/A12B_2P.trim..        A12B         A12</span>
+<span class="co">#&gt; 17  results/V12A_1P.trim.. results/V12A_2P.trim..        V12A         V12</span>
+<span class="co">#&gt; 18  results/V12B_1P.trim.. results/V12B_2P.trim..        V12B         V12</span>
+<span class="co">#&gt;      SampleLong  Experiment        Date</span>
+<span class="co">#&gt;     &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
+<span class="co">#&gt; 1     Mock.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 2     Mock.1h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 3      Avr.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 4      Avr.1h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 5      Vir.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; ...         ...         ...         ...</span>
+<span class="co">#&gt; 14   Mock.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 15    Avr.12h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 16    Avr.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 17    Vir.12h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 18    Vir.12h.B           1 23-Mar-2012</span></code></pre></div>
+<p>We can also check all the expected <code>outfiles</code> for this particular step, as follows:</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">outfiles</a></span><span class="op">(</span><span class="va">sal</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; DataFrame with 18 rows and 4 columns</span>
+<span class="co">#&gt;             hisat2_sam       samtools_bam      samtools_sort_bam</span>
+<span class="co">#&gt;            &lt;character&gt;        &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1    ./results/M1A.sam  ./results/M1A.bam ./results/M1A.sorted..</span>
+<span class="co">#&gt; 2    ./results/M1B.sam  ./results/M1B.bam ./results/M1B.sorted..</span>
+<span class="co">#&gt; 3    ./results/A1A.sam  ./results/A1A.bam ./results/A1A.sorted..</span>
+<span class="co">#&gt; 4    ./results/A1B.sam  ./results/A1B.bam ./results/A1B.sorted..</span>
+<span class="co">#&gt; 5    ./results/V1A.sam  ./results/V1A.bam ./results/V1A.sorted..</span>
+<span class="co">#&gt; ...                ...                ...                    ...</span>
+<span class="co">#&gt; 14  ./results/M12B.sam ./results/M12B.bam ./results/M12B.sorte..</span>
+<span class="co">#&gt; 15  ./results/A12A.sam ./results/A12A.bam ./results/A12A.sorte..</span>
+<span class="co">#&gt; 16  ./results/A12B.sam ./results/A12B.bam ./results/A12B.sorte..</span>
+<span class="co">#&gt; 17  ./results/V12A.sam ./results/V12A.bam ./results/V12A.sorte..</span>
+<span class="co">#&gt; 18  ./results/V12B.sam ./results/V12B.bam ./results/V12B.sorte..</span>
+<span class="co">#&gt;             samtools_index</span>
+<span class="co">#&gt;                &lt;character&gt;</span>
+<span class="co">#&gt; 1   ./results/M1A.sorted..</span>
+<span class="co">#&gt; 2   ./results/M1B.sorted..</span>
+<span class="co">#&gt; 3   ./results/A1A.sorted..</span>
+<span class="co">#&gt; 4   ./results/A1B.sorted..</span>
+<span class="co">#&gt; 5   ./results/V1A.sorted..</span>
+<span class="co">#&gt; ...                    ...</span>
+<span class="co">#&gt; 14  ./results/M12B.sorte..</span>
+<span class="co">#&gt; 15  ./results/A12A.sorte..</span>
+<span class="co">#&gt; 16  ./results/A12B.sorte..</span>
+<span class="co">#&gt; 17  ./results/V12A.sorte..</span>
+<span class="co">#&gt; 18  ./results/V12B.sorte..</span></code></pre></div>
+<p>Now, we can observe that the third step has been added and contains one substep.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span>
+<span class="co">#&gt; Instance of 'SYSargsList': </span>
+<span class="co">#&gt;     WF Steps:</span>
+<span class="co">#&gt;        1. trimming --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 72 | Existing: 0 | Missing: 72 </span>
+<span class="co">#&gt;          1.1. trimmomatic-pe</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;        2. hisat2_index --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 8 | Existing: 0 | Missing: 8 </span>
+<span class="co">#&gt;          2.1. hisat2-index</span>
+<span class="co">#&gt;              cmdlist: 1 | Pending: 1</span>
+<span class="co">#&gt;        3. hisat2_mapping --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 72 | Existing: 0 | Missing: 72 </span>
+<span class="co">#&gt;          3.1. hisat2</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;          3.2. samtools-view</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;          3.3. samtools-sort</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;          3.4. samtools-index</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt; </span></code></pre></div>
+<p>In addition, we can access all the command-lines for each one of the substeps.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">cmdlist</a></span><span class="op">(</span><span class="va">sal</span><span class="op">[</span><span class="st">"hisat2_mapping"</span><span class="op">]</span>, targets <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; $hisat2_mapping$M1A</span>
+<span class="co">#&gt; $hisat2_mapping$M1A$hisat2</span>
+<span class="co">#&gt; [1] "hisat2 -S ./results/M1A.sam  -x ./data/tair10.fasta  -k 1  --min-intronlen 30  --max-intronlen 3000  -1 results/M1A_1P.trimmed.fastq.gz -2 results/M1A_2P.trimmed.fastq.gz --threads 4"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping$M1A$`samtools-view`</span>
+<span class="co">#&gt; [1] "samtools view -bS -o ./results/M1A.bam  ./results/M1A.sam "</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping$M1A$`samtools-sort`</span>
+<span class="co">#&gt; [1] "samtools sort -o ./results/M1A.sorted.bam  ./results/M1A.bam  -@ 4"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping$M1A$`samtools-index`</span>
+<span class="co">#&gt; [1] "samtools index -b results/M1A.sorted.bam  results/M1A.sorted.bam.bai  ./results/M1A.sorted.bam "</span></code></pre></div>
+</div>
+<div id="getting-data-from-a-workflow-instance" class="section level4">
+<h4 class="hasAnchor">
+<a href="#getting-data-from-a-workflow-instance" class="anchor"></a>Getting data from a workflow instance</h4>
+<p>The final step in this simple workflow is an R code step. For that, we are using the <code>LineWise</code> constructor function.</p>
+<p>This constructor function requires the <code>step_name</code> and the R-based code under the <code>code</code> argument. The R code should be enclosed by braces (<code>{}</code>) and separated by a new line.</p>
+<p>One interesting feature showed here is the <code>getColumn</code> method that allows extracting the information for a workflow instance. Those files can be used in an R code, as demonstrated below.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">getColumn</a></span><span class="op">(</span><span class="va">sal</span>, step <span class="op">=</span> <span class="st">"hisat2_mapping"</span>, <span class="st">"outfiles"</span>, column <span class="op">=</span> <span class="st">"samtools_sort_bam"</span><span class="op">)</span>
+<span class="co">#&gt;                         M1A                         M1B </span>
+<span class="co">#&gt;  "./results/M1A.sorted.bam"  "./results/M1B.sorted.bam" </span>
+<span class="co">#&gt;                         A1A                         A1B </span>
+<span class="co">#&gt;  "./results/A1A.sorted.bam"  "./results/A1B.sorted.bam" </span>
+<span class="co">#&gt;                         V1A                         V1B </span>
+<span class="co">#&gt;  "./results/V1A.sorted.bam"  "./results/V1B.sorted.bam" </span>
+<span class="co">#&gt;                         M6A                         M6B </span>
+<span class="co">#&gt;  "./results/M6A.sorted.bam"  "./results/M6B.sorted.bam" </span>
+<span class="co">#&gt;                         A6A                         A6B </span>
+<span class="co">#&gt;  "./results/A6A.sorted.bam"  "./results/A6B.sorted.bam" </span>
+<span class="co">#&gt;                         V6A                         V6B </span>
+<span class="co">#&gt;  "./results/V6A.sorted.bam"  "./results/V6B.sorted.bam" </span>
+<span class="co">#&gt;                        M12A                        M12B </span>
+<span class="co">#&gt; "./results/M12A.sorted.bam" "./results/M12B.sorted.bam" </span>
+<span class="co">#&gt;                        A12A                        A12B </span>
+<span class="co">#&gt; "./results/A12A.sorted.bam" "./results/A12B.sorted.bam" </span>
+<span class="co">#&gt;                        V12A                        V12B </span>
+<span class="co">#&gt; "./results/V12A.sorted.bam" "./results/V12B.sorted.bam"</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/LineWise-class.html">LineWise</a></span><span class="op">(</span>code <span class="op">=</span> <span class="op">{</span>
+  <span class="va">bampaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">getColumn</a></span><span class="op">(</span><span class="va">sal</span>, step <span class="op">=</span> <span class="st">"hisat2_mapping"</span>, <span class="st">"outfiles"</span>, column <span class="op">=</span> <span class="st">"samtools_sort_bam"</span><span class="op">)</span>
+  <span class="va">fqpaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">getColumn</a></span><span class="op">(</span><span class="va">sal</span>, step <span class="op">=</span> <span class="st">"trimming"</span>, <span class="st">"targetsWF"</span>, column <span class="op">=</span> <span class="st">"FileName1"</span><span class="op">)</span>
+  <span class="va">read_statsDF</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/alignStats.html">alignStats</a></span><span class="op">(</span>args<span class="op">=</span><span class="va">bampaths</span>, fqpaths <span class="op">=</span> <span class="va">fqpaths</span>, pairEnd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">read_statsDF</span>, <span class="st">"results/alignStats.xls"</span>, row.names<span class="op">=</span><span class="cn">FALSE</span>, quote<span class="op">=</span><span class="cn">FALSE</span>, sep<span class="op">=</span><span class="st">"\t"</span><span class="op">)</span>
+  <span class="op">}</span>,
+  step_name <span class="op">=</span> <span class="st">"mapping_stats"</span>, 
+  dependency <span class="op">=</span> <span class="st">"hisat2_mapping"</span><span class="op">)</span></code></pre></div>
+<p>Let’s explore the workflow to check the steps:</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">stepsWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; Instance of 'SYSargs2':</span>
+<span class="co">#&gt;    Slot names/accessors: </span>
+<span class="co">#&gt;       targets: 18 (M1A...V12B), targetsheader: 4 (lines)</span>
+<span class="co">#&gt;       modules: 1</span>
+<span class="co">#&gt;       wf: 0, clt: 1, yamlinput: 12 (inputs)</span>
+<span class="co">#&gt;       input: 18, output: 18</span>
+<span class="co">#&gt;       cmdlist: 18</span>
+<span class="co">#&gt;    Sub Steps:</span>
+<span class="co">#&gt;       1. trimmomatic-pe (rendered: TRUE)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_index</span>
+<span class="co">#&gt; Instance of 'SYSargs2':</span>
+<span class="co">#&gt;    Slot names/accessors: </span>
+<span class="co">#&gt;       targets: 0 (...), targetsheader: 0 (lines)</span>
+<span class="co">#&gt;       modules: 1</span>
+<span class="co">#&gt;       wf: 0, clt: 1, yamlinput: 5 (inputs)</span>
+<span class="co">#&gt;       input: 1, output: 1</span>
+<span class="co">#&gt;       cmdlist: 1</span>
+<span class="co">#&gt;    Sub Steps:</span>
+<span class="co">#&gt;       1. hisat2-index (rendered: TRUE)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; Instance of 'SYSargs2':</span>
+<span class="co">#&gt;    Slot names/accessors: </span>
+<span class="co">#&gt;       targets: 18 (M1A...V12B), targetsheader: 4 (lines)</span>
+<span class="co">#&gt;       modules: 2</span>
+<span class="co">#&gt;       wf: 4, clt: 4, yamlinput: 8 (inputs)</span>
+<span class="co">#&gt;       input: 18, output: 18</span>
+<span class="co">#&gt;       cmdlist: 18</span>
+<span class="co">#&gt;    Sub Steps:</span>
+<span class="co">#&gt;       1. hisat2 (rendered: TRUE)</span>
+<span class="co">#&gt;       2. samtools-view (rendered: TRUE)</span>
+<span class="co">#&gt;       3. samtools-sort (rendered: TRUE)</span>
+<span class="co">#&gt;       4. samtools-index (rendered: TRUE)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $mapping_stats</span>
+<span class="co">#&gt; Instance of 'LineWise'</span>
+<span class="co">#&gt;     Code Chunk length: 4</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">dependency</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_index</span>
+<span class="co">#&gt; [1] "trimming"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; [1] "trimming"     "hisat2_index"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $mapping_stats</span>
+<span class="co">#&gt; [1] "hisat2_mapping"</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">codeLine</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; trimming AND hisat2_index AND hisat2_mapping step have been dropped because it is not a LineWise object.</span>
+<span class="co">#&gt; mapping_stats</span>
+<span class="co">#&gt;     bampaths &lt;- getColumn(sal, step = "hisat2_mapping", "outfiles", column = "samtools_sort_bam")</span>
+<span class="co">#&gt;     fqpaths &lt;- getColumn(sal, step = "trimming", "targetsWF", column = "FileName1")</span>
+<span class="co">#&gt;     read_statsDF &lt;- alignStats(args = bampaths, fqpaths = fqpaths, pairEnd = TRUE)</span>
+<span class="co">#&gt;     write.table(read_statsDF, "results/alignStats.xls", row.names = FALSE, quote = FALSE, sep = "\t")</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">targetsWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; DataFrame with 18 rows and 7 columns</span>
+<span class="co">#&gt;                  FileName1              FileName2  SampleName      Factor</span>
+<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
+<span class="co">#&gt; 1   ./data/SRR446027_1.f.. ./data/SRR446027_2.f..         M1A          M1</span>
+<span class="co">#&gt; 2   ./data/SRR446028_1.f.. ./data/SRR446028_2.f..         M1B          M1</span>
+<span class="co">#&gt; 3   ./data/SRR446029_1.f.. ./data/SRR446029_2.f..         A1A          A1</span>
+<span class="co">#&gt; 4   ./data/SRR446030_1.f.. ./data/SRR446030_2.f..         A1B          A1</span>
+<span class="co">#&gt; 5   ./data/SRR446031_1.f.. ./data/SRR446031_2.f..         V1A          V1</span>
+<span class="co">#&gt; ...                    ...                    ...         ...         ...</span>
+<span class="co">#&gt; 14  ./data/SRR446040_1.f.. ./data/SRR446040_2.f..        M12B         M12</span>
+<span class="co">#&gt; 15  ./data/SRR446041_1.f.. ./data/SRR446041_2.f..        A12A         A12</span>
+<span class="co">#&gt; 16  ./data/SRR446042_1.f.. ./data/SRR446042_2.f..        A12B         A12</span>
+<span class="co">#&gt; 17  ./data/SRR446043_1.f.. ./data/SRR446043_2.f..        V12A         V12</span>
+<span class="co">#&gt; 18  ./data/SRR446044_1.f.. ./data/SRR446044_2.f..        V12B         V12</span>
+<span class="co">#&gt;      SampleLong  Experiment        Date</span>
+<span class="co">#&gt;     &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
+<span class="co">#&gt; 1     Mock.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 2     Mock.1h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 3      Avr.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 4      Avr.1h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 5      Vir.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; ...         ...         ...         ...</span>
+<span class="co">#&gt; 14   Mock.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 15    Avr.12h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 16    Avr.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 17    Vir.12h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 18    Vir.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_index</span>
+<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; DataFrame with 18 rows and 7 columns</span>
+<span class="co">#&gt;       trimmomatic_1_paired   trimmomatic_2_paired  SampleName      Factor</span>
+<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
+<span class="co">#&gt; 1   results/M1A_1P.trimm.. results/M1A_2P.trimm..         M1A          M1</span>
+<span class="co">#&gt; 2   results/M1B_1P.trimm.. results/M1B_2P.trimm..         M1B          M1</span>
+<span class="co">#&gt; 3   results/A1A_1P.trimm.. results/A1A_2P.trimm..         A1A          A1</span>
+<span class="co">#&gt; 4   results/A1B_1P.trimm.. results/A1B_2P.trimm..         A1B          A1</span>
+<span class="co">#&gt; 5   results/V1A_1P.trimm.. results/V1A_2P.trimm..         V1A          V1</span>
+<span class="co">#&gt; ...                    ...                    ...         ...         ...</span>
+<span class="co">#&gt; 14  results/M12B_1P.trim.. results/M12B_2P.trim..        M12B         M12</span>
+<span class="co">#&gt; 15  results/A12A_1P.trim.. results/A12A_2P.trim..        A12A         A12</span>
+<span class="co">#&gt; 16  results/A12B_1P.trim.. results/A12B_2P.trim..        A12B         A12</span>
+<span class="co">#&gt; 17  results/V12A_1P.trim.. results/V12A_2P.trim..        V12A         V12</span>
+<span class="co">#&gt; 18  results/V12B_1P.trim.. results/V12B_2P.trim..        V12B         V12</span>
+<span class="co">#&gt;      SampleLong  Experiment        Date</span>
+<span class="co">#&gt;     &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
+<span class="co">#&gt; 1     Mock.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 2     Mock.1h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 3      Avr.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 4      Avr.1h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 5      Vir.1h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; ...         ...         ...         ...</span>
+<span class="co">#&gt; 14   Mock.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 15    Avr.12h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 16    Avr.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; 17    Vir.12h.A           1 23-Mar-2012</span>
+<span class="co">#&gt; 18    Vir.12h.B           1 23-Mar-2012</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $mapping_stats</span>
+<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">outfiles</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; DataFrame with 18 rows and 4 columns</span>
+<span class="co">#&gt;       trimmomatic_1_paired trimmomatic_1_unpaired   trimmomatic_2_paired</span>
+<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1   results/M1A_1P.trimm.. results/M1A_1U.trimm.. results/M1A_2P.trimm..</span>
+<span class="co">#&gt; 2   results/M1B_1P.trimm.. results/M1B_1U.trimm.. results/M1B_2P.trimm..</span>
+<span class="co">#&gt; 3   results/A1A_1P.trimm.. results/A1A_1U.trimm.. results/A1A_2P.trimm..</span>
+<span class="co">#&gt; 4   results/A1B_1P.trimm.. results/A1B_1U.trimm.. results/A1B_2P.trimm..</span>
+<span class="co">#&gt; 5   results/V1A_1P.trimm.. results/V1A_1U.trimm.. results/V1A_2P.trimm..</span>
+<span class="co">#&gt; ...                    ...                    ...                    ...</span>
+<span class="co">#&gt; 14  results/M12B_1P.trim.. results/M12B_1U.trim.. results/M12B_2P.trim..</span>
+<span class="co">#&gt; 15  results/A12A_1P.trim.. results/A12A_1U.trim.. results/A12A_2P.trim..</span>
+<span class="co">#&gt; 16  results/A12B_1P.trim.. results/A12B_1U.trim.. results/A12B_2P.trim..</span>
+<span class="co">#&gt; 17  results/V12A_1P.trim.. results/V12A_1U.trim.. results/V12A_2P.trim..</span>
+<span class="co">#&gt; 18  results/V12B_1P.trim.. results/V12B_1U.trim.. results/V12B_2P.trim..</span>
+<span class="co">#&gt;     trimmomatic_2_unpaired</span>
+<span class="co">#&gt;                &lt;character&gt;</span>
+<span class="co">#&gt; 1   results/M1A_2U.trimm..</span>
+<span class="co">#&gt; 2   results/M1B_2U.trimm..</span>
+<span class="co">#&gt; 3   results/A1A_2U.trimm..</span>
+<span class="co">#&gt; 4   results/A1B_2U.trimm..</span>
+<span class="co">#&gt; 5   results/V1A_2U.trimm..</span>
+<span class="co">#&gt; ...                    ...</span>
+<span class="co">#&gt; 14  results/M12B_2U.trim..</span>
+<span class="co">#&gt; 15  results/A12A_2U.trim..</span>
+<span class="co">#&gt; 16  results/A12B_2U.trim..</span>
+<span class="co">#&gt; 17  results/V12A_2U.trim..</span>
+<span class="co">#&gt; 18  results/V12B_2U.trim..</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_index</span>
+<span class="co">#&gt; DataFrame with 1 row and 8 columns</span>
+<span class="co">#&gt;            hisat2_index1          hisat2_index2          hisat2_index3</span>
+<span class="co">#&gt;              &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1 ./data/tair10.fasta... ./data/tair10.fasta... ./data/tair10.fasta...</span>
+<span class="co">#&gt;            hisat2_index4          hisat2_index5          hisat2_index6</span>
+<span class="co">#&gt;              &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1 ./data/tair10.fasta... ./data/tair10.fasta... ./data/tair10.fasta...</span>
+<span class="co">#&gt;            hisat2_index7          hisat2_index8</span>
+<span class="co">#&gt;              &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1 ./data/tair10.fasta... ./data/tair10.fasta...</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; DataFrame with 18 rows and 4 columns</span>
+<span class="co">#&gt;             hisat2_sam       samtools_bam      samtools_sort_bam</span>
+<span class="co">#&gt;            &lt;character&gt;        &lt;character&gt;            &lt;character&gt;</span>
+<span class="co">#&gt; 1    ./results/M1A.sam  ./results/M1A.bam ./results/M1A.sorted..</span>
+<span class="co">#&gt; 2    ./results/M1B.sam  ./results/M1B.bam ./results/M1B.sorted..</span>
+<span class="co">#&gt; 3    ./results/A1A.sam  ./results/A1A.bam ./results/A1A.sorted..</span>
+<span class="co">#&gt; 4    ./results/A1B.sam  ./results/A1B.bam ./results/A1B.sorted..</span>
+<span class="co">#&gt; 5    ./results/V1A.sam  ./results/V1A.bam ./results/V1A.sorted..</span>
+<span class="co">#&gt; ...                ...                ...                    ...</span>
+<span class="co">#&gt; 14  ./results/M12B.sam ./results/M12B.bam ./results/M12B.sorte..</span>
+<span class="co">#&gt; 15  ./results/A12A.sam ./results/A12A.bam ./results/A12A.sorte..</span>
+<span class="co">#&gt; 16  ./results/A12B.sam ./results/A12B.bam ./results/A12B.sorte..</span>
+<span class="co">#&gt; 17  ./results/V12A.sam ./results/V12A.bam ./results/V12A.sorte..</span>
+<span class="co">#&gt; 18  ./results/V12B.sam ./results/V12B.bam ./results/V12B.sorte..</span>
+<span class="co">#&gt;             samtools_index</span>
+<span class="co">#&gt;                &lt;character&gt;</span>
+<span class="co">#&gt; 1   ./results/M1A.sorted..</span>
+<span class="co">#&gt; 2   ./results/M1B.sorted..</span>
+<span class="co">#&gt; 3   ./results/A1A.sorted..</span>
+<span class="co">#&gt; 4   ./results/A1B.sorted..</span>
+<span class="co">#&gt; 5   ./results/V1A.sorted..</span>
+<span class="co">#&gt; ...                    ...</span>
+<span class="co">#&gt; 14  ./results/M12B.sorte..</span>
+<span class="co">#&gt; 15  ./results/A12A.sorte..</span>
+<span class="co">#&gt; 16  ./results/A12B.sorte..</span>
+<span class="co">#&gt; 17  ./results/V12A.sorte..</span>
+<span class="co">#&gt; 18  ./results/V12B.sorte..</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $mapping_stats</span>
+<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
 <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">projectInfo</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
 <span class="co">#&gt; $project</span>
 <span class="co">#&gt; [1] "/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021"</span>
@@ -407,337 +935,6 @@ WConnectivity between CWL param files and targets files.
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $sysargslist</span>
 <span class="co">#&gt; [1] ".SPRproject/SYSargsList.yml"</span></code></pre></div>
-<p>Also, the <code>length</code> function will return how many steps this workflow contains and in this case it is empty, as follow:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0</span></code></pre></div>
-<div id="workflow-design" class="section level2">
-<h2 class="hasAnchor">
-<a href="#workflow-design" class="anchor"></a>Workflow Design</h2>
-<p><em><code>systemPipeR</code></em> workflows can be designed and built from start to finish with a single command, importing from an R Markdown file or stepwise in interactive mode from the R console. In the <a href="#appendstep">next section</a>, we will demonstrate how to build the workflow in an interactive mode, and in the <a href="#importWF">following section</a>, we will show how to build from a file.</p>
-<p>New workflows are constructed, or existing ones modified, by connecting each step via <code>appendStep</code> method. Each <code>SYSargsList</code> instance contains instructions needed for processing a set of input files with a specific command-line or R software, as well as the paths to the corresponding outfiles generated by a particular tool/step.</p>
-<p>To build R code based step, the constructor function <code>Linewise</code> is used. For more details about this S4 class container, see <a href="#linewise">here</a>.</p>
-<div id="appendstep" class="section level3">
-<h3 class="hasAnchor">
-<a href="#appendstep" class="anchor"></a>Build workflow interactive</h3>
-<p>This tutorial shows a very simple example for describing and explaining all main features available within systemPipeR to design, build, manage, run, and visualize the workflow. In summary, we are exporting a dataset to multiple files, compressing and decompressing each one of the files, and importing to R, and finally performing a statistical analysis.</p>
-<p>In the previous section, we initialize the project by building the <code>sal</code> object. Until this moment, the container has no steps:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span>
-<span class="co">#&gt; Instance of 'SYSargsList': </span>
-<span class="co">#&gt;  No workflow steps added</span></code></pre></div>
-<p>Next, we need to populate the object created with the first step in the workflow.</p>
-<div id="adding-the-first-step" class="section level4">
-<h4 class="hasAnchor">
-<a href="#adding-the-first-step" class="anchor"></a>Adding the first step</h4>
-<p>The first step is R code based, and we are splitting the <code>iris</code> dataset by <code>Species</code> and for each <code>Species</code> will be saved on file. Please note that this code will not be executed now; it is just store in the container for further execution.</p>
-<p>This constructor function requires the <code>step_name</code> and the R-based code under the <code>code</code> argument. The R code should be enclosed by braces (<code>{}</code>) and separated by a new line.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/LineWise-class.html">LineWise</a></span><span class="op">(</span>code <span class="op">=</span> <span class="op">{</span>
-                              <span class="fu"><a href="https://rdrr.io/r/base/mapply.html">mapply</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,
-                                     <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span>,
-                                     <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="st">"results"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, <span class="st">".csv"</span><span class="op">)</span><span class="op">)</span>
-                                     <span class="op">)</span> 
-                            <span class="op">}</span>,
-                            step_name <span class="op">=</span> <span class="st">"export_iris"</span><span class="op">)</span></code></pre></div>
-<p>For a brief overview of the workflow, we can check the object as follows:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span>
-<span class="co">#&gt; Instance of 'SYSargsList': </span>
-<span class="co">#&gt;     WF Steps:</span>
-<span class="co">#&gt;        1. export_iris --&gt; Status: Pending</span>
-<span class="co">#&gt; </span></code></pre></div>
-<p>Also, for printing and double-check the R code in the step, we can use the <code>codeLine</code> method:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">codeLine</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; export_iris</span>
-<span class="co">#&gt;     mapply(function(x, y) write.csv(x, y), split(iris, factor(iris$Species)), file.path("results", paste0(names(split(iris, factor(iris$Species))), ".csv")))</span></code></pre></div>
-</div>
-<div id="adding-more-steps" class="section level4">
-<h4 class="hasAnchor">
-<a href="#adding-more-steps" class="anchor"></a>Adding more steps</h4>
-<p>Next, an example of how to compress the exported files using <a href="https://www.gnu.org/software/gzip/"><code>gzip</code></a> command-line.</p>
-<p>The constructor function creates an <code>SYSargsList</code> S4 class object using data from three input files:</p>
-<pre><code>- CWL command-line specification file (`wf_file` argument);
-- Input variables (`input_file` argument);
-- Targets file (`targets` argument).</code></pre>
-<p>In CWL, files with the extension <code>.cwl</code> define the parameters of a chosen command-line step or workflow, while files with the extension <code>.yml</code> define the input variables of command-line steps.</p>
-<p>The <code>targets</code> file is optional for workflow steps lacking <code>input</code> files. The connection between <code>input</code> variables and the <code>targets</code> file is defined under the <code>inputvars</code> argument. It is required a <code>named vector</code>, where each element name needs to match with column names in the <code>targets</code> file, and the value must match the names of the <code>input</code> variables defined in the <code>*.yml</code> files (see Figure @ref(fig:sprCWL)).</p>
-<p>A detailed description of the dynamic between <code>input</code> variables and <code>targets</code> files can be found <a href="#cwl_targets">here</a>. In addition, the CWL syntax overview can be found <a href="#cwl">here</a>.</p>
-<p>Besides all the data form <code>targets</code>, <code>wf_file</code>, <code>input_file</code> and <code>dir_path</code> arguments, <code>SYSargsList</code> constructor function options include:</p>
-<ul>
-<li>
-<code>step_name</code>: a unique <em>name</em> for the step. This is not mandatory; however, it is highly recommended. If no name is provided, a default <code>step_x</code>, where <code>x</code> reflects the step index, will be added.</li>
-<li>
-<code>dir</code>: this option allows creating an exclusive subdirectory for the step in the workflow. All the outfiles and log files for this particular step will be generated in the respective folders.</li>
-<li>
-<code>dependency</code>: after the first step, all the additional steps appended to the workflow require the information of the dependency tree.</li>
-</ul>
-<p>The <code>appendStep&lt;-</code> method is used to append a new step in the workflow.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl/gunzip"</span>, <span class="st">"targets_gunzip.txt"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>
-<span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>step_name <span class="op">=</span> <span class="st">"gzip"</span>, 
-                      targets <span class="op">=</span> <span class="va">targetspath</span>, dir <span class="op">=</span> <span class="cn">TRUE</span>,
-                      wf_file <span class="op">=</span> <span class="st">"gunzip/workflow_gzip.cwl"</span>, input_file <span class="op">=</span> <span class="st">"gunzip/gzip.yml"</span>,
-                      dir_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>,
-                      inputvars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>FileName <span class="op">=</span> <span class="st">"_FILE_PATH_"</span>, SampleName <span class="op">=</span> <span class="st">"_SampleName_"</span><span class="op">)</span>, 
-                      dependency <span class="op">=</span> <span class="st">"export_iris"</span><span class="op">)</span></code></pre></div>
-<p>Note: This will not work if the <code>gzip</code> is not available on your system (installed and exported to PATH) and may only work on Windows systems using PowerShell.</p>
-<p>For a overview of the workflow, we can check the object as follows:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span>
-<span class="co">#&gt; Instance of 'SYSargsList': </span>
-<span class="co">#&gt;     WF Steps:</span>
-<span class="co">#&gt;        1. export_iris --&gt; Status: Pending</span>
-<span class="co">#&gt;        2. gzip --&gt; Status: Pending </span>
-<span class="co">#&gt;            Total Files: 3 | Existing: 0 | Missing: 3 </span>
-<span class="co">#&gt;          2.1. gzip</span>
-<span class="co">#&gt;              cmdlist: 3 | Pending: 3</span>
-<span class="co">#&gt; </span></code></pre></div>
-<p>Note that we have two steps, and it is expected three files from the second step. Also, the workflow status is <em>Pending</em>, which means the workflow object is rendered in R; however, we did not execute the workflow yet. In addition to this summary, it can be observed this step has three command-lines.</p>
-<p>For more details about the command-line rendered for each target file, it can be checked as follows:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">cmdlist</a></span><span class="op">(</span><span class="va">sal</span>, step<span class="op">=</span><span class="st">"gzip"</span><span class="op">)</span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; $gzip$SE</span>
-<span class="co">#&gt; $gzip$SE$gzip</span>
-<span class="co">#&gt; [1] "gzip -c  results/setosa.csv &gt; results/SE.csv.gz"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip$VE</span>
-<span class="co">#&gt; $gzip$VE$gzip</span>
-<span class="co">#&gt; [1] "gzip -c  results/versicolor.csv &gt; results/VE.csv.gz"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip$VI</span>
-<span class="co">#&gt; $gzip$VI$gzip</span>
-<span class="co">#&gt; [1] "gzip -c  results/virginica.csv &gt; results/VI.csv.gz"</span></code></pre></div>
-</div>
-<div id="using-the-outfiles-for-the-next-step" class="section level4">
-<h4 class="hasAnchor">
-<a href="#using-the-outfiles-for-the-next-step" class="anchor"></a>Using the <code>outfiles</code> for the next step</h4>
-<p>For building this step, all the previous procedures are being used to append the next step. However, here, we can observe power features that build the connectivity between steps in the workflow.</p>
-<p>In this example, we would like to use the outfiles from <em>gzip</em> Step, as input from the next step, which is the <em>gunzip</em>. In this case, let’s look at the outfiles from the first step:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">outfiles</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; $export_iris</span>
-<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 1 column</span>
-<span class="co">#&gt;           gzip_file</span>
-<span class="co">#&gt;         &lt;character&gt;</span>
-<span class="co">#&gt; 1 results/SE.csv.gz</span>
-<span class="co">#&gt; 2 results/VE.csv.gz</span>
-<span class="co">#&gt; 3 results/VI.csv.gz</span></code></pre></div>
-<p>The column we want to use is “gzip_file.” For the argument <code>targets</code> in the <code>SYSargsList</code> function, it should provide the name of the correspondent step in the Workflow and which <code>outfiles</code> you would like to be incorporated in the next step. The argument <code>inputvars</code> allows the connectivity between <code>outfiles</code> and the new <code>targets</code> file. Here, the name of the previous <code>outfiles</code> should be provided it. Please note that all <code>outfiles</code> column names must be unique.</p>
-<p>It is possible to keep all the original columns from the <code>targets</code> files or remove some columns for a clean <code>targets</code> file. The argument <code>rm_targets_col</code> provides this flexibility, where it is possible to specify the names of the columns that should be removed. If no names are passing here, the new columns will be appended.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>step_name <span class="op">=</span> <span class="st">"gunzip"</span>, 
-                      targets <span class="op">=</span> <span class="st">"gzip"</span>, dir <span class="op">=</span> <span class="cn">TRUE</span>,
-                      wf_file <span class="op">=</span> <span class="st">"gunzip/workflow_gunzip.cwl"</span>, input_file <span class="op">=</span> <span class="st">"gunzip/gunzip.yml"</span>,
-                      dir_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>,
-                      inputvars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>gzip_file <span class="op">=</span> <span class="st">"_FILE_PATH_"</span>, SampleName <span class="op">=</span> <span class="st">"_SampleName_"</span><span class="op">)</span>, 
-                      rm_targets_col <span class="op">=</span> <span class="st">"FileName"</span>, 
-                      dependency <span class="op">=</span> <span class="st">"gzip"</span><span class="op">)</span></code></pre></div>
-<p>We can check the targets automatically create for this step, based on the previous <code>outfiles</code>:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">targetsWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; $gunzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 2 columns</span>
-<span class="co">#&gt;           gzip_file  SampleName</span>
-<span class="co">#&gt;         &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1 results/SE.csv.gz          SE</span>
-<span class="co">#&gt; 2 results/VE.csv.gz          VE</span>
-<span class="co">#&gt; 3 results/VI.csv.gz          VI</span></code></pre></div>
-<p>We can also check all the expected <code>outfiles</code> for this particular step, as follows:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">outfiles</a></span><span class="op">(</span><span class="va">sal</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; $gunzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 1 column</span>
-<span class="co">#&gt;      gunzip_file</span>
-<span class="co">#&gt;      &lt;character&gt;</span>
-<span class="co">#&gt; 1 results/SE.csv</span>
-<span class="co">#&gt; 2 results/VE.csv</span>
-<span class="co">#&gt; 3 results/VI.csv</span></code></pre></div>
-<p>Now, we can observe that the third step has been added and contains one substep.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span>
-<span class="co">#&gt; Instance of 'SYSargsList': </span>
-<span class="co">#&gt;     WF Steps:</span>
-<span class="co">#&gt;        1. export_iris --&gt; Status: Pending</span>
-<span class="co">#&gt;        2. gzip --&gt; Status: Pending </span>
-<span class="co">#&gt;            Total Files: 3 | Existing: 0 | Missing: 3 </span>
-<span class="co">#&gt;          2.1. gzip</span>
-<span class="co">#&gt;              cmdlist: 3 | Pending: 3</span>
-<span class="co">#&gt;        3. gunzip --&gt; Status: Pending </span>
-<span class="co">#&gt;            Total Files: 3 | Existing: 0 | Missing: 3 </span>
-<span class="co">#&gt;          3.1. gunzip</span>
-<span class="co">#&gt;              cmdlist: 3 | Pending: 3</span>
-<span class="co">#&gt; </span></code></pre></div>
-<p>In addition, we can access all the command-lines for each one of the substeps.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">cmdlist</a></span><span class="op">(</span><span class="va">sal</span><span class="op">[</span><span class="st">"gzip"</span><span class="op">]</span>, targets <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; $gzip$SE</span>
-<span class="co">#&gt; $gzip$SE$gzip</span>
-<span class="co">#&gt; [1] "gzip -c  results/setosa.csv &gt; results/SE.csv.gz"</span></code></pre></div>
-</div>
-<div id="getting-data-from-a-workflow-instance" class="section level4">
-<h4 class="hasAnchor">
-<a href="#getting-data-from-a-workflow-instance" class="anchor"></a>Getting data from a workflow instance</h4>
-<p>The final step in this simple workflow is an R code step. For that, we are using the <code>LineWise</code> constructor function as demonstrated above.</p>
-<p>One interesting feature showed here is the <code>getColumn</code> method that allows extracting the information for a workflow instance. Those files can be used in an R code, as demonstrated below.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">getColumn</a></span><span class="op">(</span><span class="va">sal</span>, step <span class="op">=</span> <span class="st">"gunzip"</span>, <span class="st">'outfiles'</span><span class="op">)</span>
-<span class="co">#&gt;               SE               VE               VI </span>
-<span class="co">#&gt; "results/SE.csv" "results/VE.csv" "results/VI.csv"</span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/LineWise-class.html">LineWise</a></span><span class="op">(</span>code <span class="op">=</span> <span class="op">{</span>
-                    <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">getColumn</a></span><span class="op">(</span><span class="va">sal</span>, step <span class="op">=</span> <span class="st">"gunzip"</span>, <span class="st">'outfiles'</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span><span class="op">(</span><span class="va">x</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-                    <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">df</span><span class="op">)</span>
-                    <span class="va">stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">mean</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, <span class="fl">2</span>, <span class="va">sd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-                    <span class="va">stats</span><span class="op">$</span><span class="va">species</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span>
-                    
-                    <span class="va">plot</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">stats</span>, <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">species</span>, y <span class="op">=</span> <span class="va">mean</span>, fill <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-                      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, color <span class="op">=</span> <span class="st">"black"</span>, position <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-                      <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_errorbar</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">mean</span><span class="op">-</span><span class="va">sd</span>, ymax <span class="op">=</span> <span class="va">mean</span><span class="op">+</span><span class="va">sd</span><span class="op">)</span>, width <span class="op">=</span> <span class="fl">.2</span>, position <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">.9</span><span class="op">)</span><span class="op">)</span> 
-                    <span class="op">}</span>,
-                    step_name <span class="op">=</span> <span class="st">"iris_stats"</span>, 
-                    dependency <span class="op">=</span> <span class="st">"gzip"</span><span class="op">)</span></code></pre></div>
-</div>
-</div>
-<div id="importWF" class="section level3">
-<h3 class="hasAnchor">
-<a href="#importWF" class="anchor"></a>Build workflow from a {R Markdown}</h3>
-<p>The precisely same workflow can be created by importing the steps from an R Markdown file. As demonstrated above, it is required to initialize the project with <code>SPRproject</code> function.</p>
-<p><code>importWF</code> function will scan and import all the R chunk from the R Markdown file and build all the workflow instances. Then, each R chuck in the file will be converted in a workflow step.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal_rmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>logs.dir <span class="op">=</span> <span class="st">".SPRproject_rmd"</span><span class="op">)</span> 
-<span class="co">#&gt; Creating directory '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject_rmd'</span>
-<span class="co">#&gt; Creating file '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject_rmd/SYSargsList.yml'</span>
-
-<span class="va">sal_rmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/importWF.html">importWF</a></span><span class="op">(</span><span class="va">sal_rmd</span>, 
-                file_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"spr_simple_wf.Rmd"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Reading Rmd file</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;  ---- Actions ----</span>
-<span class="co">#&gt; Checking chunk SPR option</span>
-<span class="co">#&gt; Ignore non-SPR chunks: 17</span>
-<span class="co">#&gt; Checking chunk eval values</span>
-<span class="co">#&gt; Resolve step names</span>
-<span class="co">#&gt; Check duplicated step names</span>
-<span class="co">#&gt; Checking chunk dependencies</span>
-<span class="co">#&gt; Use the previous step as dependency for steps without 'spr.dep' options: 27</span>
-<span class="co">#&gt; Parse chunk code</span>
-<span class="co">#&gt; ---- Succes! Create output ----</span>
-<span class="co">#&gt; Now importing step 'export_iris' </span>
-<span class="co">#&gt; Now importing step 'gzip' </span>
-<span class="co">#&gt; Now importing step 'gunzip' </span>
-<span class="co">#&gt; Now importing step 'stats'</span></code></pre></div>
-<p>Let’s explore the workflow to check the steps:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">stepsWF</a></span><span class="op">(</span><span class="va">sal_rmd</span><span class="op">)</span>
-<span class="co">#&gt; $export_iris</span>
-<span class="co">#&gt; Instance of 'LineWise'</span>
-<span class="co">#&gt;     Code Chunk length: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; Instance of 'SYSargs2':</span>
-<span class="co">#&gt;    Slot names/accessors: </span>
-<span class="co">#&gt;       targets: 3 (SE...VI), targetsheader: 1 (lines)</span>
-<span class="co">#&gt;       modules: 0</span>
-<span class="co">#&gt;       wf: 1, clt: 1, yamlinput: 4 (inputs)</span>
-<span class="co">#&gt;       input: 3, output: 3</span>
-<span class="co">#&gt;       cmdlist: 3</span>
-<span class="co">#&gt;    Sub Steps:</span>
-<span class="co">#&gt;       1. gzip (rendered: TRUE)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gunzip</span>
-<span class="co">#&gt; Instance of 'SYSargs2':</span>
-<span class="co">#&gt;    Slot names/accessors: </span>
-<span class="co">#&gt;       targets: 3 (SE...VI), targetsheader: 1 (lines)</span>
-<span class="co">#&gt;       modules: 0</span>
-<span class="co">#&gt;       wf: 1, clt: 1, yamlinput: 4 (inputs)</span>
-<span class="co">#&gt;       input: 3, output: 3</span>
-<span class="co">#&gt;       cmdlist: 3</span>
-<span class="co">#&gt;    Sub Steps:</span>
-<span class="co">#&gt;       1. gunzip (rendered: TRUE)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $stats</span>
-<span class="co">#&gt; Instance of 'LineWise'</span>
-<span class="co">#&gt;     Code Chunk length: 5</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">dependency</a></span><span class="op">(</span><span class="va">sal_rmd</span><span class="op">)</span>
-<span class="co">#&gt; $export_iris</span>
-<span class="co">#&gt; [1] ""</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; [1] "export_iris"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gunzip</span>
-<span class="co">#&gt; [1] "gzip"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $stats</span>
-<span class="co">#&gt; [1] "gunzip"</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">codeLine</a></span><span class="op">(</span><span class="va">sal_rmd</span><span class="op">)</span>
-<span class="co">#&gt; gzip AND gunzip step have been dropped because it is not a LineWise object.</span>
-<span class="co">#&gt; export_iris</span>
-<span class="co">#&gt;     mapply(function(x, y) write.csv(x, y), split(iris, factor(iris$Species)), file.path("results", paste0(names(split(iris, factor(iris$Species))), ".csv")))</span>
-<span class="co">#&gt; stats</span>
-<span class="co">#&gt;     df &lt;- lapply(getColumn(sal, step = "gunzip", "outfiles"), function(x) read.delim(x, sep = ",")[-1])</span>
-<span class="co">#&gt;     df &lt;- do.call(rbind, df)</span>
-<span class="co">#&gt;     stats &lt;- data.frame(cbind(mean = apply(df[, 1:4], 2, mean), sd = apply(df[, 1:4], 2, sd)))</span>
-<span class="co">#&gt;     stats$species &lt;- rownames(stats)</span>
-<span class="co">#&gt;     plot &lt;- ggplot2::ggplot(stats, ggplot2::aes(x = species, y = mean, fill = species)) + ggplot2::geom_bar(stat = "identity", color = "black", position = ggplot2::position_dodge()) + ggplot2::geom_errorbar(ggplot2::aes(ymin = mean - sd, ymax = mean + sd), width = 0.2, position = ggplot2::position_dodge(0.9))</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">targetsWF</a></span><span class="op">(</span><span class="va">sal_rmd</span><span class="op">)</span>
-<span class="co">#&gt; $export_iris</span>
-<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 2 columns</span>
-<span class="co">#&gt;                 FileName  SampleName</span>
-<span class="co">#&gt;              &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1     results/setosa.csv          SE</span>
-<span class="co">#&gt; 2 results/versicolor.csv          VE</span>
-<span class="co">#&gt; 3  results/virginica.csv          VI</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gunzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 2 columns</span>
-<span class="co">#&gt;           gzip_file  SampleName</span>
-<span class="co">#&gt;         &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1 results/SE.csv.gz          SE</span>
-<span class="co">#&gt; 2 results/VE.csv.gz          VE</span>
-<span class="co">#&gt; 3 results/VI.csv.gz          VI</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $stats</span>
-<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span></code></pre></div>
-<div id="rules-to-create-the-r-markdown-to-import-as-workflow" class="section level4">
-<h4 class="hasAnchor">
-<a href="#rules-to-create-the-r-markdown-to-import-as-workflow" class="anchor"></a>Rules to create the R Markdown to import as workflow</h4>
-<p>To include a particular code chunk from the R Markdown file in the workflow analysis, please use the following code chunk options:</p>
-<pre><code>-   `spr='r'`: for code chunks with R code lines;
--   `spr='sysargs'`: for code chunks with an `SYSargsList` object;
--   `spr.dep=&lt;StepName&gt;`: for specify the previous dependency.</code></pre>
-<p>For example:</p>
-<blockquote>
-<p><em>```{r step_1, eval=TRUE, spr=‘r,’ spr.dep=‘step_0’}</em></p>
-</blockquote>
-<blockquote>
-<p><em>```{r step_2, eval=TRUE, spr=‘sysargs,’ spr.dep=‘step_1’}</em></p>
-</blockquote>
-<p>For <code>spr = 'sysargs'</code>, the last object assigned must to be the <code>SYSargsList</code>, for example:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">targetspath</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl/example/targets_example.txt"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>
-<span class="va">HW_mul</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>step_name <span class="op">=</span> <span class="st">"Example"</span>, 
-                      targets <span class="op">=</span> <span class="va">targetspath</span>, 
-                      wf_file <span class="op">=</span> <span class="st">"example/example.cwl"</span>, input_file <span class="op">=</span> <span class="st">"example/example.yml"</span>, 
-                      dir_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/cwl"</span>, package <span class="op">=</span> <span class="st">"systemPipeR"</span><span class="op">)</span>, 
-                      inputvars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>Message <span class="op">=</span> <span class="st">"_STRING_"</span>, SampleName <span class="op">=</span> <span class="st">"_SAMPLE_"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Also, note that all the required files or objects to generate one particular command-line step must be defined in a R code chunk imported. The motivation for this is that when R Markdown files are imported, the <code>spr = 'sysargs'</code> R chunk will be evaluated and stored in the workflow control class as the <code>SYSargsList</code> object, while the R code based (<code>spr = 'r'</code>) is not evaluated, and until the workflow is executed it will be store as an expression.</p>
 </div>
 </div>
 </div>
@@ -746,117 +943,107 @@ WConnectivity between CWL param files and targets files.
 <h1 class="hasAnchor">
 <a href="#running-the-workflow" class="anchor"></a>Running the workflow</h1>
 <p>For running the workflow, <code>runWF</code> function will execute all the command-lines store in the workflow container.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sal <span class="ot">&lt;-</span> <span class="fu">runWF</span>(sal)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running Step: export_iris </span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Step Status: Success </span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running Step: gzip </span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="er">|=======================</span>                                               <span class="er">|</span>  <span class="dv">33</span>%</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="er">|===============================================</span>                       <span class="er">|</span>  <span class="dv">67</span>%</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ---- Summary ---- </span></span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Targets Total_Files Existing_Files Missing_Files    gzip</span></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      SE           1              1             0 Success</span></span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      VE           1              1             0 Success</span></span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      VI           1              1             0 Success</span></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Step Status: Success </span></span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running Step: gunzip </span></span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>                                                                      <span class="er">|</span>   <span class="dv">0</span>%</span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>  <span class="er">|=======================</span>                                               <span class="er">|</span>  <span class="dv">33</span>%</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>  <span class="er">|===============================================</span>                       <span class="er">|</span>  <span class="dv">67</span>%</span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>  <span class="sc">|</span>                                                                            </span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>  <span class="er">|======================================================================|</span> <span class="dv">100</span>%</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ---- Summary ---- </span></span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Targets Total_Files Existing_Files Missing_Files  gunzip</span></span>
-<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      SE           1              1             0 Success</span></span>
-<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      VE           1              1             0 Success</span></span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3      VI           1              1             0 Success</span></span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Step Status: Success </span></span>
-<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running Step: iris_stats</span></span></code></pre></div>
-<p><img src="systemPipeWorkshop2021_files/figure-html/runWF-1.png" width="700"></p>
-<pre><code>#&gt; 
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |======================================================================| 100%
-#&gt; Step Status: Success</code></pre>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span></code></pre></div>
 <p>This essential function allows the user to choose one or multiple steps to be executed using the <code>steps</code> argument. However, it is necessary to follow the workflow dependency graph. If a selected step depends on a previous step(s) that was not executed, the execution will fail.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF</a></span><span class="op">(</span><span class="va">sal</span>, steps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Also, it allows forcing the execution of the steps, even if the status of the step is <code>'Success'</code> and all the expected <code>outfiles</code> exists. Another feature of the <code>runWF</code> function is ignoring all the warnings and errors and running the workflow by the arguments <code>warning.stop</code> and <code>error.stop</code>, respectively.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF</a></span><span class="op">(</span><span class="va">sal</span>, force <span class="op">=</span> <span class="cn">TRUE</span>, warning.stop <span class="op">=</span> <span class="cn">FALSE</span>, error.stop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>When the project was initialized by <code>SPRproject</code> function, it was created an environment for all objects created during the workflow execution. This environment can be accessed as follows:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">viewEnvir</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span></code></pre></div>
 <p>The workflow execution allows to save this environment for future recovery:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF</a></span><span class="op">(</span><span class="va">sal</span>, saveEnv <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div id="workflow-status" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workflow-status" class="anchor"></a>Workflow status</h3>
 <p>To check the summary of the workflow, we can use:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span>
 <span class="co">#&gt; Instance of 'SYSargsList': </span>
 <span class="co">#&gt;     WF Steps:</span>
-<span class="co">#&gt;        1. export_iris --&gt; Status: Success</span>
-<span class="co">#&gt;        2. gzip --&gt; Status: Success </span>
-<span class="co">#&gt;            Total Files: 3 | Existing: 3 | Missing: 0 </span>
-<span class="co">#&gt;          2.1. gzip</span>
-<span class="co">#&gt;              cmdlist: 3 | Success: 3</span>
-<span class="co">#&gt;        3. gunzip --&gt; Status: Success </span>
-<span class="co">#&gt;            Total Files: 3 | Existing: 3 | Missing: 0 </span>
-<span class="co">#&gt;          3.1. gunzip</span>
-<span class="co">#&gt;              cmdlist: 3 | Success: 3</span>
-<span class="co">#&gt;        4. iris_stats --&gt; Status: Success</span>
+<span class="co">#&gt;        1. trimming --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 72 | Existing: 0 | Missing: 72 </span>
+<span class="co">#&gt;          1.1. trimmomatic-pe</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;        2. hisat2_index --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 8 | Existing: 0 | Missing: 8 </span>
+<span class="co">#&gt;          2.1. hisat2-index</span>
+<span class="co">#&gt;              cmdlist: 1 | Pending: 1</span>
+<span class="co">#&gt;        3. hisat2_mapping --&gt; Status: Pending </span>
+<span class="co">#&gt;            Total Files: 72 | Existing: 0 | Missing: 72 </span>
+<span class="co">#&gt;          3.1. hisat2</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;          3.2. samtools-view</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;          3.3. samtools-sort</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;          3.4. samtools-index</span>
+<span class="co">#&gt;              cmdlist: 18 | Pending: 18</span>
+<span class="co">#&gt;        4. mapping_stats --&gt; Status: Pending</span>
 <span class="co">#&gt; </span></code></pre></div>
 <p>To access more details about the workflow instances, we can use the <code>statusWF</code> method:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">statusWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; $export_iris</span>
+<span class="co">#&gt; $trimming</span>
+<span class="co">#&gt; DataFrame with 18 rows and 5 columns</span>
+<span class="co">#&gt;         Targets Total_Files Existing_Files Missing_Files trimmomatic-pe</span>
+<span class="co">#&gt;     &lt;character&gt;   &lt;numeric&gt;      &lt;numeric&gt;     &lt;numeric&gt;       &lt;factor&gt;</span>
+<span class="co">#&gt; 1           M1A           4              0             4        Pending</span>
+<span class="co">#&gt; 2           M1B           4              0             4        Pending</span>
+<span class="co">#&gt; 3           A1A           4              0             4        Pending</span>
+<span class="co">#&gt; 4           A1B           4              0             4        Pending</span>
+<span class="co">#&gt; 5           V1A           4              0             4        Pending</span>
+<span class="co">#&gt; ...         ...         ...            ...           ...            ...</span>
+<span class="co">#&gt; 14         M12B           4              0             4        Pending</span>
+<span class="co">#&gt; 15         A12A           4              0             4        Pending</span>
+<span class="co">#&gt; 16         A12B           4              0             4        Pending</span>
+<span class="co">#&gt; 17         V12A           4              0             4        Pending</span>
+<span class="co">#&gt; 18         V12B           4              0             4        Pending</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_index</span>
+<span class="co">#&gt; DataFrame with 1 row and 5 columns</span>
+<span class="co">#&gt;       Targets Total_Files Existing_Files Missing_Files hisat2-index</span>
+<span class="co">#&gt;   &lt;character&gt;   &lt;numeric&gt;      &lt;numeric&gt;     &lt;numeric&gt;     &lt;factor&gt;</span>
+<span class="co">#&gt; 1   defaultid           8              0             8      Pending</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $hisat2_mapping</span>
+<span class="co">#&gt; DataFrame with 18 rows and 8 columns</span>
+<span class="co">#&gt;         Targets Total_Files Existing_Files Missing_Files   hisat2 samtools-view</span>
+<span class="co">#&gt;     &lt;character&gt;   &lt;numeric&gt;      &lt;numeric&gt;     &lt;numeric&gt; &lt;factor&gt;      &lt;factor&gt;</span>
+<span class="co">#&gt; 1           M1A           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 2           M1B           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 3           A1A           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 4           A1B           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 5           V1A           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; ...         ...         ...            ...           ...      ...           ...</span>
+<span class="co">#&gt; 14         M12B           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 15         A12A           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 16         A12B           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 17         V12A           4              0             4  Pending       Pending</span>
+<span class="co">#&gt; 18         V12B           4              0             4  Pending       Pending</span>
+<span class="co">#&gt;     samtools-sort samtools-index</span>
+<span class="co">#&gt;          &lt;factor&gt;       &lt;factor&gt;</span>
+<span class="co">#&gt; 1         Pending        Pending</span>
+<span class="co">#&gt; 2         Pending        Pending</span>
+<span class="co">#&gt; 3         Pending        Pending</span>
+<span class="co">#&gt; 4         Pending        Pending</span>
+<span class="co">#&gt; 5         Pending        Pending</span>
+<span class="co">#&gt; ...           ...            ...</span>
+<span class="co">#&gt; 14        Pending        Pending</span>
+<span class="co">#&gt; 15        Pending        Pending</span>
+<span class="co">#&gt; 16        Pending        Pending</span>
+<span class="co">#&gt; 17        Pending        Pending</span>
+<span class="co">#&gt; 18        Pending        Pending</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $mapping_stats</span>
 <span class="co">#&gt; DataFrame with 1 row and 2 columns</span>
-<span class="co">#&gt;          Step      Status</span>
-<span class="co">#&gt;   &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1 export_iris     Success</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 5 columns</span>
-<span class="co">#&gt;       Targets Total_Files Existing_Files Missing_Files    gzip</span>
-<span class="co">#&gt;   &lt;character&gt;   &lt;numeric&gt;      &lt;numeric&gt;     &lt;numeric&gt;  &lt;list&gt;</span>
-<span class="co">#&gt; 1          SE           1              1             0 Success</span>
-<span class="co">#&gt; 2          VE           1              1             0 Success</span>
-<span class="co">#&gt; 3          VI           1              1             0 Success</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $gunzip</span>
-<span class="co">#&gt; DataFrame with 3 rows and 5 columns</span>
-<span class="co">#&gt;       Targets Total_Files Existing_Files Missing_Files  gunzip</span>
-<span class="co">#&gt;   &lt;character&gt;   &lt;numeric&gt;      &lt;numeric&gt;     &lt;numeric&gt;  &lt;list&gt;</span>
-<span class="co">#&gt; 1          SE           1              1             0 Success</span>
-<span class="co">#&gt; 2          VE           1              1             0 Success</span>
-<span class="co">#&gt; 3          VI           1              1             0 Success</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $iris_stats</span>
-<span class="co">#&gt; DataFrame with 1 row and 2 columns</span>
-<span class="co">#&gt;          Step      Status</span>
-<span class="co">#&gt;   &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1  iris_stats     Success</span></code></pre></div>
+<span class="co">#&gt;            Step status.summary</span>
+<span class="co">#&gt;     &lt;character&gt;    &lt;character&gt;</span>
+<span class="co">#&gt; 1 mapping_stats        Pending</span></code></pre></div>
 </div>
 <div id="visualize-workflow" class="section level2">
 <h2 class="hasAnchor">
@@ -868,16 +1055,16 @@ WConnectivity between CWL param files and targets files.
 - Sample status and statistics; 
 - Workflow timing: running duration time. </code></pre>
 <p>If no argument is provided, the basic plot will automatically detect width, height, layout, plot method, branches, <em>etc</em>.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, show_legend <span class="op">=</span> <span class="cn">TRUE</span>, width <span class="op">=</span> <span class="st">"80%"</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-00afd1ec19d9e8b36bf1" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
-<script type="application/json" data-for="htmlwidget-00afd1ec19d9e8b36bf1">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        export_iris -> gzip -> iris_stats[color=\"dodgerblue\"]\n   }\n    gzip -> gunzip\n    \n    export_iris[label=<<b><font color=\"#5cb85c\">export_iris<\/font><br><\/br><font color=\"#5cb85c\">1<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step export_iris: 1 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-04 15:29:13; End time: 2021-08-04 15:29:13; Duration: 00:00:00\"]\n    gzip[label=<<b><font color=\"#5cb85c\">gzip<\/font><br><\/br><font color=\"#5cb85c\">3<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">3<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step gzip: 3 samples passed; 0 samples have warnings; 0 samples have errors; 3 samples in total; Start time: 2021-08-04 15:29:13; End time: 2021-08-04 15:29:13; Duration: 00:00:00\"]\n    gunzip[label=<<b><font color=\"#5cb85c\">gunzip<\/font><br><\/br><font color=\"#5cb85c\">3<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">3<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step gunzip: 3 samples passed; 0 samples have warnings; 0 samples have errors; 3 samples in total; Start time: 2021-08-04 15:29:13; End time: 2021-08-04 15:29:13; Duration: 00:00:00\"]\n    iris_stats[label=<<b><font color=\"#5cb85c\">iris_stats<\/font><br><\/br><font color=\"#5cb85c\">1<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0.3s<\/font>>  tooltip=\"step iris_stats: 1 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-04 15:29:13; End time: 2021-08-04 15:29:13; Duration: 00:00:0.3\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-65184327","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="#plotWF">here</a>.</p>
+<div id="htmlwidget-b8ce8cad8848822aef6c" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b8ce8cad8848822aef6c">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-04 18:00:19; End time: 2021-08-04 18:00:19; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-04 18:00:19; End time: 2021-08-04 18:00:19; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-04 18:00:19; End time: 2021-08-04 18:00:19; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-04 18:00:19; End time: 2021-08-04 18:00:19; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-31425768","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="#plotWF">here</a>.</p>
 </div>
 <div id="generation-of-technical-report" class="section level2">
 <h2 class="hasAnchor">
 <a href="#generation-of-technical-report" class="anchor"></a>Generation of technical report</h2>
 <p><em><code>systemPipeR</code></em> compiles all the workflow execution logs in one central location, making it easier to check any standard output (<code>stdout</code>) or standard error (<code>stderr</code>) for any command-line tools used on the workflow or the R code <code>stdout</code>. Also, the workflow plot is appended at the beginning of the report, making it easier to click on the respective step.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/renderLogs.html">renderLogs</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="parallelization-on-clusters" class="section level2">
@@ -887,7 +1074,7 @@ WConnectivity between CWL param files and targets files.
 <p>The computation can be greatly accelerated by processing many files in parallel using several compute nodes of a cluster, where a scheduling/queuing system is used for load balancing. For this the <code>clusterRun</code> function submits the computing requests to the scheduler using the run specifications defined by <code>runWF</code>.</p>
 <p>A named list provides the computational resources. By default, it can be defined the upper time limit in minutes for jobs before they get killed by the scheduler, memory limit in Mb, number of <code>CPUs</code>, and number of tasks.</p>
 <p>The number of independent parallel cluster processes is defined under the <code>Njobs</code> argument. The following example will run one process in parallel using for each 4 CPU cores. If the resources available on a cluster allow running all the processes simultaneously, then the shown sample submission will utilize in total four CPU cores (<code>NJobs * ncpus</code>). Note, <code>clusterRun</code> can be used with most queueing systems as it is based on utilities from the <em><code>batchtools</code></em> package which supports the use of template files (<em><code>*.tmpl</code></em>) for defining the run parameters of different schedulers. To run the following code, one needs to have both a <code>conf file</code> (see <em><code>.batchtools.conf.R</code></em> samples <a href="https://mllg.github.io/batchtools/">here</a>) and a template file (see <em><code>*.tmpl</code></em> samples <a href="https://github.com/mllg/batchtools/tree/master/inst/templates">here</a>) for the queueing available on a system. The following example uses the sample <code>conf</code> and <code>template</code> files for the <code>Slurm</code> scheduler provided by this package.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mllg/batchtools">batchtools</a></span><span class="op">)</span>
 <span class="va">resources</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>walltime<span class="op">=</span><span class="fl">120</span>, ntasks<span class="op">=</span><span class="fl">1</span>, ncpus<span class="op">=</span><span class="fl">4</span>, memory<span class="op">=</span><span class="fl">1024</span><span class="op">)</span>
 <span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/clusterRun.html">clusterRun</a></span><span class="op">(</span><span class="va">sal</span>, FUN <span class="op">=</span> <span class="va">runWF</span>, 
@@ -897,64 +1084,52 @@ WConnectivity between CWL param files and targets files.
                   Njobs<span class="op">=</span><span class="fl">1</span>, runid<span class="op">=</span><span class="st">"01"</span>, resourceList<span class="op">=</span><span class="va">resources</span><span class="op">)</span></code></pre></div>
 <p>Note: The example is submitting the jog to <code>short</code> partition. If you desire to use a different partition, please adjust accordingly (<code>batchtools.slurm.tmpl</code>).</p>
 </div>
-<div id="exported-the-workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#exported-the-workflow" class="anchor"></a>Exported the workflow</h2>
+</div>
+<div id="exported-the-workflow" class="section level1">
+<h1 class="hasAnchor">
+<a href="#exported-the-workflow" class="anchor"></a>Exported the workflow</h1>
 <p><em><code>systemPipeR</code></em> workflow management system allows to translate and export the workflow build interactively to R Markdown format or an executable bash script. This feature advances the reusability of the workflow, as well as the flexibility for workflow execution.</p>
 <div id="r-markdown-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#r-markdown-file" class="anchor"></a>R Markdown file</h3>
 <p><code>sal2rmd</code> function takes an <code>SYSargsList</code> workflow container and translates it to SPR workflow template R markdown format. This file can be imported with the <code>importWF</code> function, as demonstrated above.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/sal2rmd.html">sal2rmd</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="bash-script" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bash-script" class="anchor"></a>Bash script</h3>
 <p><code>sal2bash</code> function takes an <code>SYSargsList</code> workflow container and translates it to an executable bash script, so one can run the workflow without loading <code>SPR</code> or using an R console.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/sal2bash.html">sal2bash</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span></code></pre></div>
 <p>It will be generated on the project root an executable bash script, called by default the <code>spr_wf.sh</code>. Also, a directory <code>./spr_wf</code> will be created and store all the R scripts based on the workflow steps. Please note that this function will “collapse” adjacent R steps into one file as much as possible.</p>
-</div>
 </div>
 <div id="project-resume-and-restart" class="section level2">
 <h2 class="hasAnchor">
 <a href="#project-resume-and-restart" class="anchor"></a>Project Resume and Restart</h2>
 <p>If you desire to resume or restart a project that has been initialized in the past, <code>SPRproject</code> function allows this operation.</p>
 <p>With the resume option, it is possible to load the <code>SYSargsList</code> object in R and resume the analysis. Please, make sure to provide the <code>logs.dir</code> location, and the corresponded <code>YAML</code> file name. The current working directory needs to be in the project root directory.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>resume <span class="op">=</span> <span class="cn">TRUE</span>, logs.dir <span class="op">=</span> <span class="st">".SPRproject"</span>, 
                   sys.file <span class="op">=</span> <span class="st">".SPRproject/SYSargsList.yml"</span><span class="op">)</span> </code></pre></div>
 <p>If you choose to save the environment in the last analysis, you can recover all the files created in that particular section. <code>SPRproject</code> function allows this with <code>load.envir</code> argument. Please note that the environment was saved only with you run the workflow in the last section (<code><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF()</a></code>).</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>resume <span class="op">=</span> <span class="cn">TRUE</span>, load.envir <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </code></pre></div>
 <p>After loading the workflow at your current section, you can check the objects created in the old environment and decide if it is necessary to copy them to the current environment.</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">viewEnvir</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">copyEnvir</a></span><span class="op">(</span><span class="va">sal</span>, list<span class="op">=</span><span class="st">"plot"</span>, new.env <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">globalenv</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>This option will keep all previous logs in the folder; however, if you desire to clean the execution history and restart the workflow, the <code>restart=TRUE</code> option can be used.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>restart <span class="op">=</span> <span class="cn">TRUE</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, load.envir <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </code></pre></div>
 <p>The last and more drastic option from <code>SYSproject</code> function is to overwrite the logs and the workflow. This option will delete the hidden folder and the information on the <code>SYSargsList.yml</code> files. This will not delete any parameter file nor any results it was created in previous runs. Please use with caution.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </code></pre></div>
 </div>
-<div id="showcase-rna-seq-workflow" class="section level2">
-<h2 class="hasAnchor">
-<a href="#showcase-rna-seq-workflow" class="anchor"></a>Showcase RNA-Seq workflow</h2>
-<p>If you desire to import and run a RNA-seq pipeline, please follow:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">systemPipeRdata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/systemPipeRdata/man/genWorkenvir.html">genWorkenvir</a></span><span class="op">(</span>workflow <span class="op">=</span> <span class="st">"rnaseq"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"rnaseq"</span><span class="op">)</span>
-<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span><span class="op">)</span> 
-<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/importWF.html">importWF</a></span><span class="op">(</span><span class="va">sal</span>, file_path <span class="op">=</span> <span class="st">"systemPipeRNAseq_importWF.Rmd"</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/runWF.html">runWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/renderLogs.html">renderLogs</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="overview-of-systempipeshiny-core-functionalities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview-of-systempipeshiny-core-functionalities" class="anchor"></a>Overview of <em>systemPipeShiny</em> core functionalities</h2>
+<div id="overview-of-systempipeshiny-core-functionalities" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview-of-systempipeshiny-core-functionalities" class="anchor"></a>Overview of <em>systemPipeShiny</em> core functionalities</h1>
 <p><strong><span style="color:#5DA7D6;">s</span>ystem<span style="color:#5DA7D6;">P</span>ipe<span style="color:#5DA7D6;">S</span>hiny</strong> (SPS) extends the widely used <a href="/spr/">systemPipeR</a> (SPR) workflow environment with a versatile graphical user interface provided by a <a href="https://shiny.rstudio.com">Shiny App</a>. This allows non-R users, such as experimentalists, to run many systemPipeR’s workflow designs, control, and visualization functionalities interactively without requiring knowledge of R. Most importantly, <code>SPS</code> has been designed as a general purpose framework for interacting with other R packages in an intuitive manner. Like most Shiny Apps, SPS can be used on both local computers as well as centralized server-based deployments that can be accessed remotely as a public web service for using SPR’s functionalities with community and/or private data. The framework can integrate many core packages from the R/Bioconductor ecosystem. Examples of SPS’ current functionalities include:</p>
 <ul>
 <li>A default interactive workflow module to create experimental designs, visualize and customize workflow topologies with previews, and programming free workflow execution within the application.</li>
@@ -964,7 +1139,6 @@ WConnectivity between CWL param files and targets files.
 <li>A ‘Canvas Workbench’ to manage complex visual results. It allows users to organize and to compare plots in an efficient manner combined with a session screenshot feature to edit scientific and publishable figures.</li>
 <li>Three other supporting packages to help all users from beginners and advanced developers to extend under current SPS framework or on their own visualization apps.</li>
 </ul>
-</div>
 <div id="demo" class="section level2">
 <h2 class="hasAnchor">
 <a href="#demo" class="anchor"></a>Demo</h2>
@@ -1016,7 +1190,7 @@ WConnectivity between CWL param files and targets files.
 <div id="version-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#version-information" class="anchor"></a>Version information</h1>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
 <span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
@@ -1073,34 +1247,33 @@ WConnectivity between CWL param files and targets files.
 <span class="co">#&gt;  [55] xtable_1.8-4             progress_1.2.2           bit_4.0.4               </span>
 <span class="co">#&gt;  [58] DT_0.18                  AnnotationForge_1.35.0   shinyjqui_0.4.0         </span>
 <span class="co">#&gt;  [61] htmlwidgets_1.5.3        httr_1.4.2               shinyAce_0.4.1          </span>
-<span class="co">#&gt;  [64] RColorBrewer_1.1-2       ellipsis_0.3.2           farver_2.1.0            </span>
-<span class="co">#&gt;  [67] shinydashboardPlus_2.0.2 pkgconfig_2.0.3          XML_3.99-0.6            </span>
-<span class="co">#&gt;  [70] sass_0.4.0               dbplyr_2.1.1             locfit_1.5-9.4          </span>
-<span class="co">#&gt;  [73] utf8_1.2.2               labeling_0.4.2           tidyselect_1.1.1        </span>
-<span class="co">#&gt;  [76] rlang_0.4.11             later_1.2.0              AnnotationDbi_1.55.1    </span>
-<span class="co">#&gt;  [79] munsell_0.5.0            tools_4.1.0              cachem_1.0.5            </span>
-<span class="co">#&gt;  [82] generics_0.1.0           RSQLite_2.2.7            evaluate_0.14           </span>
-<span class="co">#&gt;  [85] stringr_1.4.0            fastmap_1.1.0            yaml_2.2.1              </span>
-<span class="co">#&gt;  [88] ragg_1.1.3               knitr_1.33               bit64_4.0.5             </span>
-<span class="co">#&gt;  [91] fs_1.5.0                 purrr_0.3.4              KEGGREST_1.33.0         </span>
-<span class="co">#&gt;  [94] RBGL_1.69.0              mime_0.11                xml2_1.3.2              </span>
-<span class="co">#&gt;  [97] biomaRt_2.49.2           rstudioapi_0.13          debugme_1.1.0           </span>
-<span class="co">#&gt; [100] compiler_4.1.0           plotly_4.9.4.1           filelock_1.0.2          </span>
-<span class="co">#&gt; [103] curl_4.3.2               png_0.1-7                tibble_3.1.3            </span>
-<span class="co">#&gt; [106] bslib_0.2.5.1            stringi_1.7.3            highr_0.9               </span>
-<span class="co">#&gt; [109] GenomicFeatures_1.45.0   desc_1.3.0               lattice_0.20-44         </span>
-<span class="co">#&gt; [112] Matrix_1.3-4             styler_1.5.1             shinyjs_2.0.0           </span>
-<span class="co">#&gt; [115] vctrs_0.3.8              pillar_1.6.2             lifecycle_1.0.0         </span>
-<span class="co">#&gt; [118] BiocManager_1.30.16      jquerylib_0.1.4          data.table_1.14.0       </span>
-<span class="co">#&gt; [121] bitops_1.0-7             httpuv_1.6.1             rtracklayer_1.53.0      </span>
-<span class="co">#&gt; [124] R6_2.5.0                 BiocIO_1.3.0             latticeExtra_0.6-29     </span>
-<span class="co">#&gt; [127] hwriter_1.3.2            bookdown_0.22            promises_1.2.0.1        </span>
-<span class="co">#&gt; [130] assertthat_0.2.1         openssl_1.4.4            Category_2.59.0         </span>
-<span class="co">#&gt; [133] rprojroot_2.0.2          rjson_0.2.20             shinyWidgets_0.6.0      </span>
-<span class="co">#&gt; [136] withr_2.4.2              batchtools_0.9.15        GenomeInfoDbData_1.2.6  </span>
-<span class="co">#&gt; [139] parallel_4.1.0           hms_1.1.0                grid_4.1.0              </span>
-<span class="co">#&gt; [142] tidyr_1.1.3              rmarkdown_2.9            shinytoastr_2.1.1       </span>
-<span class="co">#&gt; [145] restfulr_0.0.13</span></code></pre></div>
+<span class="co">#&gt;  [64] RColorBrewer_1.1-2       ellipsis_0.3.2           shinydashboardPlus_2.0.2</span>
+<span class="co">#&gt;  [67] pkgconfig_2.0.3          XML_3.99-0.6             sass_0.4.0              </span>
+<span class="co">#&gt;  [70] dbplyr_2.1.1             locfit_1.5-9.4           utf8_1.2.2              </span>
+<span class="co">#&gt;  [73] tidyselect_1.1.1         rlang_0.4.11             later_1.2.0             </span>
+<span class="co">#&gt;  [76] AnnotationDbi_1.55.1     munsell_0.5.0            tools_4.1.0             </span>
+<span class="co">#&gt;  [79] cachem_1.0.5             generics_0.1.0           RSQLite_2.2.7           </span>
+<span class="co">#&gt;  [82] evaluate_0.14            stringr_1.4.0            fastmap_1.1.0           </span>
+<span class="co">#&gt;  [85] yaml_2.2.1               ragg_1.1.3               knitr_1.33              </span>
+<span class="co">#&gt;  [88] bit64_4.0.5              fs_1.5.0                 purrr_0.3.4             </span>
+<span class="co">#&gt;  [91] KEGGREST_1.33.0          RBGL_1.69.0              mime_0.11               </span>
+<span class="co">#&gt;  [94] xml2_1.3.2               biomaRt_2.49.2           rstudioapi_0.13         </span>
+<span class="co">#&gt;  [97] debugme_1.1.0            compiler_4.1.0           plotly_4.9.4.1          </span>
+<span class="co">#&gt; [100] filelock_1.0.2           curl_4.3.2               png_0.1-7               </span>
+<span class="co">#&gt; [103] tibble_3.1.3             bslib_0.2.5.1            stringi_1.7.3           </span>
+<span class="co">#&gt; [106] highr_0.9                GenomicFeatures_1.45.0   desc_1.3.0              </span>
+<span class="co">#&gt; [109] lattice_0.20-44          Matrix_1.3-4             styler_1.5.1            </span>
+<span class="co">#&gt; [112] shinyjs_2.0.0            vctrs_0.3.8              pillar_1.6.2            </span>
+<span class="co">#&gt; [115] lifecycle_1.0.0          BiocManager_1.30.16      jquerylib_0.1.4         </span>
+<span class="co">#&gt; [118] data.table_1.14.0        bitops_1.0-7             httpuv_1.6.1            </span>
+<span class="co">#&gt; [121] rtracklayer_1.53.0       R6_2.5.0                 BiocIO_1.3.0            </span>
+<span class="co">#&gt; [124] latticeExtra_0.6-29      hwriter_1.3.2            promises_1.2.0.1        </span>
+<span class="co">#&gt; [127] bookdown_0.22            assertthat_0.2.1         openssl_1.4.4           </span>
+<span class="co">#&gt; [130] Category_2.59.0          rprojroot_2.0.2          rjson_0.2.20            </span>
+<span class="co">#&gt; [133] shinyWidgets_0.6.0       withr_2.4.2              batchtools_0.9.15       </span>
+<span class="co">#&gt; [136] GenomeInfoDbData_1.2.6   parallel_4.1.0           hms_1.1.0               </span>
+<span class="co">#&gt; [139] grid_4.1.0               tidyr_1.1.3              rmarkdown_2.9           </span>
+<span class="co">#&gt; [142] shinytoastr_2.1.1        restfulr_0.0.13</span></code></pre></div>
 </div>
 <div id="funding" class="section level1">
 <h1 class="hasAnchor">
@@ -1113,6 +1286,12 @@ WConnectivity between CWL param files and targets files.
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Amstutz2016-ka" class="csl-entry">
 Amstutz, Peter, Michael R Crusoe, Nebojša Tijanić, Brad Chapman, John Chilton, Michael Heuer, Andrey Kartashov, et al. 2016. <span>“Common Workflow Language, V1.0,”</span> July. <a href="https://doi.org/10.6084/m9.figshare.3115156.v2">https://doi.org/10.6084/m9.figshare.3115156.v2</a>.
+</div>
+<div id="ref-Bolger2014-yr" class="csl-entry">
+Bolger, Anthony M, Marc Lohse, and Bjoern Usadel. 2014. <span>“Trimmomatic: A Flexible Trimmer for Illumina Sequence Data.”</span> <em>Bioinformatics</em> 30 (15): 2114–20.
+</div>
+<div id="ref-Kim2015-ve" class="csl-entry">
+Kim, Daehwan, Ben Langmead, and Steven L Salzberg. 2015. <span>“<span>HISAT</span>: A Fast Spliced Aligner with Low Memory Requirements.”</span> <em>Nat. Methods</em> 12 (4): 357–60.
 </div>
 </div>
 </div>
