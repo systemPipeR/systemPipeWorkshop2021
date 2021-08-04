@@ -23,6 +23,14 @@ navbar:
       menu:
       - text: Slides
         href: http://www.dcassol.com/bioc2021_slides/
+    - text: Articles
+      menu:
+      - text: Project structure
+        href: articles/spr_project.html
+      - text: CWL syntax
+        href: articles/cwl_syntax.html
+      - text: SPR and CWL
+        href: articles/cwl_and_spr.html
   right:
    - icon: fab fa-github
      href: https://github.com/systemPipeR/systemPipeWorkshop2021

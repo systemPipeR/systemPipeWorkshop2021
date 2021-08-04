@@ -1,0 +1,112 @@
+---
+title: "systemPipeR: Project structure"
+author: ""
+date: "Last update: `r format(Sys.time(), '%d %B, %Y')`" 
+output:
+    BiocStyle::html_document:
+    toc_float: true
+    code_folding: show
+vignette: |
+    %\VignetteEncoding{UTF-8}
+    %\VignetteIndexEntry{Project structure}
+    %\VignetteEngine{knitr::rmarkdown}
+fontsize: 14pt
+editor_options: 
+    markdown: 
+      wrap: 80
+chunk_output_type: console
+bibliography: bibtex.bib
+---
+    
+```{r setting, echo=FALSE}
+if (file.exists("bioc2021")) unlink("bioc2021", recursive = TRUE)
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>"
+)
+library(systemPipeR)
+```
+
+**Authors**:
+        Daniela Cassol (danielac@ucr.edu),
+        Le Zhang (le.zhang001@email.ucr.edu),
+        Thomas Girke (thomas.girke@ucr.edu).
+
+**Institution**: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.
+
+# Project structure
+
+`systemPipeR` expects a project directory structure that consists of a directory
+where users may store all the raw data, the results directory that will be reserved 
+for all the outfiles files, and the parameters directory. 
+
+This structure allows reproducibility and collaboration across the data science 
+team, since internally relative paths are used. Users could transfer this project 
+to a different location and still be able to run the entire workflow. Also, it 
+increases efficiency and data management once the raw data is kept in a separate 
+folder and avoids duplication. 
+
+## Directory Structure {#dir}
+
+[_`systemPipeRdata`_](http://bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html), 
+helper package, provides pre-configured workflows, reporting 
+templates, and sample data loaded as demonstrated below. With a single command, 
+the package allows creating the workflow environment containing the structure 
+described here (see Figure 1).
+
+Directory names are indicated in <span style="color:grey">***green***</span>.
+Users can change this structure as needed, but need to adjust the code in their 
+workflows accordingly. 
+
+* <span style="color:green">_**workflow/**_</span> (*e.g.* *myproject/*) 
++ This is the root directory of the R session running the workflow.
++ Run script ( *\*.Rmd*) and sample annotation (*targets.txt*) files are located here.
++ Note, this directory can have any name (*e.g.* <span style="color:green">_**myproject**_</span>). Changing its name does not require any modifications in the run script(s).
++ **Important subdirectories**: 
+    + <span style="color:green">_**param/**_</span> 
+    + <span style="color:green">_**param/cwl/**_</span>: This subdirectory stores all the parameter and configuration files. To organize workflows, each can have its own subdirectory, where all `*.cwl` and `*input.yml` files need to be in the same subdirectory. 
++ <span style="color:green">_**data/**_ </span>
+    + Raw data (*e.g.* FASTQ files)
++ FASTA file of reference (*e.g.* reference genome)
++ Annotation files
++ Metadata
++ etc.
++ <span style="color:green">_**results/**_</span>
+    + Analysis results are usually written to this directory, including: alignment, variant and peak files (BAM, VCF, BED); tabular result files; and image/plot files
++ Note, the user has the option to organize results files for a given sample and analysis step in a separate subdirectory.
+
+```{r dir, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "Figure 1. *systemPipeR's* preconfigured directory structure."}
+knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/spr_project.png")  
+```
+
+## Structure of initial _`targets`_ file
+
+The _`targets`_ file defines all input files (_e.g._ FASTQ, BAM, BCF) and sample 
+comparisons of an analysis workflow. The following shows the format of a sample 
+_`targets`_ file included in the package. It also can be viewed and downloaded 
+from `systemPipeR`'s GitHub repository [here](https://github.com/tgirke/systemPipeR/blob/master/inst/extdata/targets.txt). 
+In a target file with a single type of input files, here FASTQ files of 
+single-end (SE) reads, the first column defines the paths and the second column
+represents a unique id name for each sample. The third column called `Factor` 
+represents the biological replicates. All subsequent columns are optional to provide
+additional information. Any number of additional columns can be added as needed.
+
+Users should note here, the usage of targets files is optional when using
+_`systemPipeR's`_ new workflow management interface. They can be replaced by a standard YAML
+input file used by CWL. Since for organizing experimental variables targets
+files are extremely useful and user-friendly. Thus, we encourage users to keep using 
+them. 
+
+- Structure of _`targets`_ file for paired-end (PE) samples
+
+```{r targetsSE, eval=TRUE}
+targetspath <- system.file("extdata", "targetsPE.txt", package="systemPipeR") 
+showDF(read.delim(targetspath, comment.char = "#"))
+```
+
+To work with custom data, users need to generate a _`targets`_ file containing 
+the paths to their own FASTQ files and then provide under _`targetspath`_ the
+path to the corresponding _`targets`_ file. 
