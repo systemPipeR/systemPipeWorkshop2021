@@ -19,17 +19,13 @@ navbar:
   left:
     - text: Workshop
       href: articles/systemPipeWorkshop2021.html
-    # - text: Tutorial
-    #   menu:
-    #   - text: Build Your First Workflow
-    #     href: tutorials/Exercise_SPR.html
+    - text: Slides
+      menu:
+      - text: Slides
+        href: http://www.dcassol.com/bioc2021_slides/
   right:
    - icon: fab fa-github
      href: https://github.com/systemPipeR/systemPipeWorkshop2021
    - icon: fab fa-docker
      href: https://hub.docker.com/r/systempipe/systempipeworkshop2021
 
-# tutorials:
-# - name: SPR workflow
-#   title: Build Your First Workflow
-#   url: https://dcassol.shinyapps.io/Exercise_SPR/
