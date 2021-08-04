@@ -1,7 +1,7 @@
 Package: systemPipeWorkshop2021
 Title: systemPipeR Workshop - BioC2021
-Version: 0.9.2
-Date: 2020-07-22
+Version: 0.1.0
+Date: 2020-08-04
 Authors@R: c(
     person(given = "Daniela", family = "Cassol", role = c("aut", "cre"), email="danicassol@gmail.com"), 
     person(given = "Le", family = "Zhang", role = c("aut")),
