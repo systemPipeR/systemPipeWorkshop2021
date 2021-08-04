@@ -50,10 +50,10 @@ Participants will be able to perform all analysis components of this workshop ha
 |------------------------------------------------------------------|------|
 | Overview of *systemPipe* toolkit                                 | 10m  | 
 | Introduction to SPR's command-line interface                     | 20m  |
-| Configuration and execution of workflows                         | 20m  |
 | Showcase RNA-Seq workflow                                        | 20m  |
+| Configuration and execution of workflows                         | 20m  |
 | Parallelization on single machines and clusters                  | 10m  |
-| Generation of technical and scientific analysis reports          | 5m   |s
+| Generation of technical and scientific analysis reports          | 5m   |
 | Overview of *systemPipeShiny* core functionalities               | 20m  |
 
 ## Workshop goals and objectives
