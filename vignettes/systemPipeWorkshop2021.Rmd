@@ -228,61 +228,6 @@ knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPip
 
 # Explore all details of Design and Run Workflow 
 
-## Project initialization
-
-To create a workflow within `systemPipeR`, we can start by defining an empty workflow
-container and checking the directory structure:
-
-```{r SPRproject, eval=TRUE}
-sal <- SPRproject(projPath = getwd()) 
-```
-
-Internally, `SPRproject` function creates a hidden folder called `.SPRproject`,
-by default, to store all the log files.
-A `YAML` file, here called `SYSargsList.yml`, also has been created, which initially
-contains the basic location of the project structure; however, every time the 
-workflow object `sal` is updated in R, the new information will also be saved in this 
-flat-file database for easy recovery.
-If you desire different names for the logs folder and the `YAML` file, these can 
-be modified as follows:
-
-```{r SPRproject_logs, eval=FALSE}
-sal <- SPRproject(logs.dir= ".SPRproject", sys.file=".SPRproject/SYSargsList.yml") 
-```
-
-Also, this function will check and/or create the basic folder structure if missing, 
-which means `data`, `param`, and `results` directories, as described [here](https://systempipe.org/systemPipeWorkshop2021/articles/spr_project.html). 
-If the user wants to use a different names for these directories, can be specified 
-as follows:
-
-```{r SPRproject_dir, eval=FALSE}
-sal <- SPRproject(data = "data", param = "param", results = "results") 
-```
-
-It is possible to isolate all the R objects created within the workflow analysis 
-from the current environment. `SPRproject` function provides the option to create 
-a new environment, and in this way, it is not overwriting any object you may want
-to have at your current section. 
-
-```{r SPRproject_env, eval=FALSE}
-sal <- SPRproject(envir = new.env()) 
-```
-
-In this stage, the object `sal` is a empty container, except for the project information.
-The project information can be accessed by the `projectInfo` method:
-
-```{r projectInfo, eval=TRUE}
-sal
-projectInfo(sal)
-```
-
-Also, the `length` function will return how many steps this workflow contains and
-in this case it is empty, as follow:
-
-```{r length, eval=TRUE}
-length(sal)
-```
-
 ## Structure of parameters files
 
 The parameters required for running command-line software are provided by adopting the 
@@ -357,6 +302,61 @@ This [article](https://systempipe.org/systemPipeWorkshop2021/articles/cwl_and_sp
 explore the connectivity between the CWL parameters files and `systemPipeR`
 workflow management class. In addition, we will show how the workflow can be easily scalable 
 with `systemPipeR`.
+
+## Project initialization
+
+To create a workflow within `systemPipeR`, we can start by defining an empty workflow
+container and checking the directory structure:
+
+```{r SPRproject, eval=TRUE}
+sal <- SPRproject(projPath = getwd()) 
+```
+
+Internally, `SPRproject` function creates a hidden folder called `.SPRproject`,
+by default, to store all the log files.
+A `YAML` file, here called `SYSargsList.yml`, also has been created, which initially
+contains the basic location of the project structure; however, every time the 
+workflow object `sal` is updated in R, the new information will also be saved in this 
+flat-file database for easy recovery.
+If you desire different names for the logs folder and the `YAML` file, these can 
+be modified as follows:
+
+```{r SPRproject_logs, eval=FALSE}
+sal <- SPRproject(logs.dir= ".SPRproject", sys.file=".SPRproject/SYSargsList.yml") 
+```
+
+Also, this function will check and/or create the basic folder structure if missing, 
+which means `data`, `param`, and `results` directories, as described [here](https://systempipe.org/systemPipeWorkshop2021/articles/spr_project.html). 
+If the user wants to use a different names for these directories, can be specified 
+as follows:
+
+```{r SPRproject_dir, eval=FALSE}
+sal <- SPRproject(data = "data", param = "param", results = "results") 
+```
+
+It is possible to isolate all the R objects created within the workflow analysis 
+from the current environment. `SPRproject` function provides the option to create 
+a new environment, and in this way, it is not overwriting any object you may want
+to have at your current section. 
+
+```{r SPRproject_env, eval=FALSE}
+sal <- SPRproject(envir = new.env()) 
+```
+
+In this stage, the object `sal` is a empty container, except for the project information.
+The project information can be accessed by the `projectInfo` method:
+
+```{r projectInfo, eval=TRUE}
+sal
+projectInfo(sal)
+```
+
+Also, the `length` function will return how many steps this workflow contains and
+in this case it is empty, as follow:
+
+```{r length, eval=TRUE}
+length(sal)
+```
 
 ## Workflow Design 
 
@@ -466,10 +466,11 @@ queuing systems of clusters using the _`systemPipeR's`_ new CWL command-line int
 
 ```{r hisat2_index, eval=TRUE}
 appendStep(sal) <- SYSargsList(
-  step_name = "hisat2_index", dir = FALSE, targets=NULL, 
+  step_name = "hisat2_index", 
+  targets = NULL, dir = FALSE, 
   wf_file = "hisat2/hisat2-index.cwl", 
-  input_file="hisat2/hisat2-index.yml",
-  dir_path="param/cwl", 
+  input_file = "hisat2/hisat2-index.yml",
+  dir_path = "param/cwl", 
   dependency = "trimming"
 )
 ```
