@@ -240,51 +240,6 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <div id="explore-all-details-of-design-and-run-workflow" class="section level1">
 <h1 class="hasAnchor">
 <a href="#explore-all-details-of-design-and-run-workflow" class="anchor"></a>Explore all details of Design and Run Workflow</h1>
-<div id="project-initialization" class="section level2">
-<h2 class="hasAnchor">
-<a href="#project-initialization" class="anchor"></a>Project initialization</h2>
-<p>To create a workflow within <code>systemPipeR</code>, we can start by defining an empty workflow container and checking the directory structure:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>projPath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> 
-<span class="co">#&gt; Creating directory '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject'</span>
-<span class="co">#&gt; Creating file '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject/SYSargsList.yml'</span></code></pre></div>
-<p>Internally, <code>SPRproject</code> function creates a hidden folder called <code>.SPRproject</code>, by default, to store all the log files. A <code>YAML</code> file, here called <code>SYSargsList.yml</code>, also has been created, which initially contains the basic location of the project structure; however, every time the workflow object <code>sal</code> is updated in R, the new information will also be saved in this flat-file database for easy recovery. If you desire different names for the logs folder and the <code>YAML</code> file, these can be modified as follows:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>logs.dir<span class="op">=</span> <span class="st">".SPRproject"</span>, sys.file<span class="op">=</span><span class="st">".SPRproject/SYSargsList.yml"</span><span class="op">)</span> </code></pre></div>
-<p>Also, this function will check and/or create the basic folder structure if missing, which means <code>data</code>, <code>param</code>, and <code>results</code> directories, as described <a href="https://systempipe.org/systemPipeWorkshop2021/articles/spr_project.html">here</a>. If the user wants to use a different names for these directories, can be specified as follows:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>data <span class="op">=</span> <span class="st">"data"</span>, param <span class="op">=</span> <span class="st">"param"</span>, results <span class="op">=</span> <span class="st">"results"</span><span class="op">)</span> </code></pre></div>
-<p>It is possible to isolate all the R objects created within the workflow analysis from the current environment. <code>SPRproject</code> function provides the option to create a new environment, and in this way, it is not overwriting any object you may want to have at your current section.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
-<p>In this stage, the object <code>sal</code> is a empty container, except for the project information. The project information can be accessed by the <code>projectInfo</code> method:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sal</span>
-<span class="co">#&gt; Instance of 'SYSargsList': </span>
-<span class="co">#&gt;  No workflow steps added</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">projectInfo</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; $project</span>
-<span class="co">#&gt; [1] "/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $data</span>
-<span class="co">#&gt; [1] "data"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $param</span>
-<span class="co">#&gt; [1] "param"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $results</span>
-<span class="co">#&gt; [1] "results"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $logsDir</span>
-<span class="co">#&gt; [1] ".SPRproject"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $sysargslist</span>
-<span class="co">#&gt; [1] ".SPRproject/SYSargsList.yml"</span></code></pre></div>
-<p>Also, the <code>length</code> function will return how many steps this workflow contains and in this case it is empty, as follow:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0</span></code></pre></div>
-</div>
 <div id="structure-of-parameters-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#structure-of-parameters-files" class="anchor"></a>Structure of parameters files</h2>
@@ -294,7 +249,7 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <h3 class="hasAnchor">
 <a href="#automate-creation-of-cwl-parameters" class="anchor"></a>Automate creation of CWL parameters</h3>
 <p>Users need to define the command-line in a pseudo-bash script format:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># "hisat2 -S ./results/M1A.sam -x ./data/tair10.fasta -k 1 -threads 4 -U ./data/SRR446027_1.fastq.gz "</span>
 <span class="va">command</span> <span class="op">&lt;-</span> <span class="st">"
     hisat2 \
@@ -325,7 +280,7 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <p>The four component is the original command-line.</p>
 <p>If in interactive mode, the function will verify that everything is correct and will ask you to proceed. Here, the user can answer “no” and provide more information at the string level. Another question is to save the param created here.</p>
 <p>If running the workflow in non-interactive mode, the <code>createParam</code> function will consider “yes” and returning the container.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cmd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/createParamFiles.html">createParam</a></span><span class="op">(</span><span class="va">command</span>, writeParamFiles <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; *****BaseCommand*****</span>
 <span class="co">#&gt; hisat2 </span>
@@ -368,6 +323,51 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 </h3>
 <p>This <a href="https://systempipe.org/systemPipeWorkshop2021/articles/cwl_and_spr.html">article</a> explore the connectivity between the CWL parameters files and <code>systemPipeR</code> workflow management class. In addition, we will show how the workflow can be easily scalable with <code>systemPipeR</code>.</p>
 </div>
+</div>
+<div id="project-initialization" class="section level2">
+<h2 class="hasAnchor">
+<a href="#project-initialization" class="anchor"></a>Project initialization</h2>
+<p>To create a workflow within <code>systemPipeR</code>, we can start by defining an empty workflow container and checking the directory structure:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>projPath <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> 
+<span class="co">#&gt; Creating directory '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject'</span>
+<span class="co">#&gt; Creating file '/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021/.SPRproject/SYSargsList.yml'</span></code></pre></div>
+<p>Internally, <code>SPRproject</code> function creates a hidden folder called <code>.SPRproject</code>, by default, to store all the log files. A <code>YAML</code> file, here called <code>SYSargsList.yml</code>, also has been created, which initially contains the basic location of the project structure; however, every time the workflow object <code>sal</code> is updated in R, the new information will also be saved in this flat-file database for easy recovery. If you desire different names for the logs folder and the <code>YAML</code> file, these can be modified as follows:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>logs.dir<span class="op">=</span> <span class="st">".SPRproject"</span>, sys.file<span class="op">=</span><span class="st">".SPRproject/SYSargsList.yml"</span><span class="op">)</span> </code></pre></div>
+<p>Also, this function will check and/or create the basic folder structure if missing, which means <code>data</code>, <code>param</code>, and <code>results</code> directories, as described <a href="https://systempipe.org/systemPipeWorkshop2021/articles/spr_project.html">here</a>. If the user wants to use a different names for these directories, can be specified as follows:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>data <span class="op">=</span> <span class="st">"data"</span>, param <span class="op">=</span> <span class="st">"param"</span>, results <span class="op">=</span> <span class="st">"results"</span><span class="op">)</span> </code></pre></div>
+<p>It is possible to isolate all the R objects created within the workflow analysis from the current environment. <code>SPRproject</code> function provides the option to create a new environment, and in this way, it is not overwriting any object you may want to have at your current section.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SPRproject.html">SPRproject</a></span><span class="op">(</span>envir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/environment.html">new.env</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
+<p>In this stage, the object <code>sal</code> is a empty container, except for the project information. The project information can be accessed by the <code>projectInfo</code> method:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">sal</span>
+<span class="co">#&gt; Instance of 'SYSargsList': </span>
+<span class="co">#&gt;  No workflow steps added</span>
+<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">projectInfo</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; $project</span>
+<span class="co">#&gt; [1] "/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $data</span>
+<span class="co">#&gt; [1] "data"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $param</span>
+<span class="co">#&gt; [1] "param"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $results</span>
+<span class="co">#&gt; [1] "results"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $logsDir</span>
+<span class="co">#&gt; [1] ".SPRproject"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $sysargslist</span>
+<span class="co">#&gt; [1] ".SPRproject/SYSargsList.yml"</span></code></pre></div>
+<p>Also, the <code>length</code> function will return how many steps this workflow contains and in this case it is empty, as follow:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0</span></code></pre></div>
 </div>
 <div id="workflow-design" class="section level2">
 <h2 class="hasAnchor">
@@ -446,10 +446,11 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <p>The following steps will demonstrate how to use the short read aligner <code>Hisat2</code> <span class="citation">(Kim, Langmead, and Salzberg 2015)</span> in both interactive job submissions and batch submissions to queuing systems of clusters using the <em><code>systemPipeR's</code></em> new CWL command-line interface.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">appendStep</span><span class="op">(</span><span class="va">sal</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">SYSargsList</a></span><span class="op">(</span>
-  step_name <span class="op">=</span> <span class="st">"hisat2_index"</span>, dir <span class="op">=</span> <span class="cn">FALSE</span>, targets<span class="op">=</span><span class="cn">NULL</span>, 
+  step_name <span class="op">=</span> <span class="st">"hisat2_index"</span>, 
+  targets <span class="op">=</span> <span class="cn">NULL</span>, dir <span class="op">=</span> <span class="cn">FALSE</span>, 
   wf_file <span class="op">=</span> <span class="st">"hisat2/hisat2-index.cwl"</span>, 
-  input_file<span class="op">=</span><span class="st">"hisat2/hisat2-index.yml"</span>,
-  dir_path<span class="op">=</span><span class="st">"param/cwl"</span>, 
+  input_file <span class="op">=</span> <span class="st">"hisat2/hisat2-index.yml"</span>,
+  dir_path <span class="op">=</span> <span class="st">"param/cwl"</span>, 
   dependency <span class="op">=</span> <span class="st">"trimming"</span>
 <span class="op">)</span></code></pre></div>
 <p>For a overview of the workflow, we can check the object as follows:</p>
@@ -853,8 +854,8 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <p>If no argument is provided, the basic plot will automatically detect width, height, layout, plot method, branches, <em>etc</em>.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, show_legend <span class="op">=</span> <span class="cn">TRUE</span>, width <span class="op">=</span> <span class="st">"80%"</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-27d9498b8f785999b5fd" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
-<script type="application/json" data-for="htmlwidget-27d9498b8f785999b5fd">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 05:25:23; End time: 2021-08-05 05:25:23; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-05 05:25:23; End time: 2021-08-05 05:25:23; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 05:25:23; End time: 2021-08-05 05:25:23; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-05 05:25:23; End time: 2021-08-05 05:25:23; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-45863172","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR">here</a>.</p>
+<div id="htmlwidget-6fe331ad8ed9c465fc25" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6fe331ad8ed9c465fc25">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 18:37:55; End time: 2021-08-05 18:37:55; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-05 18:37:55; End time: 2021-08-05 18:37:55; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 18:37:55; End time: 2021-08-05 18:37:55; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-05 18:37:55; End time: 2021-08-05 18:37:55; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-54637821","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR">here</a>.</p>
 </div>
 <div id="generation-of-technical-report" class="section level2">
 <h2 class="hasAnchor">
@@ -1019,7 +1020,7 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <span class="co">#&gt;  [9] GenomicAlignments_1.29.0    SummarizedExperiment_1.23.1</span>
 <span class="co">#&gt; [11] Biobase_2.53.0              MatrixGenerics_1.5.2       </span>
 <span class="co">#&gt; [13] matrixStats_0.60.0          BiocParallel_1.27.2        </span>
-<span class="co">#&gt; [15] Rsamtools_2.9.1             Biostrings_2.61.1          </span>
+<span class="co">#&gt; [15] Rsamtools_2.9.1             Biostrings_2.61.2          </span>
 <span class="co">#&gt; [17] XVector_0.33.0              GenomicRanges_1.45.0       </span>
 <span class="co">#&gt; [19] GenomeInfoDb_1.29.3         IRanges_2.27.0             </span>
 <span class="co">#&gt; [21] S4Vectors_0.31.0            BiocGenerics_0.39.1        </span>
