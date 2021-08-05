@@ -133,3 +133,4 @@ cmdlist(HW_mul)
 ```{r sprCWL, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "Connectivity between CWL param files and targets files."}
 knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/SPR_CWL_hello.png")  
 ```
+
