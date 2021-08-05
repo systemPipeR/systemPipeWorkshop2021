@@ -117,7 +117,7 @@
 <a href="#overview-of-systempipe-toolkit" class="anchor"></a>Overview of <em>systemPipe</em> toolkit</h1>
 <p><code>systemPipe</code> (SP) is a generic toolkit for designing and running reproducible data analysis workflows. The environment consists of three major modules implemented as R/Bioconductor packages:</p>
 <ul>
-<li><p><code>systemPipeR</code> (SPR) provides core functionalities for defining workflows, interacting with command-line software, and executing both R and/or command-line software, as well as generating publication-quality analysis reports.</p></li>
+<li><p><code>systemPipeR</code> (SPR) provides core functionalities for defining, designing and running workflows, interacting with both R and/or command-line software, as well as generating publication-quality analysis reports.</p></li>
 <li><p><code>systemPipeShiny</code> (SPS) integrates a graphical user interface for managing workflows and visualizing results interactively.</p></li>
 <li><p><code>systemPipeWorkflow</code> (SPW) offers a collection of pre-configured workflow templates.</p></li>
 </ul>
@@ -730,162 +730,7 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <span class="co">#&gt;     bampaths &lt;- getColumn(sal, step = "hisat2_mapping", "outfiles", column = "samtools_sort_bam")</span>
 <span class="co">#&gt;     fqpaths &lt;- getColumn(sal, step = "trimming", "targetsWF", column = "FileName1")</span>
 <span class="co">#&gt;     read_statsDF &lt;- alignStats(args = bampaths, fqpaths = fqpaths, pairEnd = TRUE)</span>
-<span class="co">#&gt;     write.table(read_statsDF, "results/alignStats.xls", row.names = FALSE, quote = FALSE, sep = "\t")</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">targetsWF</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; $trimming</span>
-<span class="co">#&gt; DataFrame with 18 rows and 7 columns</span>
-<span class="co">#&gt;                  FileName1              FileName2  SampleName      Factor</span>
-<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1   ./data/SRR446027_1.f.. ./data/SRR446027_2.f..         M1A          M1</span>
-<span class="co">#&gt; 2   ./data/SRR446028_1.f.. ./data/SRR446028_2.f..         M1B          M1</span>
-<span class="co">#&gt; 3   ./data/SRR446029_1.f.. ./data/SRR446029_2.f..         A1A          A1</span>
-<span class="co">#&gt; 4   ./data/SRR446030_1.f.. ./data/SRR446030_2.f..         A1B          A1</span>
-<span class="co">#&gt; 5   ./data/SRR446031_1.f.. ./data/SRR446031_2.f..         V1A          V1</span>
-<span class="co">#&gt; ...                    ...                    ...         ...         ...</span>
-<span class="co">#&gt; 14  ./data/SRR446040_1.f.. ./data/SRR446040_2.f..        M12B         M12</span>
-<span class="co">#&gt; 15  ./data/SRR446041_1.f.. ./data/SRR446041_2.f..        A12A         A12</span>
-<span class="co">#&gt; 16  ./data/SRR446042_1.f.. ./data/SRR446042_2.f..        A12B         A12</span>
-<span class="co">#&gt; 17  ./data/SRR446043_1.f.. ./data/SRR446043_2.f..        V12A         V12</span>
-<span class="co">#&gt; 18  ./data/SRR446044_1.f.. ./data/SRR446044_2.f..        V12B         V12</span>
-<span class="co">#&gt;      SampleLong  Experiment        Date</span>
-<span class="co">#&gt;     &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1     Mock.1h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 2     Mock.1h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 3      Avr.1h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 4      Avr.1h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 5      Vir.1h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; ...         ...         ...         ...</span>
-<span class="co">#&gt; 14   Mock.12h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 15    Avr.12h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 16    Avr.12h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 17    Vir.12h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 18    Vir.12h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $hisat2_index</span>
-<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $hisat2_mapping</span>
-<span class="co">#&gt; DataFrame with 18 rows and 7 columns</span>
-<span class="co">#&gt;       trimmomatic_1_paired   trimmomatic_2_paired  SampleName      Factor</span>
-<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1   results/M1A_1P.trimm.. results/M1A_2P.trimm..         M1A          M1</span>
-<span class="co">#&gt; 2   results/M1B_1P.trimm.. results/M1B_2P.trimm..         M1B          M1</span>
-<span class="co">#&gt; 3   results/A1A_1P.trimm.. results/A1A_2P.trimm..         A1A          A1</span>
-<span class="co">#&gt; 4   results/A1B_1P.trimm.. results/A1B_2P.trimm..         A1B          A1</span>
-<span class="co">#&gt; 5   results/V1A_1P.trimm.. results/V1A_2P.trimm..         V1A          V1</span>
-<span class="co">#&gt; ...                    ...                    ...         ...         ...</span>
-<span class="co">#&gt; 14  results/M12B_1P.trim.. results/M12B_2P.trim..        M12B         M12</span>
-<span class="co">#&gt; 15  results/A12A_1P.trim.. results/A12A_2P.trim..        A12A         A12</span>
-<span class="co">#&gt; 16  results/A12B_1P.trim.. results/A12B_2P.trim..        A12B         A12</span>
-<span class="co">#&gt; 17  results/V12A_1P.trim.. results/V12A_2P.trim..        V12A         V12</span>
-<span class="co">#&gt; 18  results/V12B_1P.trim.. results/V12B_2P.trim..        V12B         V12</span>
-<span class="co">#&gt;      SampleLong  Experiment        Date</span>
-<span class="co">#&gt;     &lt;character&gt; &lt;character&gt; &lt;character&gt;</span>
-<span class="co">#&gt; 1     Mock.1h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 2     Mock.1h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 3      Avr.1h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 4      Avr.1h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 5      Vir.1h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; ...         ...         ...         ...</span>
-<span class="co">#&gt; 14   Mock.12h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 15    Avr.12h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 16    Avr.12h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; 17    Vir.12h.A           1 23-Mar-2012</span>
-<span class="co">#&gt; 18    Vir.12h.B           1 23-Mar-2012</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $mapping_stats</span>
-<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">outfiles</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; $trimming</span>
-<span class="co">#&gt; DataFrame with 18 rows and 4 columns</span>
-<span class="co">#&gt;       trimmomatic_1_paired trimmomatic_1_unpaired   trimmomatic_2_paired</span>
-<span class="co">#&gt;                &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
-<span class="co">#&gt; 1   results/M1A_1P.trimm.. results/M1A_1U.trimm.. results/M1A_2P.trimm..</span>
-<span class="co">#&gt; 2   results/M1B_1P.trimm.. results/M1B_1U.trimm.. results/M1B_2P.trimm..</span>
-<span class="co">#&gt; 3   results/A1A_1P.trimm.. results/A1A_1U.trimm.. results/A1A_2P.trimm..</span>
-<span class="co">#&gt; 4   results/A1B_1P.trimm.. results/A1B_1U.trimm.. results/A1B_2P.trimm..</span>
-<span class="co">#&gt; 5   results/V1A_1P.trimm.. results/V1A_1U.trimm.. results/V1A_2P.trimm..</span>
-<span class="co">#&gt; ...                    ...                    ...                    ...</span>
-<span class="co">#&gt; 14  results/M12B_1P.trim.. results/M12B_1U.trim.. results/M12B_2P.trim..</span>
-<span class="co">#&gt; 15  results/A12A_1P.trim.. results/A12A_1U.trim.. results/A12A_2P.trim..</span>
-<span class="co">#&gt; 16  results/A12B_1P.trim.. results/A12B_1U.trim.. results/A12B_2P.trim..</span>
-<span class="co">#&gt; 17  results/V12A_1P.trim.. results/V12A_1U.trim.. results/V12A_2P.trim..</span>
-<span class="co">#&gt; 18  results/V12B_1P.trim.. results/V12B_1U.trim.. results/V12B_2P.trim..</span>
-<span class="co">#&gt;     trimmomatic_2_unpaired</span>
-<span class="co">#&gt;                &lt;character&gt;</span>
-<span class="co">#&gt; 1   results/M1A_2U.trimm..</span>
-<span class="co">#&gt; 2   results/M1B_2U.trimm..</span>
-<span class="co">#&gt; 3   results/A1A_2U.trimm..</span>
-<span class="co">#&gt; 4   results/A1B_2U.trimm..</span>
-<span class="co">#&gt; 5   results/V1A_2U.trimm..</span>
-<span class="co">#&gt; ...                    ...</span>
-<span class="co">#&gt; 14  results/M12B_2U.trim..</span>
-<span class="co">#&gt; 15  results/A12A_2U.trim..</span>
-<span class="co">#&gt; 16  results/A12B_2U.trim..</span>
-<span class="co">#&gt; 17  results/V12A_2U.trim..</span>
-<span class="co">#&gt; 18  results/V12B_2U.trim..</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $hisat2_index</span>
-<span class="co">#&gt; DataFrame with 1 row and 8 columns</span>
-<span class="co">#&gt;            hisat2_index1          hisat2_index2          hisat2_index3</span>
-<span class="co">#&gt;              &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
-<span class="co">#&gt; 1 ./data/tair10.fasta... ./data/tair10.fasta... ./data/tair10.fasta...</span>
-<span class="co">#&gt;            hisat2_index4          hisat2_index5          hisat2_index6</span>
-<span class="co">#&gt;              &lt;character&gt;            &lt;character&gt;            &lt;character&gt;</span>
-<span class="co">#&gt; 1 ./data/tair10.fasta... ./data/tair10.fasta... ./data/tair10.fasta...</span>
-<span class="co">#&gt;            hisat2_index7          hisat2_index8</span>
-<span class="co">#&gt;              &lt;character&gt;            &lt;character&gt;</span>
-<span class="co">#&gt; 1 ./data/tair10.fasta... ./data/tair10.fasta...</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $hisat2_mapping</span>
-<span class="co">#&gt; DataFrame with 18 rows and 4 columns</span>
-<span class="co">#&gt;             hisat2_sam       samtools_bam      samtools_sort_bam</span>
-<span class="co">#&gt;            &lt;character&gt;        &lt;character&gt;            &lt;character&gt;</span>
-<span class="co">#&gt; 1    ./results/M1A.sam  ./results/M1A.bam ./results/M1A.sorted..</span>
-<span class="co">#&gt; 2    ./results/M1B.sam  ./results/M1B.bam ./results/M1B.sorted..</span>
-<span class="co">#&gt; 3    ./results/A1A.sam  ./results/A1A.bam ./results/A1A.sorted..</span>
-<span class="co">#&gt; 4    ./results/A1B.sam  ./results/A1B.bam ./results/A1B.sorted..</span>
-<span class="co">#&gt; 5    ./results/V1A.sam  ./results/V1A.bam ./results/V1A.sorted..</span>
-<span class="co">#&gt; ...                ...                ...                    ...</span>
-<span class="co">#&gt; 14  ./results/M12B.sam ./results/M12B.bam ./results/M12B.sorte..</span>
-<span class="co">#&gt; 15  ./results/A12A.sam ./results/A12A.bam ./results/A12A.sorte..</span>
-<span class="co">#&gt; 16  ./results/A12B.sam ./results/A12B.bam ./results/A12B.sorte..</span>
-<span class="co">#&gt; 17  ./results/V12A.sam ./results/V12A.bam ./results/V12A.sorte..</span>
-<span class="co">#&gt; 18  ./results/V12B.sam ./results/V12B.bam ./results/V12B.sorte..</span>
-<span class="co">#&gt;             samtools_index</span>
-<span class="co">#&gt;                &lt;character&gt;</span>
-<span class="co">#&gt; 1   ./results/M1A.sorted..</span>
-<span class="co">#&gt; 2   ./results/M1B.sorted..</span>
-<span class="co">#&gt; 3   ./results/A1A.sorted..</span>
-<span class="co">#&gt; 4   ./results/A1B.sorted..</span>
-<span class="co">#&gt; 5   ./results/V1A.sorted..</span>
-<span class="co">#&gt; ...                    ...</span>
-<span class="co">#&gt; 14  ./results/M12B.sorte..</span>
-<span class="co">#&gt; 15  ./results/A12A.sorte..</span>
-<span class="co">#&gt; 16  ./results/A12B.sorte..</span>
-<span class="co">#&gt; 17  ./results/V12A.sorte..</span>
-<span class="co">#&gt; 18  ./results/V12B.sorte..</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $mapping_stats</span>
-<span class="co">#&gt; DataFrame with 0 rows and 0 columns</span>
-<span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/SYSargsList-class.html">projectInfo</a></span><span class="op">(</span><span class="va">sal</span><span class="op">)</span>
-<span class="co">#&gt; $project</span>
-<span class="co">#&gt; [1] "/__w/systemPipeWorkshop2021/systemPipeWorkshop2021/vignettes/bioc2021"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $data</span>
-<span class="co">#&gt; [1] "data"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $param</span>
-<span class="co">#&gt; [1] "param"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $results</span>
-<span class="co">#&gt; [1] "results"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $logsDir</span>
-<span class="co">#&gt; [1] ".SPRproject"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $sysargslist</span>
-<span class="co">#&gt; [1] ".SPRproject/SYSargsList.yml"</span></code></pre></div>
+<span class="co">#&gt;     write.table(read_statsDF, "results/alignStats.xls", row.names = FALSE, quote = FALSE, sep = "\t")</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -1008,8 +853,8 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <p>If no argument is provided, the basic plot will automatically detect width, height, layout, plot method, branches, <em>etc</em>.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, show_legend <span class="op">=</span> <span class="cn">TRUE</span>, width <span class="op">=</span> <span class="st">"80%"</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-f670075dc07f2e1557cc" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f670075dc07f2e1557cc">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 00:12:31; End time: 2021-08-05 00:12:31; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-05 00:12:31; End time: 2021-08-05 00:12:31; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 00:12:31; End time: 2021-08-05 00:12:31; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-05 00:12:31; End time: 2021-08-05 00:12:31; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-76841532","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="#plotWF">here</a>.</p>
+<div id="htmlwidget-916ca6ed2045e25a2081" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
+<script type="application/json" data-for="htmlwidget-916ca6ed2045e25a2081">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 04:20:56; End time: 2021-08-05 04:20:56; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-05 04:20:56; End time: 2021-08-05 04:20:56; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 04:20:56; End time: 2021-08-05 04:20:56; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-05 04:20:56; End time: 2021-08-05 04:20:56; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-25873614","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR">here</a>.</p>
 </div>
 <div id="generation-of-technical-report" class="section level2">
 <h2 class="hasAnchor">
