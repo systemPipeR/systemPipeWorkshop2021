@@ -27,3 +27,5 @@ RUN Rscript -e "options(repos = c(CRAN = 'https://cran.r-project.org')); devtool
 RUN Rscript -e 'BiocManager::install("systemPipeR/systemPipeShiny")'
 RUN Rscript -e 'BiocManager::install("tgirke/systemPipeR")'
 RUN Rscript -e 'BiocManager::install("tgirke/systemPipeRdata")'
+RUN Rscript -e 'BiocManager::install("lz100/spsComps")'
+RUN Rscript -e 'BiocManager::install("lz100/drawer")'

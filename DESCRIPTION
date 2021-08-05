@@ -38,7 +38,8 @@ Suggests:
     networkD3, 
     pushbar, 
     rhandsontable, 
-    shinyTree
+    shinyTree, 
+    cicerone
 URL: https://systempipe.org/systemPipeWorkshop2021/
 BugReports: https://systempipe.org/systemPipeWorkshop2021/issues/new/choose
 VignetteBuilder: knitr
