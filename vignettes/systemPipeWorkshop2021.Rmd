@@ -42,9 +42,7 @@ knitr::opts_chunk$set(
 analysis workflows. The environment consists of three major modules implemented 
 as R/Bioconductor packages:
 
-  - `systemPipeR` (SPR) provides core functionalities for defining workflows, 
-    interacting with command-line software, and executing both R and/or command-line
-    software, as well as generating publication-quality analysis reports.
+  - `systemPipeR` (SPR) provides core functionalities for defining, designing and running workflows, interacting with both R and/or command-line software, as well as generating publication-quality analysis reports.
  
   - `systemPipeShiny` (SPS) integrates a graphical user interface for managing 
     workflows and visualizing results interactively. 
@@ -601,9 +599,6 @@ Let's explore the workflow to check the steps:
 stepsWF(sal)
 dependency(sal)
 codeLine(sal)
-targetsWF(sal)
-outfiles(sal)
-projectInfo(sal)
 ```
 
 # Running the workflow
@@ -681,7 +676,7 @@ height, layout, plot method, branches, _etc_.
 plotWF(sal, show_legend = TRUE, width = "80%", rstudio = TRUE)
 ```
 
-For more details about the `plotWF` function, please see [here](#plotWF).
+For more details about the `plotWF` function, please see [here](http://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR).
 
 ## Generation of technical report
 
