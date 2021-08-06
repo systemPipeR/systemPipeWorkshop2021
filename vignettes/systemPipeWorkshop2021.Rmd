@@ -891,6 +891,128 @@ For the admin panel login, account name **"admin"**, password **"admin"**.
 _shinyapp.io_ will reset the app once a while, but this will affect other people 
 who are trying the demo simultaneously. 
 
+
+## Sreenshots of SPS features
+### SPS main app
+
+<img src="images/main_app.png" height="500px" class="center" />
+
+
+### Module workflow 
+A step-by-step guided workplace to create -> run workflows. 
+<img src="images/wf_main.png" height="500px" class="center" />
+
+### Module workflow create targets
+Create and check targets file. 
+<img src="images/wf_targets.png" height="500px" class="center" />
+
+
+### Module workflow design workflow steps 
+Add/remove/modify/change orders of your workflows with all the visual aids.
+<img src="images/wf_wf.png" height="300px" class="center" />
+
+### Module workflow run
+Execute the workflow directly in SPS with the Rstudio-like interface.
+<img src="images/wf_run.png" height="400px" class="center" />
+
+### Module RNAseq clustering and plotting
+Clustering and plotting your read counts.
+<img src="images/rnaseq_heatmap.png" height="500px" class="center" />
+
+### Module RNAseq DEG
+Do some DEG analysis with a few clicks.
+<img src="images/rnaseq_deg.png" height="500px" class="center" />
+
+
+### Module Quick ggplot
+- Powered by {[esquisse](https://github.com/dreamRs/esquisse)} package.
+- Plot any tabular file
+<img src="images/sps_quickgg.jpg" height="450px" class="center" />
+
+### Canvas
+
+Use `to canvas` button to send plot screenshots to Canvas for later image editing.
+<img src="images/to_canvas.png"/>
+
+Use the interactive Canvas image tool to edit plots made from other tabs/modules 
+or local uploads.
+<img src="images/drawer_demo.png" height="400px" class="center" />
+
+### Create custom tabs
+Create your own plotting tab as simple as `systemPipeShiny::spsNewTab("TAB_ID")`
+
+- No shiny develop experience is required.
+- You only need to know how to code in R.
+- Focus on the `plot_code`, we handle the rest for you.
+```{r eval=FALSE}
+# simple template
+newtabUI <- spsEzUI(
+    desc = "
+    Some description
+    ",
+    tab_title = "My custom plotting tab",
+    plot_title = "My Plot",
+    plot_control =  shiny::tagList(
+        shiny::fluidRow(class = "center-child",
+            clearableTextInput(inputId = ns("plot_title"), label = "Plot title", value = "Example plot")
+        ) %>%
+            bsHoverPopover("Plot title", "Type your plot title", placement = "top")
+    )
+)
+newtabServer <- spsEzServer(
+    plot_code = {
+        plot_data <- mydata$data
+        ggplot2::ggplot(plot_data) +
+            ggplot2::geom_point(ggplot2::aes(x = Sepal.Length, y = Sepal.Width)) +
+            ggplot2::ggtitle(input$plot_title)
+    }
+)
+```
+
+### Custom tabs when loaded
+<img src="images/sps_custom_tab_ui.png" height="500px" class="center" />
+
+### Deep customize the app
+Customize almost everything of the app with these options. Read more 
+on our [website{blk}](https://systempipe.org/sps/adv_features/config/#app-options)
+<img src="images/app_options.png" height="550px" class="center" />
+
+### App protection with user login and loading animations
+Limit access with user accounts. 
+<img src="images/user_login.png" height="300px" class="center" />
+Adding loading themes before users login. 
+<img src="images/loading_theme.gif" height="300px" class="center" />
+
+### Admin
+Customizable hidden url to the admin page.
+<img src="images/admin_login.png" height="400px" class="center" />
+
+### Admin server stats
+Monitor system usage.
+<img src="images/admin_server_info.png" height="400px" class="center" />
+
+### Admin user control
+Add/change/remove users for your SPS app. 
+<img src="images/admin_user_control.png" height="400px" class="center" />
+
+## SPS Supporting packages
+Use these supporting packages in your own Rmarkdown, Shiny apps!
+
+| Package | Description | Documents | Function reference | Demo |
+| --- | --- | --- | :---: | --- |
+|<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/sps_small.png?raw=true" align="right" height="30" width="30"/>[systemPipeShiny](https://github.com/systemPipeR/systemPipeShiny) | SPS main package |[website](https://systempipe.org/sps/)|[link](https://systempipe.org/sps/funcs/sps/reference/)  | [demo](https://tgirke.shinyapps.io/systemPipeShiny/)|
+|<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/spscomps.png?raw=true" align="right" height="30" width="30" />[spsComps](https://github.com/lz100/spsComps) | SPS UI and server components |[website](https://systempipe.org/sps/dev/spscomps/)|[link](https://systempipe.org/sps/funcs/spscomps/reference/)  | [demo](https://lezhang.shinyapps.io/spsComps)|
+|<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/drawer.png?raw=true" align="right" height="30" width="30" />[drawer](https://github.com/lz100/drawer) | SPS interactive image editing tool |[website](https://systempipe.org/sps/dev/drawer/)|[link](https://systempipe.org/sps/funcs/drawer/reference/)  | [demo](https://lezhang.shinyapps.io/drawer)|
+|<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/spsutil.png?raw=true" align="right" height="30" width="30" />[spsUtil](https://github.com/lz100/spsUtil) | SPS utility functions |[website](https://systempipe.org/sps/dev/spsutil/)|[link](https://systempipe.org/sps/funcs/spsutil/reference/)  | NA|
+
+# More information
+
+  * [systemPipe Workflow Environment WebPage{blk}](https://systempipe.org/)
+  * [systemPipeR Manuals{blk}](https://systempipe.org/sp/)
+  * [systemPipeShiny Manuals{blk}](https://systempipe.org/sps/)
+  * [systemPipe Github{blk}](https://github.com/systemPipeR)
+
+
 # Version information
 
 ```{r sessionInfo}
