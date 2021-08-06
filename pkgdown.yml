@@ -4,9 +4,10 @@ pkgdown_sha: ~
 articles:
   cwl_and_spr: cwl_and_spr.html
   cwl_syntax: cwl_syntax.html
+  spr_functions: spr_functions.html
   spr_project: spr_project.html
   systemPipeWorkshop2021: systemPipeWorkshop2021.html
-last_built: 2021-08-06T18:53Z
+last_built: 2021-08-06T20:26Z
 urls:
   reference: https://systempipe.org/systemPipeWorkshop2021/reference
   article: https://systempipe.org/systemPipeWorkshop2021/articles
