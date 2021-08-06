@@ -3,7 +3,7 @@ url: https://systempipe.org/systemPipeWorkshop2021
 template:
   params:
     bootswatch: flatly
-    #ganalytics: UA-99999999-9
+    ganalytics: UA-158796879-1
 
 home:
   title: "systemPipeWorkshop2021"

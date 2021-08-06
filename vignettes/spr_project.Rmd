@@ -40,11 +40,11 @@ library(systemPipeR)
 # Project structure
 
 `systemPipeR` expects a project directory structure that consists of a directory
-where users may store all the raw data, the results directory that will be reserved 
-for all the outfiles files, and the parameters directory. 
+where users may store all the raw data (*e.g.* *data/*) , the results directory that will be reserved 
+for all the outfiles files (*e.g.* *results/*) , and the parameters directory (*e.g.* *param/*). 
 
 This structure allows reproducibility and collaboration across the data science 
-team, since internally relative paths are used. Users could transfer this project 
+team, since internally relative `paths` are used. Users could transfer the project 
 to a different location and still be able to run the entire workflow. Also, it 
 increases efficiency and data management once the raw data is kept in a separate 
 folder and avoids duplication. 
