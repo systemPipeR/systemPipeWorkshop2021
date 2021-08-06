@@ -101,7 +101,7 @@
       <h1 data-toc-skip>systemPipe: Workflow and Visualization Toolkit</h1>
                         <h4 class="author"></h4>
             
-            <h4 class="date">Last update: 05 August, 2021</h4>
+            <h4 class="date">Last update: 06 August, 2021</h4>
       
       
       <div class="hidden name"><code>systemPipeWorkshop2021.Rmd</code></div>
@@ -850,8 +850,8 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <p>If no argument is provided, the basic plot will automatically detect width, height, layout, plot method, branches, <em>etc</em>.</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/systemPipeR/man/plotWF.html">plotWF</a></span><span class="op">(</span><span class="va">sal</span>, show_legend <span class="op">=</span> <span class="cn">TRUE</span>, width <span class="op">=</span> <span class="st">"80%"</span>, rstudio <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<div id="htmlwidget-7b227b58c0c53d32e582" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7b227b58c0c53d32e582">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 21:47:00; End time: 2021-08-05 21:47:00; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-05 21:47:00; End time: 2021-08-05 21:47:00; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-05 21:47:00; End time: 2021-08-05 21:47:00; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-05 21:47:00; End time: 2021-08-05 21:47:00; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-24753816","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR">here</a>.</p>
+<div id="htmlwidget-ea0500f88e4fa594b2b0" style="width:80%;height:432.632880098888px;" class="plotwf html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ea0500f88e4fa594b2b0">{"x":{"dot":"digraph {\n    node[fontsize=20];\n    subgraph {\n        node[color=\"dodgerblue\"];\n        trimming -> hisat2_index -> hisat2_mapping -> mapping_stats[color=\"dodgerblue\"]\n   }\n    \n    \n    trimming[label=<<b><font color=\"black\">trimming<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step trimming: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-06 00:13:27; End time: 2021-08-06 00:13:27; Duration: 00:00:00\"]\n    hisat2_index[label=<<b><font color=\"black\">hisat2_index<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">8<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_index: 0 samples passed; 0 samples have warnings; 0 samples have errors; 8 samples in total; Start time: 2021-08-06 00:13:27; End time: 2021-08-06 00:13:27; Duration: 00:00:00\"]\n    hisat2_mapping[label=<<b><font color=\"black\">hisat2_mapping<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">72<\/font><\/b>; <font color=\"black\">0s<\/font>> , style=\"rounded\", shape=\"box\"  tooltip=\"step hisat2_mapping: 0 samples passed; 0 samples have warnings; 0 samples have errors; 72 samples in total; Start time: 2021-08-06 00:13:27; End time: 2021-08-06 00:13:27; Duration: 00:00:00\"]\n    mapping_stats[label=<<b><font color=\"black\">mapping_stats<\/font><br><\/br><font color=\"#5cb85c\">0<\/font>/<font color=\"#f0ad4e\">0<\/font>/<font color=\"#d9534f\">0<\/font>/<font color=\"blue\">1<\/font><\/b>; <font color=\"black\">0s<\/font>>  tooltip=\"step mapping_stats: 0 samples passed; 0 samples have warnings; 0 samples have errors; 1 samples in total; Start time: 2021-08-06 00:13:27; End time: 2021-08-06 00:13:27; Duration: 00:00:00\"]\n    subgraph cluster_legend {\n        rankdir=TB;\n        color=\"#EEEEEE\";\n        style=filled;\n        node [style=filled];\n        {rank=same; R_step; Sysargs_step; Main_branch}\n        Main_branch -> Sysargs_step -> R_step[color=\"#EEEEEE\"]\n        Main_branch[label=\"Main branch\" color=\"dodgerblue\", style=\"filled\", fillcolor=white];   Sysargs_step ->step_state[color=\"#EEEEEE\"];\n        step_state[style=\"filled\", shape=\"box\" color=white, label =<\n            <table>\n            <tr><td><b>Step Colors<\/b><\/td><\/tr>\n            <tr><td><font color=\"black\">Pending steps<\/font>; <font color=\"#5cb85c\">Successful steps<\/font>; <font color=\"#d9534f\">Failed steps<\/font><\/td><\/tr>\n            <tr><td><b>Targets Files / Code Chunk <\/b><\/td><\/tr><tr><td><font color=\"#5cb85c\">0 (pass) <\/font> | <font color=\"#f0ad4e\">0 (warning) <\/font> | <font color=\"#d9534f\">0 (error) <\/font> | <font color=\"blue\">0 (total)<\/font>; Duration<\/td><\/tr><\/table>\n            >];\n        label=\"Legends\";\n        fontsize = 30;\n        Sysargs_step[label=\"Sysargs step\" style=\"rounded, filled\", shape=\"box\", fillcolor=white];\n        R_step[label=\"R step\" style=\"rounded, filled\", fillcolor=white];\n    }\n\n}\n","plotid":"sprwf-68427513","responsive":true,"width":"80%","height":null,"plot_method":"renderSVGElement","rmd":true,"msg":""},"evals":[],"jsHooks":[]}</script><p>For more details about the <code>plotWF</code> function, please see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR">here</a>.</p>
 </div>
 <div id="generation-of-technical-report" class="section level2">
 <h2 class="hasAnchor">
@@ -925,21 +925,41 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <a href="#overview-of-systempipeshiny-core-functionalities" class="anchor"></a>Overview of <em>systemPipeShiny</em> core functionalities</h1>
 <p><strong><span style="color:#5DA7D6;">s</span>ystem<span style="color:#5DA7D6;">P</span>ipe<span style="color:#5DA7D6;">S</span>hiny</strong> (SPS) extends the widely used <a href="/spr/">systemPipeR</a> (SPR) workflow environment with a versatile graphical user interface provided by a <a href="https://shiny.rstudio.com">Shiny App</a>. This allows non-R users, such as experimentalists, to run many <code>systemPipeR's</code> workflow designs, control, and visualization functionalities interactively without requiring knowledge of R. Most importantly, <code>SPS</code> has been designed as a general purpose framework for interacting with other R packages in an intuitive manner. Like most Shiny Apps, SPS can be used on both local computers as well as centralized server-based deployments that can be accessed remotely as a public web service for using SPR’s functionalities with community and/or private data. The framework can integrate many core packages from the R/Bioconductor ecosystem. Examples of SPS’ current functionalities include:</p>
 <ul>
-<li>A default interactive workflow module to create experimental designs, visualize and customize workflow topologies with previews, and programming free workflow execution within the application.</li>
+<li>A workflow module to create experimental designs, visualize and customize workflow topologies with previews, and programming free workflow execution within the application.</li>
 <li>An interactive module with extensive plot options to visualize downstream analysis of a RNA-Seq workflow.</li>
 <li>A quick ggplot module to make all variety of scientific plots from any user defined tabular data.</li>
 <li>An extendable set of visualization functionalities makes it easy to design custom Shiny Apps under SPS framework without any knowledge of Shiny.</li>
 <li>A ‘Canvas Workbench’ to manage complex visual results. It allows users to organize and to compare plots in an efficient manner combined with a session screenshot feature to edit scientific and publishable figures.</li>
-<li>Three other supporting packages to help all users from beginners and advanced developers to extend under current SPS framework or on their own visualization apps.</li>
+<li>Three other supporting packages to help all users from beginners and advanced developers to extend under current SPS framework or on their own visualization apps and Rmarkdowns.</li>
 </ul>
+<div id="run" class="section level2">
+<h2 class="hasAnchor">
+<a href="#run" class="anchor"></a>Run</h2>
+<p>In this workshop, we are using the most recent develop version of SPS. If you are using the same Rstudio server for SPR from <a href="http://app.orchestra.cancerdatasci.org/">Orchestra{blk}</a> to run SPS, no more action is needed. Use following code to start SPS in the Rstudio server.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://systempipe.org/sps">systemPipeShiny</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/systemPipeShiny/man/spsInit.html">spsInit</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runApp.html">runApp</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="demo" class="section level2">
+</div>
+<div id="install-sps" class="section level2">
 <h2 class="hasAnchor">
-<a href="#demo" class="anchor"></a>Demo</h2>
-<p>View our online demo app:</p>
+<a href="#install-sps" class="anchor"></a>Install SPS</h2>
+<p>If you would like to run SPS locally or somewhere else, please install the most recent develop version.</p>
+<p>Full installation with all modules:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"systemPipeR/systemPipeShiny"</span>, dependencies<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Minimum installation:</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"systemPipeR/systemPipeShiny"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="demos" class="section level2">
+<h2 class="hasAnchor">
+<a href="#demos" class="anchor"></a>Demos</h2>
+<p>If you could not either use the <a href="http://app.orchestra.cancerdatasci.org/">Orchestra{blk}</a>, or run it locally, here are some deployed demos:</p>
 <table class="table">
 <colgroup>
 <col width="33%">
@@ -954,12 +974,12 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <tbody>
 <tr class="odd">
 <td><a href="https://tgirke.shinyapps.io/systemPipeShiny/">Default full installation{blk}</a></td>
-<td><a href="#installation">See installation</a></td>
+<td>takes ~20s to load</td>
 <td>full app</td>
 </tr>
 <tr class="even">
 <td><a href="https://tgirke.shinyapps.io/systemPipeShiny/">Minimum installation{blk}</a></td>
-<td><a href="#installation">See installation</a></td>
+<td></td>
 <td>no modules installed</td>
 </tr>
 <tr class="odd">
@@ -983,11 +1003,190 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <p>For the admin panel login, account name <strong>“admin”</strong>, password <strong>“admin”</strong>.</p>
 <p><strong>Please DO NOT delete or change password when you are using the admin features.</strong> <em>shinyapp.io</em> will reset the app once a while, but this will affect other people who are trying the demo simultaneously.</p>
 </div>
+<div id="sreenshots-of-sps-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#sreenshots-of-sps-features" class="anchor"></a>Sreenshots of SPS features</h2>
+<div id="sps-main-app" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sps-main-app" class="anchor"></a>SPS main app</h3>
+<p><img src="images/main_app.png" height="500px" class="center"></p>
+</div>
+<div id="module-workflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-workflow" class="anchor"></a>Module workflow</h3>
+<p>A step-by-step guided workplace to create -&gt; run workflows. <img src="images/wf_main.png" height="500px" class="center"></p>
+</div>
+<div id="module-workflow-create-targets" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-workflow-create-targets" class="anchor"></a>Module workflow create targets</h3>
+<p>Create and check targets file. <img src="images/wf_targets.png" height="500px" class="center"></p>
+</div>
+<div id="module-workflow-design-workflow-steps" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-workflow-design-workflow-steps" class="anchor"></a>Module workflow design workflow steps</h3>
+<p>Add/remove/modify/change orders of your workflows with all the visual aids. <img src="images/wf_wf.png" height="300px" class="center"></p>
+</div>
+<div id="module-workflow-run" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-workflow-run" class="anchor"></a>Module workflow run</h3>
+<p>Execute the workflow directly in SPS with the Rstudio-like interface. <img src="images/wf_run.png" height="400px" class="center"></p>
+</div>
+<div id="module-rnaseq-clustering-and-plotting" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-rnaseq-clustering-and-plotting" class="anchor"></a>Module RNAseq clustering and plotting</h3>
+<p>Clustering and plotting your read counts. <img src="images/rnaseq_heatmap.png" height="500px" class="center"></p>
+</div>
+<div id="module-rnaseq-deg" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-rnaseq-deg" class="anchor"></a>Module RNAseq DEG</h3>
+<p>Do some DEG analysis with a few clicks. <img src="images/rnaseq_deg.png" height="500px" class="center"></p>
+</div>
+<div id="module-quick-ggplot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#module-quick-ggplot" class="anchor"></a>Module Quick ggplot</h3>
+<ul>
+<li>Powered by {<a href="https://github.com/dreamRs/esquisse">esquisse</a>} package.</li>
+<li>Plot any tabular file <img src="images/sps_quickgg.jpg" height="450px" class="center">
+</li>
+</ul>
+</div>
+<div id="canvas" class="section level3">
+<h3 class="hasAnchor">
+<a href="#canvas" class="anchor"></a>Canvas</h3>
+<p>Use <code>to canvas</code> button to send plot screenshots to Canvas for later image editing. <img src="images/to_canvas.png"></p>
+<p>Use the interactive Canvas image tool to edit plots made from other tabs/modules or local uploads. <img src="images/drawer_demo.png" height="400px" class="center"></p>
+</div>
+<div id="create-custom-tabs" class="section level3">
+<h3 class="hasAnchor">
+<a href="#create-custom-tabs" class="anchor"></a>Create custom tabs</h3>
+<p>Create your own plotting tab as simple as <code><a href="https://rdrr.io/pkg/systemPipeShiny/man/spsNewTab.html">systemPipeShiny::spsNewTab("TAB_ID")</a></code></p>
+<ul>
+<li>No shiny develop experience is required.</li>
+<li>You only need to know how to code in R.</li>
+<li>Focus on the <code>plot_code</code>, we handle the rest for you.</li>
+</ul>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># simple template</span>
+<span class="va">newtabUI</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeShiny/man/spsEzUI.html">spsEzUI</a></span><span class="op">(</span>
+    desc <span class="op">=</span> <span class="st">"
+    Some description
+    "</span>,
+    tab_title <span class="op">=</span> <span class="st">"My custom plotting tab"</span>,
+    plot_title <span class="op">=</span> <span class="st">"My Plot"</span>,
+    plot_control <span class="op">=</span>  <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmltools/man/tag.html">tagList</a></span><span class="op">(</span>
+        <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/fluidPage.html">fluidRow</a></span><span class="op">(</span>class <span class="op">=</span> <span class="st">"center-child"</span>,
+            <span class="fu">clearableTextInput</span><span class="op">(</span>inputId <span class="op">=</span> <span class="fu">ns</span><span class="op">(</span><span class="st">"plot_title"</span><span class="op">)</span>, label <span class="op">=</span> <span class="st">"Plot title"</span>, value <span class="op">=</span> <span class="st">"Example plot"</span><span class="op">)</span>
+        <span class="op">)</span> <span class="op">%&gt;%</span>
+            <span class="fu">bsHoverPopover</span><span class="op">(</span><span class="st">"Plot title"</span>, <span class="st">"Type your plot title"</span>, placement <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span>
+    <span class="op">)</span>
+<span class="op">)</span>
+<span class="va">newtabServer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/systemPipeShiny/man/spsEzUI.html">spsEzServer</a></span><span class="op">(</span>
+    plot_code <span class="op">=</span> <span class="op">{</span>
+        <span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="va">mydata</span><span class="op">$</span><span class="va">data</span>
+        <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plot_data</span><span class="op">)</span> <span class="op">+</span>
+            <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>, y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+            <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">plot_title</span><span class="op">)</span>
+    <span class="op">}</span>
+<span class="op">)</span></code></pre></div>
+</div>
+<div id="custom-tabs-when-loaded" class="section level3">
+<h3 class="hasAnchor">
+<a href="#custom-tabs-when-loaded" class="anchor"></a>Custom tabs when loaded</h3>
+<p><img src="images/sps_custom_tab_ui.png" height="500px" class="center"></p>
+</div>
+<div id="deep-customize-the-app" class="section level3">
+<h3 class="hasAnchor">
+<a href="#deep-customize-the-app" class="anchor"></a>Deep customize the app</h3>
+<p>Customize almost everything of the app with these options. Read more on our <a href="https://systempipe.org/sps/adv_features/config/#app-options">website{blk}</a> <img src="images/app_options.png" height="550px" class="center"></p>
+</div>
+<div id="app-protection-with-user-login-and-loading-animations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#app-protection-with-user-login-and-loading-animations" class="anchor"></a>App protection with user login and loading animations</h3>
+<p>Limit access with user accounts. <img src="images/user_login.png" height="300px" class="center"> Adding loading themes before users login. <img src="images/loading_theme.gif" height="300px" class="center"></p>
+</div>
+<div id="admin" class="section level3">
+<h3 class="hasAnchor">
+<a href="#admin" class="anchor"></a>Admin</h3>
+<p>Customizable hidden url to the admin page. <img src="images/admin_login.png" height="400px" class="center"></p>
+</div>
+<div id="admin-server-stats" class="section level3">
+<h3 class="hasAnchor">
+<a href="#admin-server-stats" class="anchor"></a>Admin server stats</h3>
+<p>Monitor system usage. <img src="images/admin_server_info.png" height="400px" class="center"></p>
+</div>
+<div id="admin-user-control" class="section level3">
+<h3 class="hasAnchor">
+<a href="#admin-user-control" class="anchor"></a>Admin user control</h3>
+<p>Add/change/remove users for your SPS app. <img src="images/admin_user_control.png" height="400px" class="center"></p>
+</div>
+</div>
+<div id="sps-supporting-packages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#sps-supporting-packages" class="anchor"></a>SPS Supporting packages</h2>
+<p>Use these supporting packages in your own Rmarkdown, Shiny apps!</p>
+<table class="table">
+<thead><tr class="header">
+<th>Package</th>
+<th>Description</th>
+<th>Documents</th>
+<th align="center">Function reference</th>
+<th>Demo</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>
+<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/sps_small.png?raw=true" align="right" height="30" width="30"><a href="https://github.com/systemPipeR/systemPipeShiny">systemPipeShiny</a>
+</td>
+<td>SPS main package</td>
+<td><a href="https://systempipe.org/sps/">website</a></td>
+<td align="center"><a href="https://systempipe.org/sps/funcs/sps/reference/">link</a></td>
+<td><a href="https://tgirke.shinyapps.io/systemPipeShiny/">demo</a></td>
+</tr>
+<tr class="even">
+<td>
+<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/spscomps.png?raw=true" align="right" height="30" width="30"><a href="https://github.com/lz100/spsComps">spsComps</a>
+</td>
+<td>SPS UI and server components</td>
+<td><a href="https://systempipe.org/sps/dev/spscomps/">website</a></td>
+<td align="center"><a href="https://systempipe.org/sps/funcs/spscomps/reference/">link</a></td>
+<td><a href="https://lezhang.shinyapps.io/spsComps">demo</a></td>
+</tr>
+<tr class="odd">
+<td>
+<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/drawer.png?raw=true" align="right" height="30" width="30"><a href="https://github.com/lz100/drawer">drawer</a>
+</td>
+<td>SPS interactive image editing tool</td>
+<td><a href="https://systempipe.org/sps/dev/drawer/">website</a></td>
+<td align="center"><a href="https://systempipe.org/sps/funcs/drawer/reference/">link</a></td>
+<td><a href="https://lezhang.shinyapps.io/drawer">demo</a></td>
+</tr>
+<tr class="even">
+<td>
+<img src="https://github.com/systemPipeR/systemPipeR.github.io/blob/main/static/images/spsutil.png?raw=true" align="right" height="30" width="30"><a href="https://github.com/lz100/spsUtil">spsUtil</a>
+</td>
+<td>SPS utility functions</td>
+<td><a href="https://systempipe.org/sps/dev/spsutil/">website</a></td>
+<td align="center"><a href="https://systempipe.org/sps/funcs/spsutil/reference/">link</a></td>
+<td>NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="more-information" class="section level1">
+<h1 class="hasAnchor">
+<a href="#more-information" class="anchor"></a>More information</h1>
+<ul>
+<li><a href="https://systempipe.org/">systemPipe Workflow Environment WebPage{blk}</a></li>
+<li><a href="https://systempipe.org/sp/">systemPipeR Manuals{blk}</a></li>
+<li><a href="https://systempipe.org/sps/">systemPipeShiny Manuals{blk}</a></li>
+<li><a href="https://github.com/systemPipeR">systemPipe Github{blk}</a></li>
+</ul>
 </div>
 <div id="version-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#version-information" class="anchor"></a>Version information</h1>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; R version 4.1.0 (2021-05-18)</span>
 <span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span>
@@ -1078,10 +1277,18 @@ Figure 3. <em>systemPipeR’s</em> workflow structure, showing the dependency be
 <a href="#funding" class="anchor"></a>Funding</h1>
 <p>This project is funded by NSF award <a href="https://www.nsf.gov/awardsearch/showAward?AWD_ID=1661152">ABI-1661152</a>.</p>
 </div>
-<div id="references" class="section level1 unnumbered">
+<div id="references" class="section level1">
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<script>
+$(()=>{
+  $('a:contains("{blk}")').each(function(){
+    $(this)
+      .text($(this).text().replace("{blk}", ""))
+      .attr("target", "_blank");
+  });
+});
+</script><div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Amstutz2016-ka" class="csl-entry">
 Amstutz, Peter, Michael R Crusoe, Nebojša Tijanić, Brad Chapman, John Chilton, Michael Heuer, Andrey Kartashov, et al. 2016. <span>“Common Workflow Language, V1.0,”</span> July. <a href="https://doi.org/10.6084/m9.figshare.3115156.v2">https://doi.org/10.6084/m9.figshare.3115156.v2</a>.
 </div>
