@@ -1,0 +1,52 @@
+---
+title: "SPR Functions and Methods"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## `systemPipeR` Workflow Management Functions
+
+| Function Name     | Description                                                                                                             | Category |
+|-------------------|-------------------------------------------------------------------------------------------------------------------------|----------|
+| `genWorkenvir`    | Generates workflow templates provided by `systemPipeRdata` helper package / or from the individuals' pipelines packages | Build    |
+| `SPRproject`      | Constructs ts `SYSargsList` workflow control module (S4 object) from script file                                        | Build    |
+| `SYSargsList`     | Constructs `SYSargsList` workflow control module (S4 object) from parameters descriptions                               | Build    |
+| `LineWise`        | Constructs `SYSargsList` workflow control module (S4 object) from R-based code                                          | Build    | 
+| `importWF`        | Constructs `SYSargsList` object from RMarkdown file                                                                     | Build    |
+| `runWF`           | Executes command-line software and R-code specified in `SYSargsList` instances                                          | Run      |
+| `clusterRun`      | Runs command-line software and R-code steps in parallel mode on a computer cluster                                      | Run      |
+| `plotWF`          | Plot visual workflow designs and topologies with different graphical layouts                                            | Visual   |
+| `renderLogs`      | Render Technical Report based on RMarkdown                                                                              | Report   |
+| `statusWF`        | Return the overview of the workflow steps computational status                                                          | Print    |
+| `stepsWF`         | Return the overview of the workflow steps                                                                               | Print    |
+| `targetsWF`       | Return the targets files for each workflow steps                                                                        | Print    |
+| `outfiles`        | Return the expected outfiles files for each workflow steps                                                              | Print    |
+| `dependency`      | Return the dependency tree for all workflow steps                                                                       | Print    |
+| `projectInfo`     | Return the project paths                                                                                                | Print    |
+| `runInfo`         | Return the workflow steps execution configurations                                                                      | Print    |
+| `baseCommand`     | Print the base command for all `SYSargs2` steps                                                                         | Print    |
+| `SampleName`      | Print the targets ID for `SYSargs2` steps                                                                               | Print    |
+| `stepName`        | Print the workflow step name                                                                                            | Print    |
+| `targetsheader`   | Print the target files additional information                                                                           | Print    |
+| `yamlinput`       | Print the input values and variables                                                                                    | Print    |
+| `cmdlist`         | Print the rendered command-line for all `SYSargs2` steps                                                                | Print    |
+| `codeLine`        | Print the R-code lines for the `LineWise` steps                                                                         | Print    |
+| `baseCommand`     | Print the base command for the `SYSargs2` steps                                                                         | Print    |
+| `viewEnvir`       | View the R object created in the workflow execution                                                                     | Print    |
+| `copyEnvir`       | Copy the R object created in the workflow execution                                                                     | Print    |
+| `subset`          | Subset the workflow                                                                                                     | Print    |
+| `getColumn`       | Return the targets or outfiles for one workflow step                                                                    | Print    |
+| `dependency`      | Replace the dependency value of the workflow steps computational status                                                 | Config   |
+| `appendStep`      | Append a new step in `SYSargsList` workflow                                                                             | Config   |
+| `replaceStep`     | Replace a step in the `SYSargsList` workflow                                                                            | Config   |
+| `renameStep`      | Rename a step in the `SYSargsList` workflow                                                                             | Config   |
+| `yamlinput`       | Replace input values in a `SYSargs2` step                                                                               | Config   |
+| `appendCodeLine`  | Append a new `LineWise` step in `SYSargsList` workflow                                                                  | Config   |
+| `replaceCodeLine` | Replace a `LineWise` step in `SYSargsList` workflow                                                                     | Config   |
+| `updateColumn`    | Replace or append a column in the targets or outfiles                                                                   | Config   |
+| `createParam`     | Create CWL parametres files from command-line                                                                           | Config   |
+| `sal2bash`        | Export a workflow to bash script                                                                                        | Export   |
+| `sal2rmd`         | Export a workflow to R Markdown file                                                                                    | Export   |

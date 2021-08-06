@@ -31,6 +31,8 @@ navbar:
         href: articles/cwl_syntax.html
       - text: SPR and CWL
         href: articles/cwl_and_spr.html
+      - text: SPR Function and Methods
+        href: articles/spr_functions.html
   right:
    - icon: fab fa-github
      href: https://github.com/systemPipeR/systemPipeWorkshop2021

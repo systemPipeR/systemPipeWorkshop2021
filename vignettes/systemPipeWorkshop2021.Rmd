@@ -28,7 +28,6 @@ $(()=>{
 });
 </script>
 
-
 ```{r setting, echo=FALSE}
 if (file.exists("bioc2021")) unlink("bioc2021", recursive = TRUE)
 ```
@@ -837,6 +836,12 @@ file nor any results it was created in previous runs. Please use with caution.
 sal <- SPRproject(overwrite = TRUE) 
 ```
 
+# `systemPipeR` Workflow Management Functions
+
+Please find [here](https://systempipe.org/systemPipeWorkshop2021/articles/spr_functions.html) 
+a complete list of systemPipeR's functions and methods to create, configure,
+modify, run, visualize and export the `SYSargsList` container.
+
 # Overview of *systemPipeShiny* core functionalities
 
 **<span style="color:#5DA7D6;">s</span>ystem<span
@@ -870,9 +875,10 @@ with a session screenshot feature to edit scientific and publishable figures.
 to extend under current SPS framework or on their own visualization apps and Rmarkdown. 
 
 ## Run
-In this workshop, we are using the most recent develop version of SPS. If you are 
+
+In this workshop, we are using the most recent develop version of `SPS.` If you are 
 using the same Rstudio server for SPR from [Orchestra{blk}](http://app.orchestra.cancerdatasci.org/)
-to run SPS, no more action is needed. Use following code to start SPS in the Rstudio
+to run `SPS`, no more action is needed. Use following code to start `SPS` in the Rstudio
 server.
 
 ```{r shiny, eval=FALSE}
@@ -881,25 +887,8 @@ spsInit()
 shiny::runApp()
 ```
 
-## Install SPS
-If you would like to run SPS locally or somewhere else, please install the most 
-recent develop version.
-
-Full installation with all modules:
-```{r eval=FALSE}
-if (!requireNamespace("remotes", quietly=TRUE))
-    install.packages("remotes")
-remotes::install("systemPipeR/systemPipeShiny", dependencies=TRUE)
-```
-
-Minimum installation:
-```{r eval=FALSE}
-if (!requireNamespace("remotes", quietly=TRUE))
-    install.packages("remotes")
-remotes::install("systemPipeR/systemPipeShiny")
-```
-
 ## Demos
+
 If you could not either use the [Orchestra{blk}](http://app.orchestra.cancerdatasci.org/),
 or run it locally, here are some deployed demos:
 
@@ -919,59 +908,77 @@ For the admin panel login, account name **"admin"**, password **"admin"**.
 _shinyapp.io_ will reset the app once a while, but this will affect other people 
 who are trying the demo simultaneously. 
 
+## Sreenshots of `SPS` features
 
-## Sreenshots of SPS features
-### SPS main app
+### `SPS` main app
 
 <img src="images/main_app.png" height="500px" class="center" />
 
-
 ### Module workflow 
+
 A step-by-step guided workplace to create -> run workflows. 
+
 <img src="images/wf_main.png" height="500px" class="center" />
 
 ### Module workflow create targets
+
 Create and check targets file. 
+
 <img src="images/wf_targets.png" height="500px" class="center" />
 
-
 ### Module workflow design workflow steps 
+
 Add/remove/modify/change orders of your workflows with all the visual aids.
+
 <img src="images/wf_wf.png" height="300px" class="center" />
 
 ### Module workflow run
+
 Execute the workflow directly in SPS with the Rstudio-like interface.
+
 <img src="images/wf_run.png" height="400px" class="center" />
 
 ### Module RNAseq clustering and plotting
+
 Clustering and plotting your read counts.
+
 <img src="images/rnaseq_heatmap.png" height="500px" class="center" />
 
-### Module RNAseq DEG
-Do some DEG analysis with a few clicks.
+### Module RNA-seq DEG
+
+DEG analysis with a few clicks.
+
 <img src="images/rnaseq_deg.png" height="500px" class="center" />
 
+### Module Quick `ggplot`
 
-### Module Quick ggplot
 - Powered by {[esquisse](https://github.com/dreamRs/esquisse)} package.
-- Plot any tabular file
+
+- Plot any tabular file.
+
 <img src="images/sps_quickgg.jpg" height="450px" class="center" />
 
 ### Canvas
 
 Use `to canvas` button to send plot screenshots to Canvas for later image editing.
+
 <img src="images/to_canvas.png"/>
 
 Use the interactive Canvas image tool to edit plots made from other tabs/modules 
 or local uploads.
+
 <img src="images/drawer_demo.png" height="400px" class="center" />
 
 ### Create custom tabs
+
 Create your own plotting tab as simple as `systemPipeShiny::spsNewTab("TAB_ID")`
 
 - No shiny develop experience is required.
+
 - You only need to know how to code in R.
+
 - Focus on the `plot_code`, we handle the rest for you.
+
 ```{r eval=FALSE}
 # simple template
 newtabUI <- spsEzUI(
@@ -998,32 +1005,46 @@ newtabServer <- spsEzServer(
 ```
 
 ### Custom tabs when loaded
+
 <img src="images/sps_custom_tab_ui.png" height="500px" class="center" />
 
 ### Deep customize the app
+
 Customize almost everything of the app with these options. Read more 
 on our [website{blk}](https://systempipe.org/sps/adv_features/config/#app-options)
+
 <img src="images/app_options.png" height="550px" class="center" />
 
 ### App protection with user login and loading animations
+
 Limit access with user accounts. 
+
 <img src="images/user_login.png" height="300px" class="center" />
+
 Adding loading themes before users login. 
+
 <img src="images/loading_theme.gif" height="300px" class="center" />
 
 ### Admin
+
 Customizable hidden url to the admin page.
+
 <img src="images/admin_login.png" height="400px" class="center" />
 
 ### Admin server stats
+
 Monitor system usage.
+
 <img src="images/admin_server_info.png" height="400px" class="center" />
 
 ### Admin user control
+
 Add/change/remove users for your SPS app. 
+
 <img src="images/admin_user_control.png" height="400px" class="center" />
 
 ## SPS Supporting packages
+
 Use these supporting packages in your own Rmarkdown, Shiny apps!
 
 | Package | Description | Documents | Function reference | Demo |
@@ -1040,7 +1061,6 @@ Use these supporting packages in your own Rmarkdown, Shiny apps!
   * [systemPipeShiny Manuals{blk}](https://systempipe.org/sps/)
   * [systemPipe Github{blk}](https://github.com/systemPipeR)
 
-
 # Version information
 
 ```{r sessionInfo}
@@ -1052,7 +1072,4 @@ sessionInfo()
 This project is funded by NSF award [ABI-1661152](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1661152). 
 
 # References
-
-
-
 
