@@ -114,7 +114,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPip
 This workshop uses R `4.1.0` and Bioconductor version`3.14`. Bioconductor can be
 installed following [these instructions](https://www.bioconductor.org/developers/how-to/useDevel/).
 
-During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the workshop can be run in the [Rstudio Cloud](http://app.orchestra.cancerdatasci.org/).
+During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the workshop can be run in the [Orchestra Platform](http://app.orchestra.cancerdatasci.org/).
 
 ## Workshop setup with Docker
 
