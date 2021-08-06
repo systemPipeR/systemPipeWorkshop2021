@@ -303,7 +303,7 @@ To create a workflow within `systemPipeR`, we can start by defining an empty wor
 container and checking the directory structure:
 
 ```{r SPRproject, eval=TRUE}
-sal <- SPRproject(projPath = getwd()) 
+sal <- SPRproject(projPath = getwd(), silent=TRUE) 
 ```
 
 Internally, `SPRproject` function creates a hidden folder called `.SPRproject`,
@@ -340,7 +340,7 @@ sal <- SPRproject(envir = new.env())
 In this stage, the object `sal` is a empty container, except for the project information.
 The project information can be accessed by the `projectInfo` method:
 
-```{r projectInfo, eval=TRUE}
+```{r projectInfo, eval=FALSE}
 sal
 projectInfo(sal)
 ```
@@ -429,7 +429,7 @@ Besides all the data form `targets`, `wf_file`, `input_file` and `dir_path` argu
 The `appendStep<-` method is used to append a new step in the workflow.
 
 ```{r, trimming, eval=TRUE}
-sal <- SPRproject(overwrite = TRUE)
+sal <- SPRproject(overwrite = TRUE, silent=TRUE)
 targetspath <- "targetsPE.txt"
 appendStep(sal) <- SYSargsList(
     step_name = "trimming",
