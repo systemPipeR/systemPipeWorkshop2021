@@ -1,0 +1,24 @@
+on: [push, pull_request]
+
+env:
+  cache-version: v1
+  repo-name: systempipe/systempipeworkshop2021
+
+jobs:
+  job1:
+    if: "contains(toJSON(github.event.commits.*.message), 'docker')"
+    runs-on: ubuntu-latest
+    container: bioconductor/bioconductor_docker:devel
+    steps:
+      - uses: actions/checkout@v1
+         
+      - uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          # Use the environment variable on first few lines to set repo name--just centralizes changes
+          repository: ${{ env.repo-name }}
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: bioc2021
+          
