@@ -91,4 +91,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./doc
+          cname: https://systempipe.org/systemPipeWorkshop2021
 
