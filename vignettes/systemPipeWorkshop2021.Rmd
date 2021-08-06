@@ -78,30 +78,26 @@ strings for each step prior to running a command-line.
 as well as resources for containerization, parallel evaluations on computer 
 clusters along with automated generation of interactive analysis reports.
 
-```{r utilities, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "Figure 1. Relevant features in `systemPipeR`. Workflow design concepts are illustrated under (A & B). Examples of *systemPipeR's* visualization functionalities are given under (C)."}
+```{r utilities, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "Figure 1. Relevant features in `systemPipeR`. Workflow design concepts are illustrated under A. Examples of *systemPipeR's* visualization functionalities are given under B."}
 knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/utilities.png")
 ```
 
-The connectivity among all workflow steps is achieved by the `SYSargsList` workflow
-management class.
-
-`SYSargsList` S4 class is a list-like container where each instance stores all the
-input/output paths and parameter components required for a particular data
-analysis step (see Figure 2).
+The connectivity among workflow steps is defined by the `SYSargsList` workflow
+management class. This S4 class is a list-like container where each instance
+stores all the input/output paths and parameter components required for a
+particular data analysis step (see Figure 2).
 
 The `SYSargsList` constructor function will generate the instances, using as data 
 input initial targets files, as well as two-parameter files (for details, see below).
 When running preconfigured workflows, the only input the user needs to provide 
-is the initial targets file containing the paths to the input files (e.g., FASTQ) 
+is the initial targets file containing the paths to the input files (e.g. FASTQ) 
 along with unique sample labels. Subsequent targets instances are created 
 automatically, based on the connectivity establish between the steps. The 
 parameters required for running command-line software is provided by the 
-parameter (`*.cwl` and `*.yml`)) files described below.
+parameter (`*.cwl` and `*.yml`) files described below.
 
-The class store one or multiple steps, allowing central control for running, 
-checking status, and monitor complex workflows from start to finish. This design 
-enhances the `systemPipeR` workflow framework with a generalized, flexible,
-robust, and reproducible design.
+`SYSargsList` stores one or multiple steps. It defines and controls each step,
+allows status checking, as well as monitoring complex workflows from start to finish. 
 
 ```{r sysargslist, eval=TRUE, echo=FALSE, out.width="100%", fig.align = "center", fig.cap= "Figure 2. Workflow steps with input/output file operations are controlled by `SYSargsList` instances. The only input provided by the user is the initial targets file, which can be optional. Subsequent targets instances are created automatically, from the previous output files. Any number of predefined or custom workflow steps are supported."}
 knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/sysargslist.png")  
@@ -114,13 +110,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPip
 This workshop uses R `4.1.0` and Bioconductor version`3.14`. Bioconductor can be
 installed following [these instructions](https://www.bioconductor.org/developers/how-to/useDevel/).
 
-During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the workshop can be run in the [Orchestra Platform](http://app.orchestra.cancerdatasci.org/).
+During the [Bioc2021 conference](https://bioc2021.bioconductor.org/), the workshop can be run in the preconfigured [Orchestra Platform](http://app.orchestra.cancerdatasci.org/). 
 
 ## Workshop setup with Docker
 
 The Docker container used by this workshop runs with Bioconductor's `development` 
 version `3.14`. It includes all the necessary packages and software for running 
-the code of in the workshop vignettes. 
+the code of the workshop. 
 To use the Docker container, one needs to first install [Docker](https://docs.docker.com/engine/install/) on a user's system.
 
 - The container can be downloaded and run with:
@@ -174,8 +170,6 @@ library("systemPipeShiny")
 library("systemPipeRdata") 
 ```
 
-- Documentation
-
 ```{r library, eval=FALSE}
 library(help="systemPipeR") # Lists package info
 vignette("systemPipeR") # Opens vignette
@@ -209,9 +203,9 @@ on [GitHub](https://github.com/systemPipeR).
 
 # Design and Run Workflow - Quick Start
 
-## Showcase RNA-Seq workflow
+## Showcase of toy RNA-Seq workflow
 
-If you desire to generate and run a RNA-seq pipeline in a few steps, please follow:
+If you desire to generate and run a RNA-seq workflow in a few (here highly simplfied) steps, please follow:
 
 ```{r project_import, eval=FALSE}
 sal <- SPRproject() 
@@ -226,7 +220,7 @@ plotWF(sal, rstudio = TRUE)
 knitr::include_graphics("https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/plot.png") 
 ```
 
-# Explore all details of Design and Run Workflow 
+# Explore Workflow Design and Run Parameters
 
 ## Structure of parameters files
 
