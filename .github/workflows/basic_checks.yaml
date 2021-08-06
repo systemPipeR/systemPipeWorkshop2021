@@ -80,7 +80,7 @@ jobs:
           tag_with_sha: true
           tags: bioc2021
           
-    ph-pages:
+  ph-pages:
     name: gh_pages_only
     if: "contains(toJSON(github.event.commits.*.message), 'no_render')"
     runs-on: ubuntu-20.04
