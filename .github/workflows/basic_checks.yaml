@@ -6,6 +6,7 @@ env:
 
 jobs:
   job1:
+    if: "contains(toJSON(github.event.commits.*.message), 'pkg_build') && ! contains(toJSON(github.event.commits.*.message), 'no_render')"
     runs-on: ubuntu-latest
     container: bioconductor/bioconductor_docker:devel
     steps:
@@ -78,3 +79,16 @@ jobs:
           tag_with_ref: true
           tag_with_sha: true
           tags: bioc2021
+          
+    ph-pages:
+    name: gh_pages_only
+    if: "contains(toJSON(github.event.commits.*.message), 'no_render')"
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc
+          cname: systempipe.org
