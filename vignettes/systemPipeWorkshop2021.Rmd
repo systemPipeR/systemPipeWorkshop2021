@@ -827,7 +827,7 @@ SPR's functionalities with community and/or private data. The framework can
 integrate many core packages from the R/Bioconductor ecosystem. Examples of
 SPS' current functionalities include: 
 
-- A default interactive workflow module to 
+- A workflow module to 
 create experimental designs, visualize and customize workflow topologies with previews, and 
 programming free workflow execution within the application. 
 - An interactive module with extensive plot options to visualize downstream analysis of a RNA-Seq workflow.
@@ -839,7 +839,13 @@ custom Shiny Apps under SPS framework without any knowledge of Shiny.
 organize and to compare plots in an efficient manner combined
 with a session screenshot feature to edit scientific and publishable figures. 
 - Three other supporting packages to help all users from beginners and advanced developers 
-to extend under current SPS framework or on their own visualization apps. 
+to extend under current SPS framework or on their own visualization apps and Rmarkdowns. 
+
+## Run
+In this workshop, we are using the most recent develop version of SPS. If you are 
+using the same Rstudio server for SPR from [Orchestra{blk}](http://app.orchestra.cancerdatasci.org/)
+to run SPS, no more action is needed. Use following code to start SPS in the Rstudio
+server.
 
 ```{r shiny, eval=FALSE}
 library(systemPipeShiny)
@@ -847,13 +853,32 @@ spsInit()
 shiny::runApp()
 ```
 
-## Demo
-View our online demo app:
+## Install SPS
+If you would like to run SPS locally or somewhere else, please install the most 
+recent develop version.
+
+Full installation with all modules:
+```{r eval=FALSE}
+if (!requireNamespace("remotes", quietly=TRUE))
+    install.packages("remotes")
+remotes::install("systemPipeR/systemPipeShiny", dependencies=TRUE)
+```
+
+Minimum installation:
+```{r eval=FALSE}
+if (!requireNamespace("remotes", quietly=TRUE))
+    install.packages("remotes")
+remotes::install("systemPipeR/systemPipeShiny")
+```
+
+## Demos
+If you could not either use the [Orchestra{blk}](http://app.orchestra.cancerdatasci.org/),
+or run it locally, here are some deployed demos:
 
 | Type and link| option changed | notes |
 | --- | --- | --- |
-| [Default full installation{blk}](https://tgirke.shinyapps.io/systemPipeShiny/) | [See installation](#installation) | full app |
-| [Minimum installation{blk}](https://tgirke.shinyapps.io/systemPipeShiny/) | [See installation](#installation) | no modules installed |
+| [Default full installation{blk}](https://tgirke.shinyapps.io/systemPipeShiny/) | takes ~20s to load| full app |
+| [Minimum installation{blk}](https://tgirke.shinyapps.io/systemPipeShiny/) |  | no modules installed |
 | [Login enabled{blk}](https://tgirke.shinyapps.io/systemPipeShiny_loading/) | `login_screen = TRUE; login_theme = "empty"` | no modules installed |
 | [Login and login themes{blk}](https://tgirke.shinyapps.io/systemPipeShiny_loading_theme/) | `login_screen = TRUE; login_theme = "random"` | no modules installed |
 | [App admin page{blk}](https://tgirke.shinyapps.io/systemPipeShiny_loading/?admin) | `admin_page = TRUE` | or simply add "?admin" to the end of URL of demos |
@@ -877,3 +902,16 @@ sessionInfo()
 This project is funded by NSF award [ABI-1661152](https://www.nsf.gov/awardsearch/showAward?AWD_ID=1661152). 
 
 # References
+
+
+<script>
+$(()=>{
+  $('a:contains("{blk}")').each(function(){
+    $(this)
+      .text($(this).text().replace("{blk}", ""))
+      .attr("target", "_blank");
+  });
+});
+</script>
+
+
