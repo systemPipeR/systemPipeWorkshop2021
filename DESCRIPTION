@@ -21,24 +21,7 @@ Suggests:
     pkgdown, 
     systemPipeR,
     systemPipeRdata, 
-    systemPipeShiny,
-    ape, 
-    ggtree,
-    glmpca,
-    Rtsne, 
-    UpSetR, 
-    esquisse, 
-    networkD3,
-    pushbar,
-    readr,
-    rhandsontable,
-    shinyTree, 
-    esquisse, 
-    networkD3, 
-    pushbar, 
-    rhandsontable, 
-    shinyTree, 
-    cicerone
+    systemPipeShiny
 URL: https://systempipe.org/systemPipeWorkshop2021/
 BugReports: https://systempipe.org/systemPipeWorkshop2021/issues/new/choose
 VignetteBuilder: knitr
