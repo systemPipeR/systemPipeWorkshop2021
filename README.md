@@ -27,7 +27,7 @@ Non-essential background reading:
 
   * [systemPipe Workflow Environment WebPage](https://systempipe.org/)
   * [systemPipeR vignette](https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeR/inst/doc/systemPipeR.html)
-  * [systemPipeShiny vignette](https://bioconductor.org/packages/devel/bioc/vignettes/systemPipeShiny/inst/doc/systemPipeShiny.html)
+  * [systemPipeShiny manuals](https://systempipe.org/sps/)
   * [systemPipeRdata vignette](https://bioconductor.org/packages/release/data/experiment/vignettes/systemPipeRdata/inst/doc/systemPipeRdata.html)
   * [R Markdown tutorial](https://rmarkdown.rstudio.com/lesson-2.html)
 
