@@ -3,6 +3,8 @@ on: [push, pull_request]
 env:
   cache-version: v1
   repo-name: systempipe/systempipeworkshop2021
+  R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+  GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   job1:
