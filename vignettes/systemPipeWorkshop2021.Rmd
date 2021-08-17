@@ -912,43 +912,43 @@ who are trying the demo simultaneously.
 
 ### `SPS` main app
 
-<img src="images/main_app.png" height="500px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/main_app.png" height="500px" class="center" />
 
 ### Module workflow 
 
 A step-by-step guided workplace to create -> run workflows. 
 
-<img src="images/wf_main.png" height="500px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/wf_main.png" height="500px" class="center" />
 
 ### Module workflow create targets
 
 Create and check targets file. 
 
-<img src="images/wf_targets.png" height="500px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/wf_targets.png" height="500px" class="center" />
 
 ### Module workflow design workflow steps 
 
 Add/remove/modify/change orders of your workflows with all the visual aids.
 
-<img src="images/wf_wf.png" height="300px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/wf_wf.png" height="300px" class="center" />
 
 ### Module workflow run
 
 Execute the workflow directly in SPS with the Rstudio-like interface.
 
-<img src="images/wf_run.png" height="400px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/wf_run.png" height="400px" class="center" />
 
 ### Module RNAseq clustering and plotting
 
 Clustering and plotting your read counts.
 
-<img src="images/rnaseq_heatmap.png" height="500px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/rnaseq_heatmap.png" height="500px" class="center" />
 
 ### Module RNA-seq DEG
 
 DEG analysis with a few clicks.
 
-<img src="images/rnaseq_deg.png" height="500px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/rnaseq_deg.png" height="500px" class="center" />
 
 ### Module Quick `ggplot`
 
@@ -956,18 +956,18 @@ DEG analysis with a few clicks.
 
 - Plot any tabular file.
 
-<img src="images/sps_quickgg.jpg" height="450px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/sps_quickgg.jpg" height="450px" class="center" />
 
 ### Canvas
 
 Use `to canvas` button to send plot screenshots to Canvas for later image editing.
 
-<img src="images/to_canvas.png"/>
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/to_canvas.png"/>
 
 Use the interactive Canvas image tool to edit plots made from other tabs/modules 
 or local uploads.
 
-<img src="images/drawer_demo.png" height="400px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/drawer_demo.png" height="400px" class="center" />
 
 ### Create custom tabs
 
@@ -1006,42 +1006,42 @@ newtabServer <- spsEzServer(
 
 ### Custom tabs when loaded
 
-<img src="images/sps_custom_tab_ui.png" height="500px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/sps_custom_tab_ui.png" height="500px" class="center" />
 
 ### Deep customize the app
 
 Customize almost everything of the app with these options. Read more 
 on our [website{blk}](https://systempipe.org/sps/adv_features/config/#app-options)
 
-<img src="images/app_options.png" height="550px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/app_options.png" height="550px" class="center" />
 
 ### App protection with user login and loading animations
 
 Limit access with user accounts. 
 
-<img src="images/user_login.png" height="300px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/user_login.png" height="300px" class="center" />
 
 Adding loading themes before users login. 
 
-<img src="images/loading_theme.gif" height="300px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/loading_theme.gif" height="300px" class="center" />
 
 ### Admin
 
 Customizable hidden url to the admin page.
 
-<img src="images/admin_login.png" height="400px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/admin_login.png" height="400px" class="center" />
 
 ### Admin server stats
 
 Monitor system usage.
 
-<img src="images/admin_server_info.png" height="400px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/admin_server_info.png" height="400px" class="center" />
 
 ### Admin user control
 
 Add/change/remove users for your SPS app. 
 
-<img src="images/admin_user_control.png" height="400px" class="center" />
+<img src="https://raw.githubusercontent.com/systemPipeR/systemPipeWorkshop2021/master/inst/images/admin_user_control.png" height="400px" class="center" />
 
 ## SPS Supporting packages
 
